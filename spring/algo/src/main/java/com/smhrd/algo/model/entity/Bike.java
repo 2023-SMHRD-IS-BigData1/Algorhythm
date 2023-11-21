@@ -23,7 +23,7 @@ public class Bike {
     private long bikeIdx;
 
     // 자전거 사용여부
-    @Column(name = "bike_use")
+    @Column(name = "bike_use", nullable = false, length = 1)
     private String bikeUse;
     
     // 자전거 주행거리
