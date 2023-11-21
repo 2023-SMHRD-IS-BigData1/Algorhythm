@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -26,8 +27,8 @@ public class UserController {
 
     @PostMapping("/user/login")
     @ResponseBody
-    public String userLogin(@RequestBody LoginRequest loginRequest) {
-        User user = userService.loginUser(loginRequest.getUserId(), loginRequest.getUserPw());
+    public String userLogin(@RequestParam String userId,@RequestParam String userPw) {
+        User user = userService.loginUser(userId, userPw);
         log.info("user={}", user);
         return "ok";
     }

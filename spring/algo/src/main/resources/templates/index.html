@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration and Login</title>
+</head>
+<body>
+
+<h1>User Registration</h1>
+<form action="/user/join" method="post">
+    <!-- Add your registration form fields here -->
+    <label for="userId">UserId:</label>
+    <input type="text" id="userId" name="userId">
+
+    <label for="userPw">Password:</label>
+    <input type="password" id="userPw" name="userPw">
+
+    <button type="submit">Register</button>
+</form>
+
+<h1>User Login</h1>
+<form action="/user/login" method="post">
+    <!-- Add your login form fields here -->
+    <label for="loginUserId">UserId:</label>
+    <input type="text" id="loginUserId" name="userId">
+
+    <label for="loginPw">Password:</label>
+    <input type="password" id="loginPw" name="userPw">
+
+    <button type="submit">Login</button>
+</form>
+
+</body>
+</html>
