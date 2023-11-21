@@ -16,6 +16,7 @@ public class Bike {
                                 .bikeUse(String)
                                 .bikeMeter(Integer)
                                 .bikeTime(Integer)
+                                .build();
     */
     // 자전거 순번
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
