@@ -6,13 +6,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
 @Table(name = "user_info")
 @NoArgsConstructor
-@AllArgsConstructor @Builder
 public class User {
     /*        User newUser = User.builder()
                                .userName(String)
@@ -20,13 +19,17 @@ public class User {
                                .userBirthdate(LocalDate)
                                .userGender(String)
                                .userAddr(String)
-                               .joinedAt(LocalDateTime.now()) // 현재 시간으로 설정
+                               .joinedAt(LocalDate.now()) // 현재 시간으로 설정
                                .build();
     */
     // 유저 순번
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_idx")
+    @Column(name = "userIdx")
     private Long userIdx;
+
+    // 연관관계를 위한 필드
+    @OneToMany(mappedBy = "user")
+    private List<Rental> rentalRecord;
 
     // 유저 아이디
     @Column(name = "user_id", nullable = false, length = 30)
@@ -58,6 +61,20 @@ public class User {
 
     // 유저 마일리지
     @Column(name = "user_mileage")
-    @Builder.Default
     private Integer userMileage = 0;
+
+    @Builder
+    public User(Long userIdx, String userId, String userPw,
+                String userName, LocalDate userBirthdate, String userGender,
+                String userAddr, LocalDate joinedAt, Integer userMileage) {
+        this.userIdx = userIdx;
+        this.userId = userId;
+        this.userPw = userPw;
+        this.userName = userName;
+        this.userBirthdate = userBirthdate;
+        this.userGender = userGender;
+        this.userAddr = userAddr;
+        this.joinedAt = joinedAt;
+        this.userMileage = userMileage;
+    }
 }

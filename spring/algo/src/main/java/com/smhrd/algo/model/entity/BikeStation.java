@@ -15,10 +15,10 @@ import java.math.BigDecimal;
 public class BikeStation {
     /*        BikeStation newStation =BikeStation.builder()
                                                 .stationName(String)
-                                                .stationAddr1(String)
-                                                .stationAddr2(String)
+                                                .stationAddr(String)
                                                 .lat(BigDecimal)
                                                 .lng(BigDecimal)
+                                                .build();
      */
     // 정류장 순번
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,12 +30,8 @@ public class BikeStation {
     private String stationName;
    
     // 정류장 주소
-    @Column(name = "station_addr1", nullable = false, length = 800)
-    private String stationAddr1;
-    
-    // 정류장 상세주소
-    @Column(name = "station_addr2", nullable = false, length = 800)
-    private String stationAddr2;
+    @Column(name = "station_addr", nullable = false, length = 800)
+    private String stationAddr;
     
     // 정류장 위도
     @Column(name = "lat", precision = 17, scale = 14)

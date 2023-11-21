@@ -19,6 +19,7 @@ public class Rental {
                                     .returnStationIdx(Integer)
                                     .returnedAt(LocalDateTime)
                                     .rentalStatus(String)
+                                    .build();
 
     */
     // 대여 순번
@@ -31,8 +32,9 @@ public class Rental {
     private long bikeIdx;
 
     // 유저 순번
-    @Column(name = "user_idx")
-    private long userIdx;
+    @ManyToOne
+    @JoinColumn(name = "user_idx")
+    private User user;
 
     // 대여정류장 순번
     @Column(name = "rental_station_idx")

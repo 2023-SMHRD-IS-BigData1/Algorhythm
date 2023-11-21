@@ -17,6 +17,7 @@ public class Population {
                                                 .popDong(String)
                                                 .popAge(Integer)
                                                 .popGender(String)
+                                                .build();
     */
     // 인구 순번
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
