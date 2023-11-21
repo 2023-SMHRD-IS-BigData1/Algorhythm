@@ -35,7 +35,7 @@ public class User {
 
     // 유저 비밀번호
     @Column(name = "user_pw", nullable = false, length = 30)
-    private String userPW;
+    private String userPw;
 
     // 유저 이름
     @Column(name = "user_name", nullable = false, length = 30)
