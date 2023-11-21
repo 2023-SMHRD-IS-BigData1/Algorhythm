@@ -6,22 +6,22 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Table(name = "bike_info")
 @NoArgsConstructor
-@AllArgsConstructor @Builder
 public class Bike {
-    /*        Bike newBike = Bike.builder()
-                                .bikeUse(String)
-                                .bikeMeter(Integer)
-                                .bikeTime(Integer)
-                                .build();
-    */
+
     // 자전거 순번
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bike_idx")
     private long bikeIdx;
+
+    // 연관관계를 위한 필드
+    @OneToMany(mappedBy = "bike")
+    private List<Rental> rentalRecord;
 
     // 자전거 사용여부
     @Column(name = "bike_use", nullable = false, length = 1)
@@ -34,4 +34,11 @@ public class Bike {
     // 자전거 주행시간
     @Column(name = "bike_time")
     private Integer bikeTime;
+
+    @Builder
+    public Bike(String bikeUse, Integer bikeMeter, Integer bikeTime) {
+        this.bikeUse = bikeUse;
+        this.bikeMeter = bikeMeter;
+        this.bikeTime = bikeTime;
+    }
 }

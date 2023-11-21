@@ -6,25 +6,22 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Getter
 @Table(name = "bike_station_info")
 @NoArgsConstructor
-@AllArgsConstructor @Builder
 public class BikeStation {
-    /*        BikeStation newStation =BikeStation.builder()
-                                                .stationName(String)
-                                                .stationAddr(String)
-                                                .lat(BigDecimal)
-                                                .lng(BigDecimal)
-                                                .build();
-     */
+
     // 정류장 순번
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "station_idx")
     private long stationIdx;
-    
+
+    @OneToMany(mappedBy = "station")
+    private List<Rental> rentalRecord;
+
     // 정류장 이름
     @Column(name = "station_name", nullable = false, length = 80)
     private String stationName;
@@ -40,4 +37,13 @@ public class BikeStation {
     // 정류장 경도
     @Column(name = "lng", precision = 17, scale = 14)
     private BigDecimal lng;
+
+    @Builder
+    public BikeStation(String stationName, String stationAddr,
+                       BigDecimal lat, BigDecimal lng) {
+        this.stationName = stationName;
+        this.stationAddr = stationAddr;
+        this.lat = lat;
+        this.lng = lng;
+    }
 }
