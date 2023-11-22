@@ -19,17 +19,17 @@ public class Rental {
     private long rentIdx;
 
     // 자전거 순번
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bike_idx")
     private Bike bike;
 
     // 정류장 순번
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "station_idx")
     private BikeStation station;
 
     // 유저 순번
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_idx")
     private User user;
 

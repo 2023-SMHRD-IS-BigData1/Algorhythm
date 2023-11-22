@@ -4,9 +4,12 @@ import com.smhrd.algo.model.entity.Bike;
 import com.smhrd.algo.model.entity.User;
 import com.smhrd.algo.repository.BikeRepository;
 import com.smhrd.algo.repository.UserRepository;
+import com.smhrd.algo.service.WeatherService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDate;
 
@@ -16,6 +19,12 @@ public class TestController {
 
     private final UserRepository userRepository;
     private final BikeRepository bikeRepository;
+
+    @GetMapping("/test")
+    @ResponseBody
+    public String weatherData() {
+        return new WeatherService().getData();
+    }
 
     @PostConstruct
     public void init() {
