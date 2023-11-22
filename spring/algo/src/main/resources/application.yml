@@ -23,5 +23,6 @@ spring:
 
 logging:
   level:
+    com.smhrd.algo: debug
     org.hibernate.SQL: debug
     org.hibernate.type: trace

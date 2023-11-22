@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 
 @Controller
@@ -22,7 +23,7 @@ public class TestController {
 
     @GetMapping("/test")
     @ResponseBody
-    public String weatherData() {
+    public String weatherData() throws URISyntaxException {
         return new WeatherService().getData();
     }
 
