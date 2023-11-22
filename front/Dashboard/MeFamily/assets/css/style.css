@@ -1457,3 +1457,11 @@ a.fontC {
 .container .info span .fa {
   color: #EF3B3A;
 }
+
+/* 11월 22일 추가 */
+.breadcrumbs {
+  padding: 15px 0;
+  background: white;
+  min-height: 40px;
+  margin-top: 70px;
+}
