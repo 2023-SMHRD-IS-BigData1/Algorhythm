@@ -11,28 +11,25 @@ import java.time.LocalDateTime;
 @Getter
 @Table(name = "rental_info")
 @NoArgsConstructor
-@AllArgsConstructor @Builder
 public class Rental {
-    /*        Rental newRental = Rental.builder()
-                                    .rentalStationIdx
-                                    .rentedAt(LocalDateTime)
-                                    .returnStationIdx(Integer)
-                                    .returnedAt(LocalDateTime)
-                                    .rentalStatus(String)
-                                    .build();
 
-    */
     // 대여 순번
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rent_idx")
     private long rentIdx;
 
     // 자전거 순번
-    @Column(name = "bike_idx")
-    private long bikeIdx;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bike_idx")
+    private Bike bike;
+
+    // 정류장 순번
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "station_idx")
+    private BikeStation station;
 
     // 유저 순번
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_idx")
     private User user;
 
@@ -55,4 +52,19 @@ public class Rental {
     // 대여 상태
     @Column(name = "rental-status")
     private String rentalStatus;
+
+    @Builder
+    public Rental(Bike bike, BikeStation station, User user,
+                  long rentalStationIdx, LocalDateTime rentedAt,
+                  Integer returnStationIdx, LocalDateTime returnedAt,
+                  String rentalStatus) {
+        this.bike = bike;
+        this.station = station;
+        this.user = user;
+        this.rentalStationIdx = rentalStationIdx;
+        this.rentedAt = rentedAt;
+        this.returnStationIdx = returnStationIdx;
+        this.returnedAt = returnedAt;
+        this.rentalStatus = rentalStatus;
+    }
 }

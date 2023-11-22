@@ -13,18 +13,20 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public User createUser() {
+    public User createUser(String userId, String userPw, String userName,
+                           LocalDate userBirthdate, String userGender,
+                           String userAddr) {
+
         User newUser = User.builder()
-                .userId("admin")
-                .userPw("1234")
-                .userName("관리자")
-                .userBirthdate(LocalDate.of(1998,1,16))
-                .userGender("M")
-                .userAddr("월계동")
+                .userId(userId)
+                .userPw(userPw)
+                .userName(userName)
+                .userBirthdate(userBirthdate)
+                .userGender(userGender)
+                .userAddr(userAddr)
                 .joinedAt(LocalDate.now())
                 .build();
 
-        // MemberRepository를 사용하여 User 엔티티를 저장합니다.
         return userRepository.save(newUser);
     }
 

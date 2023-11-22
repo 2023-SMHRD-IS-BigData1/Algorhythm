@@ -11,17 +11,8 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "user_info")
-@NoArgsConstructor
 public class User {
-    /*        User newUser = User.builder()
-                               .userName(String)
-                               .userPW(String)
-                               .userBirthdate(LocalDate)
-                               .userGender(String)
-                               .userAddr(String)
-                               .joinedAt(LocalDate.now()) // 현재 시간으로 설정
-                               .build();
-    */
+
     // 유저 순번
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userIdx")
@@ -61,13 +52,12 @@ public class User {
 
     // 유저 마일리지
     @Column(name = "user_mileage")
-    private Integer userMileage = 0;
+    private Integer userMileage;
 
     @Builder
-    public User(Long userIdx, String userId, String userPw,
-                String userName, LocalDate userBirthdate, String userGender,
+    public User(String userId, String userPw, String userName,
+                LocalDate userBirthdate, String userGender,
                 String userAddr, LocalDate joinedAt, Integer userMileage) {
-        this.userIdx = userIdx;
         this.userId = userId;
         this.userPw = userPw;
         this.userName = userName;

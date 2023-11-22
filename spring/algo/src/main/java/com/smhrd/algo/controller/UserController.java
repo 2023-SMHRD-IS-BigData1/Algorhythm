@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.time.LocalDate;
+
 @Controller
 @RequiredArgsConstructor
 @Log4j2
@@ -20,8 +22,11 @@ public class UserController {
 
     @PostMapping("/user/join")
     @ResponseBody
-    public String userJoin() {
-        userService.createUser();
+    public String userJoin(String userId, String userPw, String userName,
+                           LocalDate userBirthdate, String userGender,
+                           String userAddr) {
+        userService.createUser(userId, userPw, userName,
+                userBirthdate, userGender, userAddr);
         return "ok";
     }
 
