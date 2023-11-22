@@ -137,14 +137,42 @@
                 <button>create</button>
                 <p class="message">Already registered? <a href="#">Sign In</a></p>
               </form>
-              <form action="/join" method="post" class="login-form">
-                <input type="text" placeholder="아이디 입력" id="userId" name="userId"/>
-                <input type="password" placeholder="비밀번호 입력 " id="userPw" name="userPw"/>
-                <input type="password" placeholder="비밀번호 입력 " id="userPw" name="userPw"/>
-                <input type="password" placeholder="비밀번호 입력 " id="userPw" name="userPw"/>
-                <button>login</button>
+              <div class="tabroLogo"><a href="#" class="tabroLogo">TABRO</a>
+                <form action="/join" method="post" class="login-form">
+                  <input type="text" placeholder="아이디 입력" id="userId" name="userId"/>
+                  <input type="password" placeholder="비밀번호 입력 " id="userPw" name="userPw"/>
+                  <input type="password" placeholder="비밀번호 확인 " id="userPw2" name="userPw2"/>
+                  <input type="text" placeholder="이름" id="userName" name="userName"/>
+                  <input type="date" id="userBirthdate" name="userBirthdate"/>
+                  <div class="btn-group">
+                    <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked />
+                    <label class="btn btn-success" for="option1" data-mdb-ripple-init>남성</label>
+                  
+                    <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" />
+                    <label class="btn btn-success" for="option3" data-mdb-ripple-init>여성</label>
+                  </div>
+                 <select name="userAddr" id="userAddr">
+                    <option value="">가람동</option>
+                    <option value="">고운동</option>
+                    <option value="">나성동</option>
+                    <option value="">누리동</option>
+                    <option value="">다솜동</option>
+                    <option value="">다정동</option>
+                    <option value="">대평동</option>
+                    <option value="">도담동</option>
+                    <option value="">보람동</option>
+                    <option value="">반곡동</option>
+                    <option value="">산울동</option>
+                    <option value="">새롬동</option>
+                    <option value="">세종동</option>
+                    <option value="">소담동</option>
+                    <option value="">어진동</option>
+                    <option value="">용호동</option>
+                  </select>
+                  <button>회원가입</button>
                 <p class="message">이미 아이디가 존재한다면 <a href="contact.html">회원가입</a></p>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
             
