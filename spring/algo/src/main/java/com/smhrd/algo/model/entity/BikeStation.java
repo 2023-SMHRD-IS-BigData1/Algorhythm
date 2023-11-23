@@ -19,9 +19,9 @@ public class BikeStation {
     @Column(name = "station_idx")
     private long stationIdx;
 
-    @OneToMany(mappedBy = "station")
-    private List<Rental> rentalRecord;
-
+    //일대다 정류장별 보유자전거 관계
+    @OneToMany(mappedBy = "bikestation")
+    private List<StationBike> haveRecord;
     // 정류장 이름
     @Column(name = "station_name", nullable = false, length = 80)
     private String stationName;

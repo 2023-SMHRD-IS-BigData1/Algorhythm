@@ -11,16 +11,14 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "user_info")
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     // 유저 순번
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userIdx")
     private Long userIdx;
-
-    // 연관관계를 위한 필드
-    @OneToMany(mappedBy = "user")
-    private List<Rental> rentalRecord;
 
     // 유저 아이디
     @Column(name = "user_id", nullable = false, length = 30)
@@ -54,10 +52,27 @@ public class User {
     @Column(name = "user_mileage")
     private Integer userMileage;
 
+    // 유저 탄소절감량
+    @Column
+    private Integer userReduce;
+
+    // 유저 사용거리
+    @Column
+    private Integer userKm;
+
+    // 유저 칼로리량
+    @Column
+    private Integer userKcal;
+
+    // 유저 심은나무
+    @Column
+    private Integer userTree;
+
     @Builder
     public User(String userId, String userPw, String userName,
                 LocalDate userBirthdate, String userGender,
-                String userAddr, LocalDate joinedAt, Integer userMileage) {
+                String userAddr, LocalDate joinedAt, Integer userMileage,
+                Integer userReduce, Integer userKm, Integer userKcal, Integer userTree) {
         this.userId = userId;
         this.userPw = userPw;
         this.userName = userName;
@@ -66,5 +81,9 @@ public class User {
         this.userAddr = userAddr;
         this.joinedAt = joinedAt;
         this.userMileage = userMileage;
+        this.userReduce = userReduce;
+        this.userKm = userKm;
+        this.userKcal = userKcal;
+        this.userTree = userTree;
     }
 }

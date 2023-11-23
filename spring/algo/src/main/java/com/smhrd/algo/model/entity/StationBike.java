@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.util.Lazy;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,8 +25,9 @@ public class StationBike {
     private long haveIdx;
 
     // 정류장 순번
-    @Column(name = "station_idx")
-    private long stationIdx;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "station_idx")
+    private BikeStation bikeStation;
 
     // 자전거 순번
     @Column(name = "bike_idx")

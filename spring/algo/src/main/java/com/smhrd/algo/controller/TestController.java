@@ -1,8 +1,6 @@
 package com.smhrd.algo.controller;
 
-import com.smhrd.algo.model.entity.Bike;
 import com.smhrd.algo.model.entity.User;
-import com.smhrd.algo.repository.BikeRepository;
 import com.smhrd.algo.repository.UserRepository;
 import com.smhrd.algo.service.WeatherService;
 import jakarta.annotation.PostConstruct;
@@ -18,7 +16,6 @@ import java.time.LocalDate;
 public class TestController {
 
     private final UserRepository userRepository;
-    private final BikeRepository bikeRepository;
 
     @GetMapping("/test")
     @ResponseBody
@@ -55,14 +52,7 @@ public class TestController {
 
         userRepository.save(testUser2);
         
-        // 자전거 10대 가데이터 저장
-        for(int i=0; i<10; i++) {
-            bikeRepository.save(Bike.builder()
-                .bikeUse("N")
-                .bikeMeter(0)
-                .bikeTime(0)
-                .build());
-        }
-        // 정거장 3곳 가데이터 저장
+
+
     }
 }
