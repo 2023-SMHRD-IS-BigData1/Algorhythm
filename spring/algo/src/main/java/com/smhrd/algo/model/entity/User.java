@@ -35,7 +35,7 @@ public class User {
     private String userName;
 
     // 유저 생년월일
-    @Column(name = "user_birthdate", nullable = false)
+    @Column(name = "user_birthdate", nullable = false, updatable = false)
     private LocalDate userBirthdate;
 
     // 유저 성별
@@ -47,7 +47,7 @@ public class User {
     private String userAddr;
 
     // 유저 가입일
-    @Column(name = "joined_at", nullable = false)
+    @Column(name = "joined_at", nullable = false, updatable = false)
     private LocalDate joinedAt;
 
     // 유저 마일리지
