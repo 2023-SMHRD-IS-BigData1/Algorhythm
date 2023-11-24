@@ -41,6 +41,13 @@
             var positionBounds = new Tmapv2.LatLngBounds();
 
             $.ajax({
+                url : "/naviperson",
+                success : function(response) {
+                    console.log(response)
+                }
+            });
+
+            $.ajax({
                 url : "/poisearch",
                 data : {"searchKeyword":searchKeyword},
                 success : function(response){
@@ -76,6 +83,11 @@
                     // 마커들이 보이도록 지도 조정
                     map.panToBounds(positionBounds);
                     map.zoomOut();
+                },
+                error : function() {
+                    // 여기서 검색 결과 실패시 모달 창이라도 띄워주세요.
+                    alert("검색결과가 없습니다");
+                    console.log("error")
                 }
             });
         }
