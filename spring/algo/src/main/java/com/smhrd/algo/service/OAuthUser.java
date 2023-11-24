@@ -1,2 +1,4 @@
-package com.smhrd.algo.service;public class OAuthUser {
+package com.smhrd.algo.service;
+
+public class OAuthUser {
 }

@@ -1,2 +1,5 @@
-package com.smhrd.algo.model.dto;public enum Role {
+package com.smhrd.algo.model.dto;
+
+public enum Role {
+    ROLE_USER;
 }
