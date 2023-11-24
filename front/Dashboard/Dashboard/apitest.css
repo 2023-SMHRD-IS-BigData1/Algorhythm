@@ -1,0 +1,23 @@
+#map {
+    display: flex;
+    margin-top: 225px;
+}
+.search_content{
+    width: 25%;
+    border: 1px solid;
+}
+#search {
+    font-size: 15px;
+    height: 36px;
+    padding-top: 0px;
+    padding-bottom: 1px;
+}
+#searchValue{
+    width: 78%;
+    font-size: 15px;
+    height: 30px;
+}
+.search_btn {
+
+    text-align: center;
+}

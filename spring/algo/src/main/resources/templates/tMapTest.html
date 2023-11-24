@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>simpleMap</title>
+    <link rel="stylesheet" href="/CSS/tmap.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script
             src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=nRUNxPRv9p2mYIfwpEZPC7qHQMtNN5ZB25T3ErVd"></script>
@@ -45,7 +46,7 @@
                 success : function(response){
 
                     var data = response.searchPoiInfo.pois.poi;
-
+                    console.log(data);
                     // 기존 마커 제거
                     if (markerArr.length > 0) {
                         for (var i in markerArr) {
