@@ -1,3 +1,4 @@
+/*
 package com.smhrd.algo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,3 +27,4 @@ public class PrincipalDetails implements UserDetails, OAuth2User{
         return null;
     }
 }
+*/

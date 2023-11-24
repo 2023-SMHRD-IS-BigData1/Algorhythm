@@ -1,3 +1,4 @@
+/*
 package com.smhrd.algo.service;
 
 import com.smhrd.algo.controller.PrincipalDetails;
@@ -47,3 +48,4 @@ public class PrincipalOAuth2UserService extends DefaultOAuth2UserService{
         return new PrincipalDetails(myUser, userInfo);
     }
 }
+*/

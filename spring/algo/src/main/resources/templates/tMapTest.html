@@ -1,27 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>simpleMap</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=ZzRVCMWhEL7KOahAwoKic3LiH1DifbjH6A38By0R"></script>
+    <script
+            src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=nRUNxPRv9p2mYIfwpEZPC7qHQMtNN5ZB25T3ErVd"></script>
+
     <script type="text/javascript">
-        var map, marker;
-        var markerArr = [];
-        function initTmap(){
-            // 1. 지도 띄우기
-            map = new Tmapv2.Map("map_div", {
-                center: new Tmapv2.LatLng(37.56520450, 126.98702028),
-                width : "70%",
-                height : "400px",
-                zoom : 17,
-                zoomControl : true,
-                scrollwheel : true
+        function initTmap() {
+            // 주요 필드
+            var map;
+            var markerArr=[];
+
+            // 맵 객체 생성
+            map = new Tmapv2.Map("map", // "map" id 값과 맞추기
+                 {
+                     center : new Tmapv2.LatLng(35.1595454, 126.8526012),
+                     width : "100%",
+                     height : "400px",
+                     zoom : 14,
+                     zoomControl : true,
+                     scrollwheel : true
+                 });
+
+            // 검색 기능
+            $('#search').click(function() {
+                var inputValue = $('#searchValue').val();
+                poiSearch(map, inputValue, markerArr)
             });
         }
     </script>
+
+    <script type="text/javascript"> // 검색 기능 function
+        function poiSearch(map, searchKeyword, markerArr) {
+
+            var marker;
+            var markerImg = "/img/tmap/testMarker.png";
+            var positionBounds = new Tmapv2.LatLngBounds();
+
+            $.ajax({
+                url : "/poisearch",
+                data : {"searchKeyword":searchKeyword},
+                success : function(response){
+
+                    var data = response.searchPoiInfo.pois.poi;
+
+                    // 기존 마커 제거
+                    if (markerArr.length > 0) {
+                        for (var i in markerArr) {
+                            markerArr[i].setMap(null);
+                        }
+                    }
+
+                    // 마커 생성
+                    for (var k=0; k<data.length; k++) { // for[s]
+                        var noorLat = data[k].noorLat; // 위도
+                        var noorLon = data[k].noorLon; // 경도
+
+                        // 마커 생성
+                        var lonlat = new Tmapv2.LatLng(noorLat, noorLon);
+                        var iconSize = new Tmapv2.Size(20,20);
+                        marker = new Tmapv2.Marker(
+                        {
+                            position : lonlat,
+                            icon : markerImg,
+                            iconSize : iconSize,
+                            map : map
+                        });
+                        markerArr.push(marker);
+                        positionBounds.extend(lonlat);
+                    } // for[e]
+
+                    // 마커들이 보이도록 지도 조정
+                    map.panToBounds(positionBounds);
+                    map.zoomOut();
+                }
+            });
+        }
+    </script>
+
 </head>
 <body onload="initTmap();">
-<div id="map_div" class="map_wrap"></div>
+
+    <div id="map"></div>
+
+    <input type="text" id="searchValue" value="" placeholder="장소를 입력해주세요" />
+    <button id="search">검색</button>
+
+
 </body>
 </html>
