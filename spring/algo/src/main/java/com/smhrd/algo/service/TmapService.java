@@ -33,6 +33,8 @@ public class TmapService {
                 .queryParam("format", "json")
                 .queryParam("callback", "result")
                 .queryParam("searchKeyword", searchKeyword)
+                .queryParam("count", 10)
+                .queryParam("multiPoint", "Y")
                 .queryParam("reqCoordType", "WGS84GEO")
                 .queryParam("resCoordType", "WGS84GEO")
                 .queryParam("areaLLCode", 29)
