@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>Kakao 지도 시작하기</title>
-
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4337b9e17b763198114b7329db717b9a"></script>
     <script>
         function initKakaoMap() {
@@ -14,8 +14,15 @@
             };
 
             var map = new kakao.maps.Map(container, options);
+
+            $.ajax({
+                url : "/test",
+                success : function(data) {
+                    console.log(data)
+                }
+            });
         }
-    </script>
+    </script>>
 </head>
 <body onload="initKakaoMap();">
 
