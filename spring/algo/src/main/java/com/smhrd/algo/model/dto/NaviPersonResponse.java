@@ -31,6 +31,8 @@ public class NaviPersonResponse {
             private Integer totalTime;
             private Integer index;
             private Integer pointIndex;
+            private Integer time;
+            private Integer distance;
             private String name;
             private String nearPoiName;
             private String nearPoiX;
