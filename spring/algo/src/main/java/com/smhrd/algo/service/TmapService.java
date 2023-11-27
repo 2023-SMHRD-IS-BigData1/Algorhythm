@@ -3,9 +3,11 @@ package com.smhrd.algo.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smhrd.algo.model.dto.LatLonRequest;
+import com.smhrd.algo.model.dto.LatLonRequest.LatlonList;
 import com.smhrd.algo.model.dto.LatLonRequest.LatlonList.Latlon;
 import com.smhrd.algo.model.dto.NaviPersonResponse;
 import com.smhrd.algo.model.dto.NaviPersonResponse.Feature;
+import com.smhrd.algo.model.dto.NaviPersonResponse.Feature.Geometry;
 import com.smhrd.algo.model.dto.PoiResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.*;
@@ -14,9 +16,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Log4j2
 public class TmapService {
@@ -44,7 +48,7 @@ public class TmapService {
                 .queryParam("multiPoint", "Y")
                 .queryParam("reqCoordType", "WGS84GEO")
                 .queryParam("resCoordType", "WGS84GEO")
-                .queryParam("areaLLCode", 29)
+                .queryParam("areaLLCode", 36)
                 .encode()
                 .build()
                 .toUri();
@@ -156,12 +160,20 @@ public class TmapService {
          Returns     : LatLonRequest 경유지가 포함된 LatLonRequest
         */
 
-        List<Feature> feature = object.getFeatures();
+        List<Feature> features = object.getFeatures();
+        List<List<Double>> latlonList = new ArrayList<>();
 
-//        for(int i=0; i<feature.size(); i++) {
-//            if (feature.get(i).getGeometry().getType())
-//        }
+        // 보행자 경로의 Point 객체만 반환받아 List로 만들기
+        for (int i=0; i<features.size(); i++) {
+            Geometry data = features.get(i).getGeometry();
+            if (data.getType().equals("Point")){
+                latlonList.add((List<Double>) data.getCoordinates());
+            }
+        }
 
+
+
+        log.debug(latlonList.size());
 
         return null;
     }

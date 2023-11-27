@@ -16,30 +16,58 @@
             var totalMarkerArr = [];
             var drawInfoArr = [];
             var resultdrawArr = [];
+            var stationMarker = [];
 
             // 맵 객체 생성
             map = new Tmapv2.Map("map", // "map" id 값과 맞추기
                  {
-                     center : new Tmapv2.LatLng(35.1595454, 126.8526012),
+                     center : new Tmapv2.LatLng(36.5040736, 127.2494855),
                      width : "100%",
                      height : "400px",
-                     zoom : 14,
+                     zoom : 17,
                      zoomControl : true,
                      scrollwheel : true
                  });
 
-            // 검색 기능
+            // 정류장 지도 위에 표기하기
+            $.ajax({
+                url : "/getstation",
+                success : function(response){
+
+                    for (var i=0; i<response.length; i++) {
+
+                        var lat = response[i].lat
+                        var lon = response[i].lng
+                        var name = response[i].stationName
+
+                        var markerPosition = new Tmapv2.LatLng(lat,lon);
+
+                        marker = new Tmapv2.Marker({
+                           position : markerPosition,
+                           icon : "/img/tmap/stationMarker.png",
+                           iconSize : new Tmapv2.Size(15,15),
+                           title : name,
+                           map : map
+                        });
+                    }
+                }
+            });
+
+
+
+            // 검색 기능 함수 아래 존재
             $('#search').click(function() {
                 var inputValue = $('#searchValue').val();
                 poiSearch(map, inputValue, markerArr)
             });
+
+            // 길찾기 기능 함수 아래 존재
             $('#navi').click(function() {
                 naviPerson(map, resultdrawArr, markerArr)
             });
         }
-    </script>
 
-    <script> // 보행자 길찾기 서비스
+         // 보행자 길찾기 서비스
         function naviPerson(map, resultdrawArr, markerArr) {
 
             // 지도 크기 조절 및 이동을 위한 객체 생성
@@ -151,8 +179,8 @@
 
                             // 줌 아웃을 위한 포인트 객체 저장
 							var lonlat = new Tmapv2.LatLng(
-							       geometry.coordinates[1],
-							       geometry.coordinates[0]);
+							    geometry.coordinates[1],
+							    geometry.coordinates[0]);
 
 							positionBounds.extend(lonlat);
 
@@ -190,6 +218,7 @@
             });
         }
 
+        // 지도에 선 그리는 부분
         function drawLine(arrPoint, map, resultdrawArr) {
             var polyline_;
 
@@ -204,9 +233,8 @@
             // 초기화를 위해 라인 담기
             resultdrawArr.push(polyline_);
 	    }
-    </script>
 
-    <script type="text/javascript"> // 검색 기능 function
+        // 검색 기능
         function poiSearch(map, searchKeyword, markerArr) {
 
             var marker;

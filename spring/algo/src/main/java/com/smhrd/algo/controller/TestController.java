@@ -1,11 +1,7 @@
 package com.smhrd.algo.controller;
 
 import com.smhrd.algo.model.dto.WeatherResponse;
-import com.smhrd.algo.model.entity.Bike;
-import com.smhrd.algo.model.entity.User;
-import com.smhrd.algo.repository.BikeRepository;
 import com.smhrd.algo.repository.BikeStationRepository;
-import com.smhrd.algo.repository.UserRepository;
 import com.smhrd.algo.service.UserService;
 import com.smhrd.algo.service.WeatherService;
 import jakarta.annotation.PostConstruct;
@@ -14,10 +10,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URISyntaxException;
-import java.time.LocalDate;
 
 @RequiredArgsConstructor
 @Log4j2
@@ -49,10 +43,7 @@ public class TestController {
 
         log.debug(bikeStationRepository.findAll().size());
 
-
-//        // User 2명 가데이터 저장
 //        userService.createUser("admin","1234","최윤석");
 
-        // 정거장 3곳 가데이터 저장
     }
 }

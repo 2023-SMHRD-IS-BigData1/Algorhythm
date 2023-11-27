@@ -1,7 +1,9 @@
 package com.smhrd.algo.model.dto;
 
 import com.smhrd.algo.model.dto.LatLonRequest.LatlonList.Latlon;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -27,6 +29,8 @@ public class LatLonRequest {
         private List<Latlon> latlon;
 
         @Getter @Setter
+        @AllArgsConstructor
+        @NoArgsConstructor
         public static  class Latlon {
             private String type;
             private Double lat;
