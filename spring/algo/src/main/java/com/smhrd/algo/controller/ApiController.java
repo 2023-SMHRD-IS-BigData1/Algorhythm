@@ -1,15 +1,15 @@
 package com.smhrd.algo.controller;
 
+import com.smhrd.algo.model.dto.LatLonRequest;
 import com.smhrd.algo.model.dto.NaviPersonResponse;
 import com.smhrd.algo.model.dto.PoiResponse;
 import com.smhrd.algo.service.TmapService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@Log4j2
 public class ApiController {
     @GetMapping("/poisearch")
     @ResponseBody
@@ -19,11 +19,12 @@ public class ApiController {
         return ts.convertToObject(json);
     }
 
-    @GetMapping("/naviperson")
+    @PostMapping("/naviperson")
     @ResponseBody
-    public NaviPersonResponse naviSearch() {
+    public NaviPersonResponse naviSearch(@RequestBody LatLonRequest latlon) {
+        log.debug(latlon);
         TmapService ts = new TmapService();
-        String json =ts.naviPerson();
+        String json =ts.naviPerson(latlon);
         return ts.converToNaviObject(json);
     }
 

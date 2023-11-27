@@ -54,8 +54,27 @@
                 }
             }
 
+            // passList 생성하기
+            const latLonRequest = {};
+
+            latLonRequest.latlonList = { latlon: [] };
+
+            latLonRequest.latlonList.latlon.push({
+              type: 'start',
+              lat: 37.556770374096615,
+              lon: 126.92365493654832
+            });
+            latLonRequest.latlonList.latlon.push({
+              type: 'end',
+              lat: 37.55279861528311,
+              lon: 126.92432158129688
+            });
+
             $.ajax({
                 url : "/naviperson",
+                data : JSON.stringify(latLonRequest),
+                contentType : "application/json",
+                method : "POST",
                 success : function(response) {
 
                     // 기존 마커 제거

@@ -2,6 +2,7 @@ package com.smhrd.algo.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.smhrd.algo.model.dto.LatLonRequest;
 import com.smhrd.algo.model.dto.NaviPersonResponse;
 import com.smhrd.algo.model.dto.PoiResponse;
 import lombok.extern.log4j.Log4j2;
@@ -74,7 +75,7 @@ public class TmapService {
         return object;
     }
 
-    public String naviPerson() {
+    public String naviPerson(LatLonRequest latlon) {
         /*
          Description : 출발지와 도착지의 위도와 경도를 입력받아,
                        보행자도로 기준으로 길을 찾아줍니다.
@@ -94,6 +95,9 @@ public class TmapService {
         headers.set("version", "1");
         headers.set("callback", "function");
 
+        // passList 제작
+        log.debug(latlon.getLatLonString());
+
         // body 세팅
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map = new HashMap<>();
@@ -101,6 +105,7 @@ public class TmapService {
         map.put("startY", 37.556770374096615);
         map.put("endX", 126.92432158129688);
         map.put("endY", 37.55279861528311);
+        map.put("passList", null);
         map.put("speed", 20);
         map.put("searchOption", "30");
         map.put("startName", "출발");

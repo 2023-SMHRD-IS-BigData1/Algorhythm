@@ -24,8 +24,7 @@ public class UserController {
     public String userJoin(String userId, String userPw, String userName,
                            LocalDate userBirthdate, String userGender,
                            String userAddr) {
-        userService.createUser(userId, userPw, userName,
-                userBirthdate, userGender, userAddr);
+
         return "ok";
     }
 
