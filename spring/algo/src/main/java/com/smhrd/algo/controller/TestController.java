@@ -71,13 +71,7 @@ public class TestController {
                 .build();
 
         userRepository.save(testUser2);
-<<<<<<< HEAD
-        
-
-
-=======
 
         // 정거장 3곳 가데이터 저장
->>>>>>> main
     }
 }

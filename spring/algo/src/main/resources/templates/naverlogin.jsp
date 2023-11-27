@@ -14,7 +14,7 @@ SecureRandom random = new SecureRandom();
 String state = new BigInteger(130, random).toString();
 String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
 + "&client_id=" + clientId
-+ "&redirect_uri=" + redirectURI
++ "&redirect_uri=" + redirectURIs
 + "&state=" + state;
 session.setAttribute("state", state);
 %>
