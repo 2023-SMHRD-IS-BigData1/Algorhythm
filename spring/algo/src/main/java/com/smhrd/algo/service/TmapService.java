@@ -3,7 +3,9 @@ package com.smhrd.algo.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smhrd.algo.model.dto.LatLonRequest;
+import com.smhrd.algo.model.dto.LatLonRequest.LatlonList.Latlon;
 import com.smhrd.algo.model.dto.NaviPersonResponse;
+import com.smhrd.algo.model.dto.NaviPersonResponse.Feature;
 import com.smhrd.algo.model.dto.PoiResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.*;
@@ -13,6 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Log4j2
@@ -97,15 +100,17 @@ public class TmapService {
 
         // passList 제작
         log.debug(latlon.getLatLonString());
+        String passList = null;
+        List<Latlon> data = latlon.getLatlonList().getLatlon();
 
         // body 세팅
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map = new HashMap<>();
-        map.put("startX", 126.92365493654832);
-        map.put("startY", 37.556770374096615);
-        map.put("endX", 126.92432158129688);
-        map.put("endY", 37.55279861528311);
-        map.put("passList", null);
+        map.put("startX", data.get(0).getLon());
+        map.put("startY", data.get(0).getLat());
+        map.put("endX", data.get(1).getLon());
+        map.put("endY", data.get(1).getLat());
+        if (passList != null) {map.put("passList", passList);}
         map.put("speed", 20);
         map.put("searchOption", "30");
         map.put("startName", "출발");
@@ -142,5 +147,22 @@ public class TmapService {
             log.debug("Failed to parse WeatherResponse from JSON", e);
         }
         return object;
+    }
+
+    public LatLonRequest findStation(NaviPersonResponse object) {
+        /*
+         Description : Data에서 Point의 위경도만을 추출하여 근처의 정거장을 찾습니다.
+         Params      : NaviPersonResponse 출발지와 목적지로 추출된 결과
+         Returns     : LatLonRequest 경유지가 포함된 LatLonRequest
+        */
+
+        List<Feature> feature = object.getFeatures();
+
+//        for(int i=0; i<feature.size(); i++) {
+//            if (feature.get(i).getGeometry().getType())
+//        }
+
+
+        return null;
     }
 }

@@ -4,6 +4,7 @@ import com.smhrd.algo.model.dto.WeatherResponse;
 import com.smhrd.algo.model.entity.Bike;
 import com.smhrd.algo.model.entity.User;
 import com.smhrd.algo.repository.BikeRepository;
+import com.smhrd.algo.repository.BikeStationRepository;
 import com.smhrd.algo.repository.UserRepository;
 import com.smhrd.algo.service.UserService;
 import com.smhrd.algo.service.WeatherService;
@@ -24,7 +25,7 @@ import java.time.LocalDate;
 public class TestController {
 
     private final UserService userService;
-    private final BikeRepository bikeRepository;
+    private final BikeStationRepository bikeStationRepository;
 
 
     @GetMapping("/test")
@@ -43,11 +44,15 @@ public class TestController {
         return response;
     }
 
-//    @PostConstruct
-//    public void init() {
+    @PostConstruct
+    public void init() {
+
+        log.debug(bikeStationRepository.findAll().size());
+
+
 //        // User 2명 가데이터 저장
 //        userService.createUser("admin","1234","최윤석");
-//
-//        // 정거장 3곳 가데이터 저장
-//    }
+
+        // 정거장 3곳 가데이터 저장
+    }
 }
