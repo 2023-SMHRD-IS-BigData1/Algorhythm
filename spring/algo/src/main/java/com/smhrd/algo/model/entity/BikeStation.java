@@ -28,11 +28,11 @@ public class BikeStation {
     private String stationAddr;
     
     // 정류장 위도
-    @Column(name = "rental_station_lng", precision = 17, scale = 14)
+    @Column(name = "rental_station_lat", precision = 17, scale = 14)
     private BigDecimal lat;
    
     // 정류장 경도
-    @Column(name = "rental_station_lat", precision = 17, scale = 14)
+    @Column(name = "rental_station_lng", precision = 17, scale = 14)
     private BigDecimal lng;
 
     @Builder

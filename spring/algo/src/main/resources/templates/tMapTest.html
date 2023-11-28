@@ -89,13 +89,13 @@
 
             latLonRequest.latlonList.latlon.push({
               type: 'start',
-              lat: 37.556770374096615,
-              lon: 126.92365493654832
+              lat: 36.49100010,
+              lon: 127.26377507
             });
             latLonRequest.latlonList.latlon.push({
               type: 'end',
-              lat: 37.55279861528311,
-              lon: 126.92432158129688
+              lat: 36.49124978,
+              lon: 127.24724877
             });
 
             $.ajax({
@@ -127,8 +127,6 @@
                     // 기존 경로 및 마커 제거
                     if (resultdrawArr.length > 0) {
 						for ( var i in resultdrawArr) {
-						    console.log(resultdrawArr[i] instanceof Tmapv2.Polyline)
-						    console.log(resultdrawArr[i].getMap())
 							resultdrawArr[i]
 									.setMap(null);
 						}
@@ -140,8 +138,6 @@
 						var geometry = resultData[i].geometry;
 						var properties = resultData[i].properties;
 						var polyline_;
-
-                        console.log(geometry)
 
 						if (geometry.type == "LineString") {
 							for ( var j in geometry.coordinates) {
@@ -247,6 +243,8 @@
                 success : function(response){
 
                     var data = response.searchPoiInfo.pois.poi;
+
+                    console.log(data)
 
                     // 기존 마커 제거
                     if (markerArr.length > 0) {

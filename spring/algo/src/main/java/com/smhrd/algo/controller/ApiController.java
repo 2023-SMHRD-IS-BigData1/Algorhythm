@@ -19,11 +19,11 @@ import java.util.List;
 public class ApiController {
 
     private final BikeStationRepository bikeStationRepository;
+    private final TmapService ts;
 
     @GetMapping("/poisearch")
     @ResponseBody
     public PoiResponse poiSearch(@RequestParam String searchKeyword) {
-        TmapService ts = new TmapService();
         String json = ts.poiSearch(searchKeyword);
         return ts.convertToObject(json);
     }
@@ -38,10 +38,11 @@ public class ApiController {
     @ResponseBody
     public NaviPersonResponse naviSearch(@RequestBody LatLonRequest latlon) {
 
-        TmapService ts = new TmapService();
         String json =ts.naviPerson(latlon);
 
-        ts.findStation(ts.converToNaviObject(json));
+        LatLonRequest findStation = ts.findStation(ts.converToNaviObject(json));
+
+        json = ts.naviPerson(findStation);
 
         return ts.converToNaviObject(json);
     }
@@ -49,7 +50,6 @@ public class ApiController {
 //    @GetMapping("/naviperson")
 //    @ResponseBody
 //    public String naviSearch() {
-//        TmapService ts = new TmapService();
 //        return ts.naviPerson();
 //    }
 }
