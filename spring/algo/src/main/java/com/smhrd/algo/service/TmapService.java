@@ -111,7 +111,7 @@ public class TmapService {
         headers.set("version", "1");
         headers.set("callback", "function");
 
-        // passList 제작
+        // passList 존재여부 체크
         String passList = null;
         try {
             if (!latlon.getLatlonList().getLatlonStations().isEmpty()) {
@@ -253,7 +253,8 @@ public class TmapService {
                 .lat(latlonList.get(latlonList.size()-1).get(1))
                 .lon(latlonList.get(latlonList.size()-1).get(0))
                 .build());
-
+        
+        // 대여 정거장과 반납 정거장이 둘 다 존재하는지 확인 필요
         List<LatlonStation> latlonStations = new ArrayList<>();
         latlonStations.add(LatlonStation.builder()
                 .type("대여")

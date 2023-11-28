@@ -14,7 +14,8 @@
             var map;
             var markerArr=[];
             var totalMarkerArr = [];
-            var drawInfoArr = [];
+            var drawBikeInfoArr = [];
+            var drawWalkInfoArr = [];
             var resultdrawArr = [];
             var stationMarker = [];
 
@@ -104,6 +105,9 @@
                 contentType : "application/json",
                 method : "POST",
                 success : function(response) {
+                    var lastMarker = "walk";
+
+                    console.log(response)
 
                     // 기존 마커 제거
                     if (markerArr.length > 0) {
@@ -132,22 +136,49 @@
 						}
 						resultdrawArr = [];
 					}
-					drawInfoArr = [];
+					drawBikeInfoArr = [];
+					walkInfoList = [];
+					drawWalkInfoArr = [];
 
                     for ( var i in resultData) { //for문 [S]
 						var geometry = resultData[i].geometry;
 						var properties = resultData[i].properties;
 						var polyline_;
 
+                        console.log(properties.pointType)
+                        if (properties.pointType == "PP1" || properties.pointType == "EP") {
+                            lastMarker = "bike"
+
+                            // 걷는 부분만 따로 저장
+                            walkInfoList.push(drawWalkInfoArr)
+                            drawWalkInfoArr=[]
+
+                        } else if (properties.pointType == "PP2") {
+                            lastMarker = "walk"
+                        }
+
+						// workspace
+
 						if (geometry.type == "LineString") {
 							for ( var j in geometry.coordinates) {
+                                if (lastMarker == "bike") {
+                                    // 포인트객체의 정보로 좌표값 변환 객체로 저장
+                                    var convertChange = new Tmapv2.LatLng(
+                                            geometry.coordinates[j][1],
+                                            geometry.coordinates[j][0]);
 
-								// 포인트객체의 정보로 좌표값 변환 객체로 저장
-								var convertChange = new Tmapv2.LatLng(
-										geometry.coordinates[j][1],
-										geometry.coordinates[j][0]);
-								// 배열에 담기
-								drawInfoArr.push(convertChange);
+                                    console.log("bike = " + convertChange)
+
+                                    // 배열에 담기
+                                    drawBikeInfoArr.push(convertChange);
+								} else {
+								    var convertChange = new Tmapv2.LatLng(
+                                            geometry.coordinates[j][1],
+                                            geometry.coordinates[j][0]);
+                                    console.log("walk = " + convertChange)
+                                    // 배열에 담기
+                                    drawWalkInfoArr.push(convertChange);
+								}
 							}
 						} else {
 							var markerImg = "";
@@ -200,7 +231,7 @@
 						}
 					}//for문 [E]
 
-                    drawLine(drawInfoArr, map, resultdrawArr);
+                    drawLine(drawBikeInfoArr, walkInfoList, map, resultdrawArr);
 
                     // 마커들이 보이도록 지도 조정
                     map.panToBounds(positionBounds);
@@ -215,17 +246,30 @@
         }
 
         // 지도에 선 그리는 부분
-        function drawLine(arrPoint, map, resultdrawArr) {
+        function drawLine(arrBikePoint,arrWalkPointList, map, resultdrawArr) {
             var polyline_;
 
             // 선 스타일 제어하는 부분
             polyline_ = new Tmapv2.Polyline({
-                path : arrPoint,
+                path : arrBikePoint,
                 strokeColor : "#000000",
-                strokeWeight : 10,
+                strokeWeight : 5,
                 map : map
             });
 
+            // 초기화를 위해 라인 담기
+            resultdrawArr.push(polyline_);
+
+            for (let arrWalkPoint of arrWalkPointList) {
+                // 선 스타일 제어하는 부분
+                polyline_ = new Tmapv2.Polyline({
+                    path : arrWalkPoint,
+                    strokeColor : "#FF0000",
+                    strokeStyle : "dot",
+                    strokeWeight : 5,
+                    map : map
+                });
+            }
             // 초기화를 위해 라인 담기
             resultdrawArr.push(polyline_);
 	    }
