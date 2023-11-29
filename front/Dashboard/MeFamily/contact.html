@@ -10,7 +10,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
+  <!-- <link href="assets/img/favicon.png" rel="icon"> -->
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -26,7 +26,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="./contact.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script defer src="./contact.js"></script>
 
   <!-- =======================================================
   * Template Name: MeFamily
@@ -39,166 +41,111 @@
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center justify-content-between">
-
-      <h1 class="logo"><a href="index.html">TABRO</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="fontC" href="index.html">대시보드</a></li>
-          <li><a class="fontC" href="our-story.html">타브러 맵</a></li>
-          <li><a class="fontC" href="events.html">이용방법</a></li>
-          <li class="dropdown"><a class="fontC" href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a class="fontC" href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a class="fontC" class="active" href="contact.html">로그인</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-    </div>
-  </header><!-- End Header -->
-
-  <main id="main">
-
-    <!-- ======= Breadcrumbs ======= -->
-    <section id="breadcrumbs" class="breadcrumbs">
-      <div class="container">
-
-        <div class="d-flex justify-content-between align-items-center">
-          <h2>로그인</h2>
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li>login</li>
-          </ol>
+  <main class="main">
+    <section class="home">
+      <h1>Welcome to the <span>TABRO</span></h1>
+      <button id="sign-up" class="btn">회원가입</button>
+      <button id="sign-in" class="btn">로그인</button>
+      <p><a class="link-copy" href="https://blog.naver.com/yumni_-" target="_blank">©Copyright 2023 TABRO</a></p>
+    </section>
+  
+    <section class="sign-up">
+      <article class="signup-left">
+        <h1>TABRO</h1>
+        <div class="wc_message">
+          <p>WELCOME TO THE</p>
+          <h3>TABRO</h3>
         </div>
-
-      </div>
-    </section><!-- End Breadcrumbs -->
-
-    <!-- ======= Contact Us Section ======= -->
-    <section id="contact-us" class="contact-us">
-      <div class="container">
-
-        <!-- <div>
-          <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
-        </div> -->
-<!-- 
-        <div class="row mt-5">
-
-          <div class="col-lg-4">
-            <div class="info">
-              <div class="id">
-                <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
-                <p>A108 Adam Street, New York, NY 535022</p>
-              </div>
-                
-              <div class="email">
-                <i class="bi bi-envelope"></i>
-                <h4>Email:</h4>
-                <p>info@example.com</p>
-              </div>
-
-              <div class="phone">
-                <i class="bi bi-phone"></i>
-                <h4>Call:</h4>
-                <p>+1 5589 55488 55s</p>
-              </div>
-
+        <div class="btn-back">
+          <i class="fas fa-2x fa-angle-left angle-left-color"></i>
+          HOME
+        </div>
+      </article>
+  
+      <article class="form-area">
+        <!-- 회원가입 -->
+        <div class="organize-form form-area-signup">
+          <h2>JOIN US</h2>
+          <form class="form" action="join" method="post" id="join-form">
+            <div class="form-field btn_ris">
+              <!-- <label for="userId">ID를 입력해주세요</label> -->
+              <input type="text" id="userId" name="userId" class="regis" placeholder="ID를 입력해주세요" />
+               <button onclick="registerCheck()" type="button"class="w3-button w3-white w3-border w3-border-green w3-round-large">Button</button>
             </div>
-
-          </div> -->
-          
-          <div class="login-page">
-            <div class="form">
-              <form action="/join" method="post" class="register-form">
-                <input type="text" placeholder="userUd"/>
-                <input type="password" placeholder="password"/>
-                <input type="text" placeholder="email address"/>
-                <button>create</button>
-                <p class="message">Already registered? <a href="#">Sign In</a></p>
-              </form>
-              <div class="tabroLogo"><a href="#" class="tabroLogo">TABRO</a>
-                <div style="height: 50px;"></div>
-                <form action="/login" method="post" class="login-form">
-                  <input type="text" placeholder="아이디 입력" id="userId" name="userId"/>
-                  <input type="password" placeholder="비밀번호 입력 " id="userPw" name="userPw"/>
-                  <button>login</button>
-                  <p class="message">아이디가 없다면? <a href="contact_regis.html">회원가입</a></p>
-                </form>
-              </div>
-            </div>
-          </div>
             
+            <div class="form-field">
+              <!-- <label for="userPw">비밀번호를 입력해주세요</label> -->
+              <input type="password" id="userPw" name="userPw" placeholder="비밀번호를 입력해주세요"/>
+            </div>
 
+            <div class="form-field">
+              <!-- <label for="userPw2">비밀번호를 확인해주세요</label> -->
+              <input type="password" id="userPw2" name="userPw2" placeholder="비밀번호를 다시 한번 입력해주세요"/>
+            </div>
+
+            <div class="form-field">
+              <!-- <label for="userName">이름을 입력해주세요</label> -->
+              <input type="text" id="userName" name="userName" placeholder="이름을 입력해주세요"/>
+            </div>
+  
+            <button class="btn-sign btn-up" id="joinBtn">회원가입</button>
+          </form>
+          <p>아이디가 있으신가요? <a href="#" class="link-in"> 로그인</a></p>
+  
         </div>
-
+  
+        <!-- 로그인 -->
+        <div class="organize-form form-area-signin">
+          <h2>LOGIN</h2>
+          <form class="form" action="login" method="post" name="login-Form">
+            <div class="form-field">
+              <!-- <label for="userId">ID</label> -->
+              <input type="text" name="userId" id="userId" placeholder="ID를 입력해주세요" />
+            </div>
+  
+            <div class="form-field">
+              <!-- <label for="userPw">Password</label> -->
+              <input type="text" name="userPw" id="userPw" placeholder="비밀번호를 입력해주세요" />
+            </div>
+  
+            <button class="btn-sign btn-in">로그인</button>
+            <div class="social-logo">
+              <button class="w3-button w3-circle naver"> </button>
+              <button class="w3-button w3-circle kakao" > </button>
+              <button class="w3-button w3-circle google"> </button>
+            </div> 
+          </form>
+          <p>아이디가 없으신가요?<a href="#" class="link-up"> 회원가입</a></p>
+        </div>
+   
+      </article>
+  
+      <article class="signup-right" > 
+        <img  class ="webLogin"src="./assets/img/loginPt.png" alt="" width="100%" height="100% ">
+        <i class="fas fa-2x fa-bars bars-style"></i>
+        <!-- <p><a class="link-copy" href="https://blog.naver.com/yumni_-" target="_blank">©Copyright 2023 TABRO</a></p> -->
+  
+      </article>
+    </section>
+  </main>
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div  id = "checkId" class="modal-content panel-info">
+        <div class="modal-header panel-heading">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">메시지 확인</h4>
+        </div>
+        <div class="modal-body">
+          <p id="checkMessage"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
       </div>
-    </section><!-- End Contact Us Section -->
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      <h3>MeFamily</h3>
-      <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
-      <div class="social-links">
-        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-      </div>
-      <div class="copyright">
-        &copy; Copyright <strong><span>MeFamily</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/family-multipurpose-html-bootstrap-template-free/ -->
-        Designed by <a href="https://bootstrapmade.com/">JU AND MIN</a>
-      </div>
+      
     </div>
-  </footer><!-- End Footer -->
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-  <script defer> 
-     $('.message a').click(function(){
-  $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-});
-</script>
-
+  </div>
 </body>
-
 </html>

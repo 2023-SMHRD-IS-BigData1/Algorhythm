@@ -1479,7 +1479,7 @@ select {
   padding: 1rem 4rem 1rem 1rem;
   background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em,
     linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
-  color: gray;
+  color: black;
   border-radius: 0.25em;
   box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
@@ -1497,3 +1497,5 @@ select {
     background-color: var(--option-bg);
   }
 }
+
+
