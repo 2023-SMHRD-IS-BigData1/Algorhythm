@@ -169,6 +169,52 @@ public class TmapService {
         return object;
     }
 
+    public String naviTransport(LatLonRequest latlon) {
+        /*
+         Description : 출발지와 도착지의 위도와 경도를 입력받아,
+                       대중교통을 사용하여 길을 찾아줍니다.
+         Params      : 출발지 위도경도, 도착지 위도경도
+         Returns     : 대중교통 도로 기준 길 JSON 데이터
+        */
+        RestTemplate restTemplate = new RestTemplate();
+
+        // appKey, URL
+        String appKey = "nRUNxPRv9p2mYIfwpEZPC7qHQMtNN5ZB25T3ErVd";
+        String URL = "https://apis.openapi.sk.com/transit/routes";
+
+        // header 세팅
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("accept", "application/json");
+        headers.set("appKey", appKey);
+
+        // body 세팅
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = new HashMap<>();
+        map.put("startX", 127.26377507);
+        map.put("startY", 36.49100010);
+        map.put("endX", 127.24724877);
+        map.put("endY", 36.49124978);
+        map.put("format", "json");
+
+        String jsonBody = null;
+        try {
+            jsonBody = mapper.writeValueAsString(map);
+            log.debug(jsonBody);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        // combine
+        HttpEntity<String> request = new HttpEntity<>(jsonBody, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(URL, HttpMethod.POST, request, String.class);
+
+        return response.getBody();
+    }
+
+
+
     public LatLonRequest findStation(NaviPersonResponse object) {
         /*
          Description : Data에서 Point의 위경도만을 추출하여 근처의 정거장을 찾습니다.

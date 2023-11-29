@@ -30,6 +30,17 @@
                      scrollwheel : true
                  });
 
+            // test
+            $.ajax({
+                url : "/navitransport",
+                success : function(response) {
+                    console.log(JSON.parse(response))
+                },
+                error : function(){
+                    alert("JSON 출력 실패");
+                }
+            });
+
             // 정류장 지도 위에 표기하기
             $.ajax({
                 url : "/getstation",

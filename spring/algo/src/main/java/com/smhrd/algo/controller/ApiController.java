@@ -34,6 +34,12 @@ public class ApiController {
         return bikeStationRepository.findAll();
     }
 
+    @GetMapping("/navitransport")
+    @ResponseBody
+    public String getTransportRoute() {
+        return ts.naviTransport(null);
+    }
+
     @PostMapping("/naviperson")
     @ResponseBody
     public NaviPersonResponse naviSearch(@RequestBody LatLonRequest latlon) {
