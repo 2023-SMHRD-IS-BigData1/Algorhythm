@@ -138,6 +138,7 @@ public class TmapService {
         String jsonBody = null;
         try {
             jsonBody = mapper.writeValueAsString(map);
+            log.debug(jsonBody);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
