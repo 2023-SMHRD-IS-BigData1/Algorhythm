@@ -2,6 +2,7 @@ package com.smhrd.algo.controller;
 
 import com.smhrd.algo.model.dto.LatLonRequest;
 import com.smhrd.algo.model.dto.NaviPersonResponse;
+import com.smhrd.algo.model.dto.NaviTransportResponse;
 import com.smhrd.algo.model.dto.PoiResponse;
 import com.smhrd.algo.model.entity.BikeStation;
 import com.smhrd.algo.repository.BikeStationRepository;
@@ -36,8 +37,10 @@ public class ApiController {
 
     @GetMapping("/navitransport")
     @ResponseBody
-    public String getTransportRoute() {
-        return ts.naviTransport(null);
+    public NaviTransportResponse getTransportRoute() {
+        String json = ts.naviTransport(null);
+        NaviTransportResponse object = ts.convertToTransportObject(json);
+        return ts.setLatLon(object);
     }
 
     @PostMapping("/naviperson")
@@ -46,11 +49,11 @@ public class ApiController {
 
         String json =ts.naviPerson(latlon);
 
-        LatLonRequest findStation = ts.findStation(ts.converToNaviObject(json));
+        LatLonRequest findStation = ts.findStation(ts.convertToPersonObject(json));
 
         json = ts.naviPerson(findStation);
 
-        return ts.converToNaviObject(json);
+        return ts.convertToPersonObject(json);
     }
 
 //    @GetMapping("/naviperson")

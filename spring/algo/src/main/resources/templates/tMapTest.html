@@ -13,11 +13,7 @@
             // 주요 필드
             var map;
             var markerArr=[];
-            var totalMarkerArr = [];
-            var drawBikeInfoArr = [];
-            var drawWalkInfoArr = [];
             var resultdrawArr = [];
-            var stationMarker = [];
 
             // 맵 객체 생성
             map = new Tmapv2.Map("map", // "map" id 값과 맞추기
@@ -31,15 +27,7 @@
                  });
 
             // test
-            $.ajax({
-                url : "/navitransport",
-                success : function(response) {
-                    console.log(JSON.parse(response))
-                },
-                error : function(){
-                    alert("JSON 출력 실패");
-                }
-            });
+            naviTransport(map, resultdrawArr, markerArr)
 
             // 정류장 지도 위에 표기하기
             $.ajax({
@@ -65,12 +53,10 @@
                 }
             });
 
-
-
             // 검색 기능 함수 아래 존재
             $('#search').click(function() {
                 var inputValue = $('#searchValue').val();
-                poiSearch(map, inputValue, markerArr)
+                poiSearch(map, inputValue, markerArr, resultdrawArr)
             });
 
             // 길찾기 기능 함수 아래 존재
@@ -78,6 +64,120 @@
                 naviPerson(map, resultdrawArr, markerArr)
             });
         }
+
+        // 대중교통 기반 길찾기 서비스
+        function naviTransport(map, resultdrawArr, markerArr) {
+
+            var transportList;
+            var selectRoute;
+
+            $.ajax({
+                url : "/navitransport",
+                success : function(response) {
+                    console.log(response)
+
+                    // 기존 마커 제거
+                    if (markerArr.length > 0) {
+                        for (var i in markerArr) {
+                            markerArr[i].setMap(null);
+                        }
+                    }
+
+                    // 기존 경로 제거
+                    if (resultdrawArr.length > 0) {
+                        for ( var i in resultdrawArr) {
+                            resultdrawArr[i]
+                                    .setMap(null);
+                        }
+                        resultdrawArr = [];
+                    }
+
+                    transportList = response.metaData.plan.itineraries
+                    selectRoute = transportList[0]
+
+                    // 나중에 삭제하고 밑에 부분으로 옮겨야 합니다.
+                    drawRoute(map, resultdrawArr, markerArr, selectRoute)
+
+                },
+                error : function(){
+                    alert("JSON 출력 실패");
+                }
+            });
+
+<!--            // 클릭 이벤트 추가하기-->
+<!--            drawRoute(map, resultdrawArr, markerArr, selectRoute)-->
+
+        } // function[E]
+
+        // 대중교통 지도에 실제로 그려주는 부분
+        function drawRoute(map, resultdrawArr, markerArr, selectRoute) {
+            console.log(selectRoute)
+            var latlonList = [];
+            var route = selectRoute.legs
+
+            // 메소드 호출시 맵 객체가 누수 되는 오류 발생, 맵 재할당 하여 해결
+            if (resultdrawArr.length > 0){
+                if (resultdrawArr[0].getMap() == null) {
+                    for ( var i in resultdrawArr) {
+                        resultdrawArr[i].setMap(map)
+                    }
+                }
+            }
+
+            // 지도 크기 조절 및 이동을 위한 객체 생성
+            var positionBounds = new Tmapv2.LatLngBounds();
+
+            for (let checkRoute of route) {
+                if(checkRoute.mode == "WALK") {
+                    // 보행자 걷는 거리 받아와서 비교후 자전거로 안내하기
+
+                    for (let latlon of checkRoute.latlons) {
+                        var pass = new Tmapv2.LatLng(
+                                    latlon.lat,
+                                    latlon.lon);
+
+                        latlonList.push(pass);
+                        positionBounds.extend(pass);
+                    }
+                    // 선 스타일 제어하는 부분
+                    polyline_ = new Tmapv2.Polyline({
+                        path : latlonList,
+                        strokeColor : "#000000",
+                        strokeWeight : 5,
+                        map : map
+                    });
+
+                    resultdrawArr.push(polyline_)
+                    latlonList=[];
+                } else {
+                    for (let latlon of checkRoute.latlons) {
+                        var pass = new Tmapv2.LatLng(
+                                    latlon.lat,
+                                    latlon.lon);
+
+                        latlonList.push(pass);
+                        positionBounds.extend(pass);
+                    }
+
+                    var strokeColor = "#" + checkRoute.routeColor
+                    console.log(strokeColor)
+
+                    // 선 스타일 제어하는 부분
+                    polyline_ = new Tmapv2.Polyline({
+                        path : latlonList,
+                        strokeColor : strokeColor,
+                        strokeWeight : 5,
+                        map : map
+                    });
+
+                    resultdrawArr.push(polyline_)
+                    latlonList=[];
+                }
+
+                map.panToBounds(positionBounds);
+
+            }
+        } // function[E}
 
          // 보행자 길찾기 서비스
         function naviPerson(map, resultdrawArr, markerArr) {
@@ -167,8 +267,6 @@
                         } else if (properties.pointType == "PP2") {
                             lastMarker = "walk"
                         }
-
-						// workspace
 
 						if (geometry.type == "LineString") {
 							for ( var j in geometry.coordinates) {
@@ -286,7 +384,7 @@
 	    }
 
         // 검색 기능
-        function poiSearch(map, searchKeyword, markerArr) {
+        function poiSearch(map, searchKeyword, markerArr, resultdrawArr) {
 
             var marker;
             var markerImg = "/img/tmap/testMarker.png";
@@ -306,6 +404,15 @@
                         for (var i in markerArr) {
                             markerArr[i].setMap(null);
                         }
+                    }
+
+                     // 기존 경로 제거
+                    if (resultdrawArr.length > 0) {
+                        for ( var i in resultdrawArr) {
+                            resultdrawArr[i]
+                                    .setMap(null);
+                        }
+                        resultdrawArr = [];
                     }
 
                     // 마커 생성
@@ -329,7 +436,7 @@
 
                     // 마커들이 보이도록 지도 조정
                     map.panToBounds(positionBounds);
-
+                    map.zoomOut();
                 },
                 error : function() {
                     // 여기서 검색 결과 실패시 모달 창이라도 띄워주세요.
