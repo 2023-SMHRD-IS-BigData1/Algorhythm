@@ -25,7 +25,7 @@ body {
   /* display: flex; */
   /* background: rgb(249, 63, 76); */
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  transition: all 0.1s ease-in 0.1s;
+  /* transition: all 0.1s ease-in 0.1s; */
 }
 /* PAGE HOME */
 .home {
@@ -64,13 +64,13 @@ a.link-copy {
 }
 .btn {
   background: none;
-  border: 2px solid white;
+  /* border: 2px solid white; */
   border-radius: 150px;
   align-self: center;
-  width: 150px;
+  /* width: 150px; */
   padding: 8px 16px;
   margin: 10px;
-  color: white;
+  /* color: white; */
   font-weight: bold;
   cursor: pointer;
   transition: all 0.1s ease-in-out 0.1s;
@@ -357,5 +357,29 @@ input#userName{
   color: black;
   input#userId::focus {
     border: 1px solid #55cb93;
+  }
+}
+/* Initially hide the phone_img */
+.phone_img {
+  display: none;
+}
+
+/* Show phone_img when the screen width is 400px or less */
+@media (max-width: 400px) {
+  .phone_img {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    margin-bottom: -105px;
+  }
+}
+
+/* Hide phone_img when the screen width is more than 400px */
+@media (min-width: 401px) {
+  .phone_img {
+    display: none;
   }
 }

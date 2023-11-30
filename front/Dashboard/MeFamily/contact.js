@@ -168,3 +168,20 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
   }	
+
+  function checkPw(){
+	  // 비밀번호가 일치하는지 확인
+	  var userPw1 = $("#userPw").val();
+	  var userPw2 = $("#userPw2").val();
+	  
+	  if(userPw1 != userPw2){
+		  //비밀번호 일치하지 않습니다.
+		  $("#PwCheckMessage").text("비밀번호가 일치하지 않습니다.");
+	  }else{
+		  // 비밀번호 일치o 
+		  $("#PwCheckMessage").text("");
+		  $("#userPw").val(userPw);
+	  }
+  }
+  
+
