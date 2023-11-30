@@ -9,6 +9,11 @@ import com.smhrd.algo.model.dto.LatLonRequest.LatlonList.LatlonStation;
 import com.smhrd.algo.model.dto.NaviPersonResponse;
 import com.smhrd.algo.model.dto.NaviPersonResponse.Feature;
 import com.smhrd.algo.model.dto.NaviPersonResponse.Feature.Geometry;
+import com.smhrd.algo.model.dto.NaviTransportResponse;
+import com.smhrd.algo.model.dto.NaviTransportResponse.MetaData.Plan.Itineraries;
+import com.smhrd.algo.model.dto.NaviTransportResponse.MetaData.Plan.Itineraries.Legs;
+import com.smhrd.algo.model.dto.NaviTransportResponse.MetaData.Plan.Itineraries.Legs.Latlons;
+import com.smhrd.algo.model.dto.NaviTransportResponse.MetaData.Plan.Itineraries.Legs.Steps;
 import com.smhrd.algo.model.dto.PoiResponse;
 import com.smhrd.algo.model.entity.BikeStation;
 import com.smhrd.algo.repository.BikeStationRepository;
@@ -25,7 +30,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Log4j2
 @Service
@@ -138,6 +142,7 @@ public class TmapService {
         String jsonBody = null;
         try {
             jsonBody = mapper.writeValueAsString(map);
+            log.debug(jsonBody);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
@@ -150,7 +155,7 @@ public class TmapService {
         return response.getBody();
     }
 
-    public NaviPersonResponse converToNaviObject(String json) {
+    public NaviPersonResponse convertToPersonObject(String json) {
          /*
          Description : 보행자경로 Api로 받은 데이터를 자바 객체화 합니다.
          Params      : JSON 형태의 문자열
@@ -164,6 +169,127 @@ public class TmapService {
 
         } catch (IOException e) {
             log.debug("Failed to parse WeatherResponse from JSON", e);
+        }
+        return object;
+    }
+
+    public String naviTransport(LatLonRequest latlon) {
+        /*
+         Description : 출발지와 도착지의 위도와 경도를 입력받아,
+                       대중교통을 사용하여 길을 찾아줍니다.
+         Params      : 출발지 위도경도, 도착지 위도경도
+         Returns     : 대중교통 도로 기준 길 JSON 데이터
+        */
+        RestTemplate restTemplate = new RestTemplate();
+
+        // appKey, URL
+        String appKey = "nRUNxPRv9p2mYIfwpEZPC7qHQMtNN5ZB25T3ErVd";
+        String URL = "https://apis.openapi.sk.com/transit/routes";
+
+        // header 세팅
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("accept", "application/json");
+        headers.set("appKey", appKey);
+
+        // body 세팅
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = new HashMap<>();
+        map.put("startX", 127.26377507);
+        map.put("startY", 36.49100010);
+        map.put("endX", 127.24724877);
+        map.put("endY", 36.49124978);
+        map.put("format", "json");
+
+        String jsonBody = null;
+        try {
+            jsonBody = mapper.writeValueAsString(map);
+            log.debug(jsonBody);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        // combine
+        HttpEntity<String> request = new HttpEntity<>(jsonBody, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(URL, HttpMethod.POST, request, String.class);
+
+        return response.getBody();
+    }
+
+    public NaviTransportResponse convertToTransportObject(String json) {
+         /*
+         Description : 보행자경로 Api로 받은 데이터를 자바 객체화 합니다.
+         Params      : JSON 형태의 문자열
+         Returns     : NaviTransportResponse (NaviTransportResponse Api 자바객체)
+        */
+        ObjectMapper mapper = new ObjectMapper();
+        NaviTransportResponse object = null;
+
+        try {
+            object = mapper.readValue(json, NaviTransportResponse.class);
+
+        } catch (IOException e) {
+            log.debug("Failed to parse WeatherResponse from JSON", e);
+        }
+        return object;
+    }
+
+    public NaviTransportResponse setLatLon(NaviTransportResponse object) {
+
+        List<Itineraries> dataList = object.getMetaData().getPlan().getItineraries();
+        for (Itineraries data : dataList) {
+            for (Legs leg : data.getLegs()) {
+                List<Latlons> setLatLon = new ArrayList<>();
+
+                if (leg.getMode().equals("WALK")) {
+                    // 출발지 latlon
+                    setLatLon.add(Latlons.builder()
+                            .lat(leg.getStart().getLat())
+                            .lon(leg.getStart().getLon())
+                            .build());
+                    for (Steps step : leg.getSteps()) {
+                        String[] road = step.getLinestring().split(" ");
+
+                        // 경로 latlon
+                        for (String idx : road) {
+                            Latlons latlons = new Latlons();
+                            String[] latlon = idx.split(",");
+                            latlons.setLon(Double.parseDouble(latlon[0]));
+                            latlons.setLat(Double.parseDouble(latlon[1]));
+                            setLatLon.add(latlons);
+                        }
+                    }
+                    // 도착지 latlon
+                    setLatLon.add(Latlons.builder()
+                            .lat(leg.getEnd().getLat())
+                            .lon(leg.getEnd().getLon())
+                            .build());
+                    // 객체에 할당
+                    leg.setLatlons(setLatLon);
+                } else {
+                    // 출발지 latlon
+                    setLatLon.add(Latlons.builder()
+                            .lat(leg.getStart().getLat())
+                            .lon(leg.getStart().getLon())
+                            .build());
+                    String[] road = leg.getPassShape().getLinestring().split(" ");
+                    for (String idx : road) {
+                        Latlons latlons = new Latlons();
+                        String[] latlon = idx.split(",");
+                        latlons.setLon(Double.parseDouble(latlon[0]));
+                        latlons.setLat(Double.parseDouble(latlon[1]));
+                        setLatLon.add(latlons);
+                    }
+                    // 도착지 latlon
+                    setLatLon.add(Latlons.builder()
+                            .lat(leg.getEnd().getLat())
+                            .lon(leg.getEnd().getLon())
+                            .build());
+                    // 객체에 할당
+                    leg.setLatlons(setLatLon);
+                }
+            }
         }
         return object;
     }
@@ -296,5 +422,4 @@ public class TmapService {
 
         return distance;
     }
-
 }
