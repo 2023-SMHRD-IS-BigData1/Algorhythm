@@ -130,7 +130,6 @@
             for (let checkRoute of route) {
                 if(checkRoute.mode == "WALK") {
                     // 보행자 걷는 거리 받아와서 비교후 자전거로 안내하기
-
                     for (let latlon of checkRoute.latlons) {
                         var pass = new Tmapv2.LatLng(
                                     latlon.lat,
@@ -139,15 +138,147 @@
                         latlonList.push(pass);
                         positionBounds.extend(pass);
                     }
-                    // 선 스타일 제어하는 부분
-                    polyline_ = new Tmapv2.Polyline({
-                        path : latlonList,
-                        strokeColor : "#000000",
-                        strokeWeight : 5,
-                        map : map
+
+                    // latLonRequest 제작하기
+                    var latLonRequest = {};
+
+                    latLonRequest.latlonList = { latlon: [] };
+
+                    latLonRequest.latlonList.latlon.push({
+                      type: checkRoute.start.name,
+                      lat: checkRoute.start.lat,
+                      lon: checkRoute.start.lon
+                    });
+                    latLonRequest.latlonList.latlon.push({
+                      type: checkRoute.end.name,
+                      lat: checkRoute.end.lat,
+                      lon: checkRoute.end.lon
                     });
 
-                    resultdrawArr.push(polyline_)
+                    console.log(JSON.stringify(latLonRequest))
+
+                    // latlonRequest 만들기
+                    $.ajax({
+                        url : "/naviperson",
+                        data : JSON.stringify(latLonRequest),
+                        contentType : "application/json",
+                        method : "POST",
+                        success : function(response) {
+                            console.log(response)
+
+                            var lastMarker = "walk";
+
+                            var resultData = response.features;
+
+                            drawBikeInfoArr = [];
+                            walkInfoList = [];
+                            drawWalkInfoArr = [];
+
+                            for ( var i in resultData) { //for문 [S]
+                                var geometry = resultData[i].geometry;
+                                var properties = resultData[i].properties;
+                                var polyline_;
+
+                                console.log(properties.pointType)
+                                if (properties.pointType == "PP1" || properties.pointType == "EP") {
+                                    lastMarker = "bike"
+
+                                    // 걷는 부분만 따로 저장
+                                    walkInfoList.push(drawWalkInfoArr)
+                                    drawWalkInfoArr=[]
+
+                                } else if (properties.pointType == "PP2") {
+                                    lastMarker = "walk"
+                                }
+
+                                if (geometry.type == "LineString") {
+                                    for ( var j in geometry.coordinates) {
+                                        if (lastMarker == "bike") {
+                                            // 포인트객체의 정보로 좌표값 변환 객체로 저장
+                                            var convertChange = new Tmapv2.LatLng(
+                                                    geometry.coordinates[j][1],
+                                                    geometry.coordinates[j][0]);
+
+                                            console.log("bike = " + convertChange)
+
+                                            // 배열에 담기
+                                            drawBikeInfoArr.push(convertChange);
+                                        } else {
+                                            var convertChange = new Tmapv2.LatLng(
+                                                    geometry.coordinates[j][1],
+                                                    geometry.coordinates[j][0]);
+                                            console.log("walk = " + convertChange)
+                                            // 배열에 담기
+                                            drawWalkInfoArr.push(convertChange);
+                                        }
+                                    }
+                                } else {
+                                    var markerImg = "";
+                                    var pType = "";
+                                    var size;
+
+                                    if (properties.pointType == "S") { //출발지 마커
+                                        markerImg = "/upload/tmap/marker/pin_r_m_s.png";
+                                        pType = "S";
+                                        size = new Tmapv2.Size(24, 38);
+                                    } else if (properties.pointType == "E") { //도착지 마커
+                                        markerImg = "/upload/tmap/marker/pin_r_m_e.png";
+                                        pType = "E";
+                                        size = new Tmapv2.Size(24, 38);
+                                    } else { //각 포인트 마커
+                                        markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
+                                        pType = "P";
+                                        size = new Tmapv2.Size(8, 8);
+                                    }
+
+                                    // 경로들의 결과값들을 포인트 객체로 변환
+                                    var latlon = new Tmapv2.Point(
+                                            geometry.coordinates[0],
+                                            geometry.coordinates[1]);
+
+                                    // 줌 아웃을 위한 포인트 객체 저장
+                                    var lonlat = new Tmapv2.LatLng(
+                                        geometry.coordinates[1],
+                                        geometry.coordinates[0]);
+
+                                    positionBounds.extend(lonlat);
+
+                                    var routeInfoObj = {
+                                        markerImage : markerImg,
+                                        lng : geometry.coordinates[0],
+                                        lat : geometry.coordinates[1],
+                                        pointType : pType
+                                    };
+
+                                    // Marker 추가
+                                    marker_p = new Tmapv2.Marker(
+                                            {
+                                                position : new Tmapv2.LatLng(
+                                                        routeInfoObj.lat,
+                                                        routeInfoObj.lng),
+                                                icon : routeInfoObj.markerImage,
+                                                iconSize : size,
+                                                map : map
+                                            });
+
+                                    markerArr.push(marker_p)
+                                }
+                            }//for문 [E]
+
+                            drawLine(drawBikeInfoArr, walkInfoList, map, resultdrawArr);
+
+                        }
+                    });
+
+<!--                    // 선 스타일 제어하는 부분-->
+<!--                    polyline_ = new Tmapv2.Polyline({-->
+<!--                        path : latlonList,-->
+<!--                        strokeColor : "#000000",-->
+<!--                        strokeWeight : 5,-->
+<!--                        map : map-->
+<!--                    });-->
+
+<!--                    resultdrawArr.push(polyline_)-->
                     latlonList=[];
                 } else {
                     for (let latlon of checkRoute.latlons) {
@@ -195,7 +326,7 @@
             }
 
             // passList 생성하기
-            const latLonRequest = {};
+            var latLonRequest = {};
 
             latLonRequest.latlonList = { latlon: [] };
 
@@ -337,6 +468,8 @@
 										iconSize : size,
 										map : map
 									});
+
+							markerArr.push(marker_p)
 						}
 					}//for문 [E]
 
@@ -378,14 +511,15 @@
                     strokeWeight : 5,
                     map : map
                 });
+                resultdrawArr.push(polyline_);
             }
             // 초기화를 위해 라인 담기
-            resultdrawArr.push(polyline_);
 	    }
 
         // 검색 기능
         function poiSearch(map, searchKeyword, markerArr, resultdrawArr) {
 
+            var map = map;
             var marker;
             var markerImg = "/img/tmap/testMarker.png";
             var positionBounds = new Tmapv2.LatLngBounds();
@@ -397,7 +531,16 @@
 
                     var data = response.searchPoiInfo.pois.poi;
 
-                    console.log(data)
+
+                    // 메소드 호출시 맵 객체가 누수 되는 오류 발생, 맵 재할당 하여 해결
+                    if (resultdrawArr.length > 0){
+                        if (resultdrawArr[0].getMap() == null) {
+                            for ( var i in resultdrawArr) {
+                                console.log(resultdrawArr[0])
+                                resultdrawArr[i].setMap(map)
+                            }
+                        }
+                    }
 
                     // 기존 마커 제거
                     if (markerArr.length > 0) {
@@ -406,14 +549,18 @@
                         }
                     }
 
+                    console.log(resultdrawArr.length)
+
                      // 기존 경로 제거
                     if (resultdrawArr.length > 0) {
                         for ( var i in resultdrawArr) {
-                            resultdrawArr[i]
-                                    .setMap(null);
+                            console.log(resultdrawArr[i])
+                            resultdrawArr[i].setMap(null);
                         }
                         resultdrawArr = [];
                     }
+
+                    console.log(resultdrawArr.length)
 
                     // 마커 생성
                     for (var k=0; k<data.length; k++) { // for[s]
