@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,7 @@ public class User {
 
     // 유저 순번
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userIdx")
+    @Column(name = "user_idx")
     private Long userIdx;
 
     // 유저 아이디
@@ -29,20 +30,8 @@ public class User {
     private String userPw;
 
     // 유저 이름
-    @Column(name = "user_name", nullable = false, length = 30)
-    private String userName;
-
-    // 유저 생년월일
-    @Column(name = "user_birthdate", nullable = false, updatable = false)
-    private LocalDate userBirthdate;
-
-    // 유저 성별
-    @Column(name = "user_gender", nullable = false, length = 1)
-    private String userGender;
-
-    // 유저 주소
-    @Column(name = "user_addr", nullable = false, length = 900)
-    private String userAddr;
+    @Column(name = "user_nickname", nullable = false, length = 30)
+    private String userNickname;
 
     // 유저 가입일
     @Column(name = "joined_at", nullable = false, updatable = false)
@@ -52,34 +41,31 @@ public class User {
     @Column(name = "user_mileage")
     private Integer userMileage;
 
-    // 유저 탄소절감량
-    @Column
+    // 유저 마일리지
+    @Column(name = "user_reduce")
     private Integer userReduce;
 
-    // 유저 사용거리
-    @Column
+    // 유저 마일리지
+    @Column(name = "user_km")
     private Integer userKm;
 
-    // 유저 칼로리량
-    @Column
+    // 유저 마일리지
+    @Column(name = "user_kcal")
     private Integer userKcal;
 
-    // 유저 심은나무
-    @Column
+    // 유저 마일리지
+    @Column(name = "user_tree")
     private Integer userTree;
 
     @Builder
-    public User(String userId, String userPw, String userName,
-                LocalDate userBirthdate, String userGender,
-                String userAddr, LocalDate joinedAt, Integer userMileage,
-                Integer userReduce, Integer userKm, Integer userKcal, Integer userTree) {
+    public User(String userId, String userPw, String userNickname,
+                Integer userMileage, Integer userReduce,
+                Integer userKm, Integer userKcal,
+                Integer userTree) {
         this.userId = userId;
         this.userPw = userPw;
-        this.userName = userName;
-        this.userBirthdate = userBirthdate;
-        this.userGender = userGender;
-        this.userAddr = userAddr;
-        this.joinedAt = joinedAt;
+        this.userNickname = userNickname;
+        this.joinedAt = LocalDate.now();
         this.userMileage = userMileage;
         this.userReduce = userReduce;
         this.userKm = userKm;

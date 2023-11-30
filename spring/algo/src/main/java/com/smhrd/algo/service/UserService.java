@@ -13,18 +13,17 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public User createUser(String userId, String userPw, String userName,
-                           LocalDate userBirthdate, String userGender,
-                           String userAddr) {
+    public User createUser(String userId, String userPw, String userNickname) {
 
         User newUser = User.builder()
                 .userId(userId)
                 .userPw(userPw)
-                .userName(userName)
-                .userBirthdate(userBirthdate)
-                .userGender(userGender)
-                .userAddr(userAddr)
-                .joinedAt(LocalDate.now())
+                .userNickname(userNickname)
+                .userMileage(0)
+                .userReduce(0)
+                .userKm(0)
+                .userKcal(0)
+                .userTree(0)
                 .build();
 
         return userRepository.save(newUser);
