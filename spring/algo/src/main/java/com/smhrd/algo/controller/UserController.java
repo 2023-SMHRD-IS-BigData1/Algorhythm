@@ -21,20 +21,37 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/user/join")
-    @ResponseBody
-    public String userJoin(String userId, String userPw, String userName,
-                           LocalDate userBirthdate, String userGender,
-                           String userAddr) {
-        log.info("userName={}", userName);
-        return "ok";
+    public String userJoin(@RequestParam String userId, @RequestParam String userPw, @RequestParam String userNickname) {
+        log.info("New user registration: userId={}, userNickname={}", userId, userNickname);
+
+        // 회원가입 정보를 받아와서 userService.createUser를 호출하여 사용자 생성 및 저장
+        User newUser = userService.createUser(userId, userPw, userNickname);
+
+        log.info("User registered successfully with userId={}", newUser.getUserId());
+
+        // 회원가입 성공 시 로그인 페이지로 리다이렉트
+        return "redirect:/login";  // "/login"은 로그인 페이지의 경로에 맞게 수정
     }
+
+//    @PostMapping("/user/login")
+//    public String userLogin(@RequestParam String userId, @RequestParam String userPw) {
+//        User user = userService.loginUser(userId, userPw);
+//        log.info("userId={}", userId);
+//        return "index";
+//    }
 
     @PostMapping("/user/login")
-    public String userLogin(@RequestParam String userId,@RequestParam String userPw) {
+    @ResponseBody
+    public String userLoginCheck(@RequestParam String userId, @RequestParam String userPw) {
         User user = userService.loginUser(userId, userPw);
-        log.info("userId={}", userId);
-        return "index";
+
+        if (user != null) {
+            log.info("User logged in successfully with userId={}", user.getUserId());
+            return "Login successful!";
+        } else {
+            log.info("Login failed for userId={}", userId);
+            return "회원가입이 필요합니다";
+        }
+
     }
-
-
 }
