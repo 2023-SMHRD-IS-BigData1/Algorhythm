@@ -5,8 +5,11 @@
   font-weight: normal;
   font-style: normal;
 }
-body {
+*{
   font-family: 'GmarketSansMedium',sans-serif ;
+}
+body {
+ 
   color: #444444;
 }
 .header-content{
@@ -996,15 +999,16 @@ section {
 
 .gallery #gallery-flters li {
   cursor: pointer;
-  display: inline-block;
-  padding: 10px 15px;
-  font-size: 14px;
+  /* display: inline-block; */
+  padding: 0px 10px;
+  font-size: 20px;
   font-weight: 600;
   line-height: 1;
   text-transform: uppercase;
   color: #444444;
   margin-bottom: 5px;
   transition: all 0.3s;
+  /* text-align: right; */
 }
 
 .gallery #gallery-flters li:hover,
@@ -1021,7 +1025,7 @@ section {
   position: relative;
   overflow: hidden;
   z-index: 1;
-  background: rgba(36, 50, 93, 0.6);
+ 
 }
 
 .gallery .gallery-wrap::before {
@@ -1627,6 +1631,8 @@ td:last-child {
 
 th.text-left {
  text-align: left;
+ height: 120px;
+ border: none;
 }
 
 th.text-center {
@@ -1647,4 +1653,84 @@ td.text-center {
 
 td.text-right {
  text-align: right;
+}
+.text-left-password {
+  display: flex;
+  align-items: center;
+}
+
+.text-left-password input {
+  height: 50px;
+}
+
+.text-left-password button {
+  height: 30px;
+  white-space: nowrap;
+  margin-left: 10px;
+}
+
+.text-left-text {
+  height: 80px;
+  border: none;
+  white-space: nowrap;
+}
+/* 테이블 모바일 버전에서 작아지는 코드 */
+/* Mobile Styles for 360*569 Screen Size */
+@media (max-width: 360px) and (max-height: 569px) {
+  /* 테이블 전체 폭을 화면 폭에 맞게 조절 */
+  .userInfo {
+    width: 100%;
+  }
+
+  /* 테이블 셀 내의 내용을 화면 폭에 맞게 조절 */
+  .userInfo td {
+    width: auto;
+    display: block;
+    text-align: left;
+  }
+
+  /* 버튼을 가로 중앙 정렬 */
+  .userInfo button {
+    margin: 10px auto;
+    display: block;
+  }
+}
+
+.innerText {
+  position: relative;
+}
+
+.Myinfo-text{
+  position: absolute;
+  top: 55%;
+  left: 40%;
+  transform: translate(-60%,50%);
+  /* font-size: ; */
+  white-space: nowrap;
+  font-size: medium;
+  font-weight: bolder;
+  color: rgb(74, 74, 74);
+}
+
+/* .img-fluid {
+  width: 336px;
+  height: 251px;
+} */
+.row>* {
+  width : 80% ;
+  margin-left : 30px;
+}
+.gallery{
+  justify-content: center;
+}
+.Myinfo-user{
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-60%,50%);
+  /* font-size: ; */
+  white-space: nowrap;
+  font-size: medium;
+  font-weight: bold;
+  color:#18d26e;
 }
