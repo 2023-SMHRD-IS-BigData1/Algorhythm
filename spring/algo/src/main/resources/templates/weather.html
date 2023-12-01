@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Weather Data</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src=http://apis.data.go.kr/1360000/MidFcstInfoService/getMidFcst"; ></script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "/weather/fetch",
+            type: "GET",
+            success: function (data) {
+                // 처리할 로직 작성
+                console.log(data);
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+    });
+</script>
+<body>
+<h2>Weather Data</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>City Name</th>
+        <th>Temperature</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="data : ${weatherDataList}">
+        <td th:text="${data.id}"></td>
+        <td th:text="${data.cityName}"></td>
+        <td th:text="${data.temperature}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

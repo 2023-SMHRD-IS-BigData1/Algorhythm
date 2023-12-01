@@ -12,6 +12,8 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "user_info")
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     // 유저 순번
