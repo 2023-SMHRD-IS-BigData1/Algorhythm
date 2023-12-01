@@ -260,7 +260,7 @@ a.link-copy {
     background-color: rgb(255, 255, 255, 0.7);
   }
   main{
-    background-image: url(./assets/img/mobile2.png);
+    background-image: url(../img/mobile2.png);
   }
   .wc_message {
 /*     display: none; */
@@ -277,7 +277,7 @@ a.link-copy {
     opacity: 0.7;
   }
  body{
-  background-image: url(./assets/img/mobile2.png);
+  background-image: url(../img/mobile2.png);
  }
  .signup-left{
 display: none;
