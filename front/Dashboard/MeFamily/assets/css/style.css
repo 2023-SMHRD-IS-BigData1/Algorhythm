@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 @font-face {
   font-family: 'GmarketSansMedium';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
@@ -1699,17 +1700,9 @@ td.text-right {
 .innerText {
   position: relative;
 }
+.gallery-container *{
+  font-family: 'Noto Sans KR', sans-serif;
 
-.Myinfo-text{
-  position: absolute;
-  top: 55%;
-  left: 40%;
-  transform: translate(-60%,50%);
-  /* font-size: ; */
-  white-space: nowrap;
-  font-size: medium;
-  font-weight: bolder;
-  color: rgb(74, 74, 74);
 }
 
 /* .img-fluid {
@@ -1723,14 +1716,76 @@ td.text-right {
 .gallery{
   justify-content: center;
 }
-.Myinfo-user{
+/* gallery my page 공통 */
+.Myinfo-text{
   position: absolute;
-  top: 75%;
-  left: 50%;
+  /* font-size: ; */
+  white-space: nowrap;
+  font-size: medium;
+  font-weight: bolder;
+  color: rgb(74, 74, 74);
+}
+.Myinfo-text-co2{
+  top: 55%;
+  left: 40%;
   transform: translate(-60%,50%);
+}
+
+
+.info-user{
+  /* position: absolute; */
   /* font-size: ; */
   white-space: nowrap;
   font-size: medium;
   font-weight: bold;
   color:#18d26e;
+  text-align: right;
+  margin-right: 5px;
+}
+.Myinfo-text-kcal {
+  top: 13%;
+  left: 35%;
+  transform: translate(-60%,50%);
+}
+
+
+.text-box1,
+.text-box2,
+.text-box3 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-box1 {
+  bottom: 15px;
+  left: 50px;
+}
+
+.text-box2 {
+  bottom: 90px;
+  left: 26px;
+}
+.info-unit{
+  font-size: smaller;
+  
+}
+.info-user{
+  font-size: larger;
+}
+h5.info-unit.unit-co2,
+h5.info-unit.unit-kcal,
+h5.info-unit.unit-tree
+ {
+  margin-top: 5px;
+}
+.Myinfo-text-tree{
+  top: 7%;
+  left: 120px;
+  transform: translate(-60%,50%);
+}
+.text-box3{
+  top: 57px;
+  left: 90px;
 }

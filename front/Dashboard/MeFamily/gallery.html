@@ -115,39 +115,51 @@
             <div class="gallery-wrap">
               <div class="innerText">
                 <img src="./assets/img/co2D.png" class="img-fluid" alt="">
-                <h3 class="Myinfo-text">온실가스 감소량</h3>
-                <h3 class="Myinfo-user"> 여기에 회원</h3>
+                <h3 class="Myinfo-text-co2 Myinfo-text">온실가스 감소량</h3>
+                <!-- 여기에는 온실가스 감소량 계산해서 넣은 값 저 숫자 넣어진 값에 넣어주심 됨당 ^^-->
+                <div class="text-box1">
+                  <h3 class="info-user-co2 info-user"> 2222234234</h3>
+                  <h5 class="info-unit unit-co2">kg</h5>
+                </div>
               </div>
-              <div class="gallery-info">
+              <!-- <div class="gallery-info">
                 <h4>온실가스</h4>
                 <p>감소량</p>
-              </div>
+              </div> -->
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 gallery-item filter-home">
             <div class="gallery-wrap">
               <div class="innerText">
-                <img src="./assets/img/co2D.png" class="img-fluid" alt="">
-                <h3 class="Myinfo-text">온실가스 감소량<br></h3>
+                <img src="./assets/img/kcal.png" class="img-fluid" alt="">
+                <h3 class="Myinfo-text-kcal Myinfo-text">칼로리 소모량<br></h3>
+                <div class="text-box2">
+                  <h3 class="info-user-kcal info-user"> 12312</h3>
+                  <h5 class="info-unit unit-kcal">kcal</h5>
+                </div>
               </div>
-              <div class="gallery-info">
-                <h4>온실가스</h4>
-                <p>감소량</p>
-              </div>
+              <!-- <div class="gallery-info">
+                <h4>칼로리</h4>
+                <p>소모량</p>
+              </div> -->
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 gallery-item filter-home">
             <div class="gallery-wrap">
               <div class="innerText">
-                <img src="./assets/img/co2D.png" class="img-fluid" alt="">
-                <h4 class="Myinfo-text">온실가스 감소량</h4>
+                <img src="./assets/img/tree.png" class="img-fluid" alt="">
+                <h3 class="Myinfo-text-tree Myinfo-text">내가 심은 나무<br></h3>
+                <div class="text-box3">
+                  <h3 class="info-user-tree info-user">5</h3>
+                  <h5 class="info-unit unit-tree">그루</h5>
+                </div>
               </div>
-              <div class="gallery-info">
-                <h4>온실가스</h4>
-                <p>감소량</p>
-              </div>
+              <!-- <div class="gallery-info">
+                <h4>칼로리</h4>
+                <p>소모량</p>
+              </div> -->
             </div>
           </div>
 
@@ -192,52 +204,7 @@
               </div>
             </div>
           </div>
-
-          <div class="col-lg-4 col-md-6 gallery-item filter-beach">
-            <div class="gallery-wrap">
-              <img src="assets/img/gallery/beach-1.jpg" class="img-fluid" alt="">
-              <div class="gallery-info">
-                <h4>Beach 1</h4>
-                <p>Beach</p>
-                <div class="gallery-links">
-                  <a href="assets/img/gallery/beach-1.jpg" class="glightbox" title="Beach 1"><i
-                      class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
           </div>
-
-          <div class="col-lg-4 col-md-6 gallery-item filter-beach">
-            <div class="gallery-wrap">
-              <img src="assets/img/gallery/beach-3.jpg" class="img-fluid" alt="">
-              <div class="gallery-info">
-                <h4>Beach 3</h4>
-                <p>Beach</p>
-                <div class="gallery-links">
-                  <a href="assets/img/gallery/beach-3.jpg" class="glightbox" title="Beach 3"><i
-                      class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 gallery-item filter-vacation">
-            <div class="gallery-wrap">
-              <img src="assets/img/gallery/vacation-3.jpg" class="img-fluid" alt="">
-              <div class="gallery-info">
-                <h4>Vacation 3</h4>
-                <p>Vacation</p>
-                <div class="gallery-links">
-                  <a href="assets/img/gallery/vacation-3.jpg" class="glightbox" title="Vacation 3"><i
-                      class="bx bx-plus"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
     </section><!-- End Gallery Section -->
 
   </main><!-- End #main -->
@@ -276,8 +243,64 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Get the initial user count
+      var initialUserCount = 0;
+
+      // Set the target user count (you can replace this with the actual value you want)
+      var targetUserCount = parseInt($(".info-user-co2").text());
+
+      $({ val: initialUserCount }).animate({ val: targetUserCount }, {
+        duration: 2000, // Animation duration in milliseconds
+        step: function () {
+          // Update the text with the current animated value
+          $(".info-user-co2").text(Math.floor(this.val).toLocaleString());
+        },
+        complete: function () {
+          // Ensure the final value is set without decimals
+          $(".info-user-co2").text(targetUserCount.toLocaleString());
+        }
+      });
+
+      var targetUserCount2 = parseInt($(".info-user-kcal").text());
+
+      $({ val: initialUserCount }).animate({ val: targetUserCount2 }, {
+        duration: 2000, // Animation duration in milliseconds
+        step: function () {
+          // Update the text with the current animated value
+          $(".info-user-kcal").text(Math.floor(this.val).toLocaleString());
+        },
+        complete: function () {
+          // Ensure the final value is set without decimals
+          $(".info-user-kcal").text(targetUserCount2.toLocaleString());
+        }
+      });
+      var targetUserCount3 = parseInt($(".info-user-tree").text());
+
+      $({ val: initialUserCount }).animate({ val: targetUserCount3 }, {
+        duration: 2000, // Animation duration in milliseconds
+        step: function () {
+          // Update the text with the current animated value
+          $(".info-user-tree").text(Math.floor(this.val).toLocaleString());
+        },
+        complete: function () {
+          // Ensure the final value is set without decimals
+          $(".info-user-tree").text(targetUserCount3.toLocaleString());
+        }
+      });
+
+      function formatNumber(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+
+
+    });
+  </script>
 
 </body>
 
