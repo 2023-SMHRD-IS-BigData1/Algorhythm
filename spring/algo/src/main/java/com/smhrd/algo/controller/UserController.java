@@ -25,15 +25,16 @@ public class UserController {
     public String userJoin(String userId, String userPw, String userName,
                            LocalDate userBirthdate, String userGender,
                            String userAddr) {
-
+        log.info("userName={}", userName);
         return "ok";
     }
 
     @PostMapping("/user/login")
-    @ResponseBody
     public String userLogin(@RequestParam String userId,@RequestParam String userPw) {
         User user = userService.loginUser(userId, userPw);
-        log.info("user={}", user);
-        return "ok";
+        log.info("userId={}", userId);
+        return "index";
     }
+
+
 }

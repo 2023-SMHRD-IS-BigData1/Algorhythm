@@ -46,4 +46,12 @@ public class TestController {
 //        userService.createUser("admin","1234","최윤석");
 
     }
+
+    @GetMapping("/logintest")
+    public String login() {
+        return "contact";
+    }
+
+
+
 }
