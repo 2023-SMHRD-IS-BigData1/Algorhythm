@@ -6,10 +6,7 @@ import com.smhrd.algo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -40,9 +37,10 @@ public class UserController {
 //        return "index";
 //    }
 
-    @PostMapping("/user/login")
+    @PostMapping ("/user/login")
     @ResponseBody
     public String userLoginCheck(@RequestParam String userId, @RequestParam String userPw) {
+        // 로그인 시에는 사용자 아이디와 비밀번호를 함께 전달
         User user = userService.loginUser(userId, userPw);
 
         if (user != null) {
@@ -52,6 +50,6 @@ public class UserController {
             log.info("Login failed for userId={}", userId);
             return "회원가입이 필요합니다";
         }
-
     }
+
 }
