@@ -32,6 +32,7 @@ public class UserService {
     }
 
     public User loginUser(String userId, String userPw) {
+
         return userRepository.findByUserIdAndUserPw(userId, userPw);
     }
 
