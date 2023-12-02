@@ -5,6 +5,7 @@ import com.smhrd.algo.model.dto.WeatherResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -12,9 +13,12 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Log4j2
+@Service
 public class WeatherService {
 
     private static final String URL = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst";
@@ -38,7 +42,7 @@ public class WeatherService {
         SimpleDateFormat hourSdf = new SimpleDateFormat("HH");
 
         String nowTime = null;
-        if (Integer.parseInt(minSdf.format(today))<40) {
+        if (Integer.parseInt(minSdf.format(today))<41) {
             nowTime = Integer.parseInt(hourSdf.format(today))-1 + "00";
         } else {
             nowTime = hourSdf.format(today) + "00";
@@ -77,9 +81,9 @@ public class WeatherService {
 
     public WeatherResponse convertToObject(String json) {
         /*
-         Description : 날씨 Api로 받은 데이터를 자바 객체화 합니다.
+         Description : 날씨 API로 받은 데이터를 자바 객체화 합니다.
          Params      : JSON 형태의 문자열
-         Returns     : WeatherResponse (날씨 api 자바객체)
+         Returns     : WeatherResponse (날씨 API 자바객체)
         */
         ObjectMapper mapper = new ObjectMapper();
         WeatherResponse object = null;
@@ -90,5 +94,52 @@ public class WeatherService {
             log.debug("Failed to parse WeatherResponse from JSON", e);
         }
         return object;
+    }
+
+    public String getSevenDayData() {
+        /*
+        Description : 기상청 중기예보 API를 활용하여 3일 뒤부터 7일간의 날씨, 기온 데이터를 가져옵니다.
+        Params      :
+        Returns     : JSON 형식의 String
+        */
+
+        RestTemplate restTemplate = new RestTemplate();
+
+//        11C20404
+
+        // 날짜 간략화
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        String predictDay = LocalDate.now().format(formatter) + "0600";
+
+        // 시간 간략화
+
+        String nowTime = null;
+
+        // appKey
+        String appKey = "LG88A4t0E5rRdYGvW4%2BwQXnaX2ksSQ6KeA8dzlOj%2FnV6KxB0rpfA5zPeyo0mdcf%2Fe%2BoSCd%2Bq7pFjtvAoPn2zNg%3D%3D";
+
+        /*
+        UriComponentsBuilder를 사용할 때, .build()를 실행할 때, 인코딩이 일어나며 이중 인코딩이 발생하게 된다.
+        .build(true)를 사용하여 인코딩된 serviceKey를 그대로 통과 시켜야 오류를 막을 수 있다.
+        */
+        URI targetUrl = UriComponentsBuilder.fromUriString("http://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa")
+                .queryParam("serviceKey", appKey)
+                .queryParam("dataType", "JSON")
+                .queryParam("regId", "11C20404")
+                .queryParam("tmFc", predictDay)
+                .build(true)
+                .encode()
+                .toUri();
+
+        log.debug("url={}", targetUrl);
+
+        // String으로 반환 받기
+        ResponseEntity<String> response = restTemplate.getForEntity(targetUrl, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Failed : HTTP error code : " + response.getStatusCode());
+        }
     }
 }
