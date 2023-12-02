@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>simpleMap</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="css/mapsearch.css">
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script
+        src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=nRUNxPRv9p2mYIfwpEZPC7qHQMtNN5ZB25T3ErVd"></script>
+
+<body onload="initTmap();">
+    <div class="mapsearch">
+        <div class="search-box">
+            <div class="search-box1">
+                <div class="search-btn-icon">
+                    <ul class="search-btn-list" role="tablist">
+                        <li class="bus item-search-tab active" role="presentation">
+                            <button type="button" id="bus-navi" class="search-btn-tab bus-button" role="tab"
+                                aria-selected="true">
+                                <i class="fa-solid fa-bus bus-icon"></i><span class="bus-text">대중교통</span>
+                            </button>
+                        </li>
+                        <li class="bike item-search-tab" role="presentation">
+                            <button type="button" id="navi" class="search-btn-tab bike-button" role="tab"
+                                aria-selected="false">
+                                <i class="fa-solid fa-person-biking bike-icon"></i><span class="bike-text">자전거</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="search-input">
+                    <input type="text" id="searchValue1" value="" placeholder="출발지를 입력해주세요">
+                    <button id="search1">출발지검색</button>
+                    <input type="text" id="searchValue2" value="" placeholder="도착지를 입력해주세요">
+                    <button id="search2">도착지검색</button>
+                </div>
+                <div>리스트</div>
+                <div>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="map"></div>
+        </div>
+    </div>
+    <script src="js/mapsearch.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
