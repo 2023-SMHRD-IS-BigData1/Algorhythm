@@ -8,16 +8,16 @@ spring:
   devtools:
     restart:
       enabled: true
-#  datasource:
-#    url: jdbc:h2:tcp://localhost/~/algo
-#    username: sa
-#    password:
-#    driver-class-name: org.h2.Driver
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://project-db-campus.smhrd.com:3308/algo
-    username: algo
-    password: 1234
+    url: jdbc:h2:tcp://localhost/~/algo
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+#  datasource:
+#    driver-class-name: org.mariadb.jdbc.Driver
+#    url: jdbc:mariadb://project-db-campus.smhrd.com:3308/algo
+#    username: algo
+#    password: 1234
   jpa:
     hibernate:
       ddl-auto: none

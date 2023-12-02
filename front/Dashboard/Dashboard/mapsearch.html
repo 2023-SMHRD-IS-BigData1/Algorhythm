@@ -12,8 +12,9 @@
 
 <body onload="initTmap();">
     <div class="mapsearch">
-        <div class="search-box">
-            <div class="search-box1">
+        <div class="search-box1">
+            <div id="map"></div>
+            <div class="search-list-box">
                 <div class="search-btn-icon">
                     <ul class="search-btn-list" role="tablist">
                         <li class="bus item-search-tab active" role="presentation">
@@ -36,17 +37,28 @@
                     <input type="text" id="searchValue2" value="" placeholder="도착지를 입력해주세요">
                     <button id="search2">도착지검색</button>
                 </div>
-                <div>리스트</div>
-                <div>
-                    <ul>
-                        <li></li>
-                        <li></li>
-                    </ul>
+                <div class="menu-list">리스트</div>
+                <div class="menu-list-box">
+                    <div class="list-box">
+                        <em>최적</em><br>
+                        <em>
+                            <span style="font-size: 30px;">11</span>
+                            <span>분</span>
+                        </em>
+                        <span>오후 5:30분 도착</span>
+                        <span>1,250원</span>
+                    </div>
                 </div>
             </div>
-            <div id="map"></div>
         </div>
     </div>
+    </div>
+    <div class="side-button-menu">
+        <div class="side-button">
+            <button class="side-button-out"></button>
+        </div>
+    </div>
+
     <script src="js/mapsearch.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
         crossorigin="anonymous"></script>
