@@ -49,7 +49,7 @@ public class TestController {
 
         log.debug(bikeStationRepository.findAll().size());
 
-//        userService.createUser("admin","1234","최윤석");
+        userService.createUser("admin","1234","최윤석");
 
     }
 
