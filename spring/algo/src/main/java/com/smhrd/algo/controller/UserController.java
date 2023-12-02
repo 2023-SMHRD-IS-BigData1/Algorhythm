@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 
@@ -37,19 +38,20 @@ public class UserController {
 //        return "index";
 //    }
 
-    @PostMapping ("/user/login")
-    @ResponseBody
-    public String userLoginCheck(@RequestParam String userId, @RequestParam String userPw) {
+    @PostMapping("/user/login")
+    public String userLoginCheck(@RequestParam String userId, @RequestParam String userPw, RedirectAttributes redirectAttributes) {
         // 로그인 시에는 사용자 아이디와 비밀번호를 함께 전달
         User user = userService.loginUser(userId, userPw);
 
         if (user != null) {
             log.info("User logged in successfully with userId={}", user.getUserId());
-            return "Login successful!";
+            redirectAttributes.addFlashAttribute("loginSuccess", true);
+            return "redirect:/index";
         } else {
             log.info("Login failed for userId={}", userId);
             return "회원가입이 필요합니다";
         }
+
     }
 
 }
