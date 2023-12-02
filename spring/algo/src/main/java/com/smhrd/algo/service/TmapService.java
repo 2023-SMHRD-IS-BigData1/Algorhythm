@@ -82,7 +82,7 @@ public class TmapService {
         /*
          Description : PoiSearch Api로 받은 데이터를 자바 객체화 합니다.
          Params      : JSON 형태의 문자열
-         Returns     : PoiResponse (PoiSearch Api 자바객체)
+         Returns     : PoiResponse (PoiSearch API 자바객체)
         */
         ObjectMapper mapper = new ObjectMapper();
         PoiResponse object = null;
@@ -157,9 +157,9 @@ public class TmapService {
 
     public NaviPersonResponse convertToPersonObject(String json) {
          /*
-         Description : 보행자경로 Api로 받은 데이터를 자바 객체화 합니다.
+         Description : 보행자경로 API로 받은 데이터를 자바 객체화 합니다.
          Params      : JSON 형태의 문자열
-         Returns     : NaviPersonResponse (NaviPersonResponse Api 자바객체)
+         Returns     : NaviPersonResponse (NaviPersonResponse API 자바객체)
         */
         ObjectMapper mapper = new ObjectMapper();
         NaviPersonResponse object = null;
@@ -219,9 +219,9 @@ public class TmapService {
 
     public NaviTransportResponse convertToTransportObject(String json) {
          /*
-         Description : 보행자경로 Api로 받은 데이터를 자바 객체화 합니다.
+         Description : 보행자경로 API로 받은 데이터를 자바 객체화 합니다.
          Params      : JSON 형태의 문자열
-         Returns     : NaviTransportResponse (NaviTransportResponse Api 자바객체)
+         Returns     : NaviTransportResponse (NaviTransportResponse API 자바객체)
         */
         ObjectMapper mapper = new ObjectMapper();
         NaviTransportResponse object = null;

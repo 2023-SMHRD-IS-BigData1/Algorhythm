@@ -20,22 +20,28 @@ public class TestController {
 
     private final UserService userService;
     private final BikeStationRepository bikeStationRepository;
+    private final WeatherService weatherService;
 
 
     @GetMapping("/test")
     @ResponseBody
     public WeatherResponse weatherData() throws URISyntaxException {
 
-        WeatherService weather = new WeatherService();
-        String json = weather.getData();
+        String json = weatherService.getData();
 
-        WeatherResponse response = weather.convertToObject(json);
+        WeatherResponse response = weatherService.convertToObject(json);
         String category = response.getResponse().getBody().getItems().getItem().get(3).getCategory();
         Double temper = response.getResponse().getBody().getItems().getItem().get(3).getObsrValue();
 
         log.debug("category={}, temper={}", category, temper);
 
         return response;
+    }
+
+    @GetMapping("/whether")
+    @ResponseBody
+    public String predictWhether() {
+        return weatherService.getSevenDayData();
     }
 
     @PostConstruct
