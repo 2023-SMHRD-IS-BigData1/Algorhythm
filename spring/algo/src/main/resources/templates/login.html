@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Contact - MeFamily Bootstrap Template</title>
+    <title>Login - MeFamily Bootstrap Template</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -65,16 +65,16 @@
             <!-- 회원가입 -->
             <div class="organize-form form-area-signup">
                 <h2>JOIN US</h2>
-                <form class="form" action="/user" method="post" id="join-form">
+                <form class="form" th:action="@{/user/join}" th:object="${userDTO}" method="post" id="join-form">
                     <div class="form-field btn_ris">
                         <!-- <label for="userId">ID를 입력해주세요</label> -->
-                        <input type="text" id="userId" name="userId" class="regis" placeholder="ID를 입력해주세요" />
+                        <input type="text" id="userId" th:field="*{userId}" class="regis" placeholder="ID를 입력해주세요"/>
                         <button onclick="registerCheck()" type="button" class="w3-button w3-white w3-border w3-border-green w3-round-large">중복체크</button>
                     </div>
 
                     <div class="form-field">
                         <!-- <label for="userPw">비밀번호를 입력해주세요</label> -->
-                        <input type="password" id="userPw" name="userPw" placeholder="비밀번호를 입력해주세요"/>
+                        <input type="password" id="userPw" th:field="*{userPw}" placeholder="PW를 입력해주세요"/>
                     </div>
 
                     <div class="form-field">
@@ -84,7 +84,7 @@
 
                     <div class="form-field">
                         <!-- <label for="userName">이름을 입력해주세요</label> -->
-                        <input type="text" id="userName" name="userName" placeholder="이름을 입력해주세요"/>
+                        <input type="text" id="userName" th:field="*{userNickname}" placeholder="이름을 입력해주세요"/>
                     </div>
 
                     <button class="btn-sign btn-up" id="joinBtn">회원가입</button>
@@ -98,15 +98,15 @@
             <!-- 로그인 -->
             <div class="organize-form form-area-signin">
                 <h2>LOGIN</h2>
-                <form class="form" action="/user" method="get" name="login-Form">
+                <form class="form" action="/user" th:object="${userDTO}" method="post" name="login-Form">
                     <div class="form-field">
                         <!-- <label for="userId">ID</label> -->
-                        <input type="text" name="userId" id="userId" placeholder="ID를 입력해주세요" />
+                        <input type="text" id="userId" th:field="*{userId}" placeholder="ID를 입력해주세요"/>
                     </div>
 
                     <div class="form-field">
                         <!-- <label for="userPw">Password</label> -->
-                        <input type="text" name="userPw" id="userPw" placeholder="비밀번호를 입력해주세요" />
+                        <input type="text" id="userPw" th:field="*{userPw}" placeholder="PW를 입력해주세요"/>
                     </div>
 
                     <button class="btn-sign btn-in">로그인</button>
