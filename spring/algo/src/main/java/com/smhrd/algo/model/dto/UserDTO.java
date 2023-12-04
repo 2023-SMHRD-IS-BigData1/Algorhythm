@@ -3,11 +3,13 @@ package com.smhrd.algo.model.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Getter
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginRequest {
-    String userId;
-    String userPw;
+public class UserDTO {
+    private String userId;
+    private String userPw;
+    private String userNickname;
 }
