@@ -70,7 +70,7 @@
             </ul>
           </li>
           <li><a class="fontC" href="events.html">이용방법</a></li>
-          <li><a class="fontC" href="gallery.html">마이페이지</a></li>
+          <li><a class="fontC" href="myPage.html">마이페이지</a></li>
           <li><a class="fontC" href="contact.html">로그아웃</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -78,8 +78,6 @@
 
     </div>
   </header><!-- End Header -->
-
-
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
@@ -104,7 +102,9 @@
         <div class="row">
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="gallery-flters">
-              <li data-filter="*" class="filter-active">내정보</li>
+              <li data-filter=".filter-home" class="filter-active" >나의 기록</li>
+              <li data-filter=".filter-beach">내 정보 변경</li>
+              <li data-filter=".filter-vacation">Vacation</li>
             </ul>
           </div>
         </div>
@@ -122,10 +122,10 @@
                   <h5 class="info-unit unit-co2">kg</h5>
                 </div>
               </div>
-              <!-- <div class="gallery-info">
+              <div class="gallery-info">
                 <h4>온실가스</h4>
                 <p>감소량</p>
-              </div> -->
+              </div>
             </div>
           </div>
 
@@ -133,16 +133,32 @@
             <div class="gallery-wrap">
               <div class="innerText">
                 <img src="./assets/img/kcal.png" class="img-fluid" alt="">
-                <h3 class="Myinfo-text-kcal Myinfo-text">칼로리 소모량<br></h3>
+                <h3 class="Myinfo-text-kcal Myinfo-text">칼로리 소모량</h3><br></h3>
                 <div class="text-box2">
-                  <h3 class="info-user-kcal info-user"> 12312</h3>
+                  <h3 class="info-user-kcal info-user"> 23423</h3>
                   <h5 class="info-unit unit-kcal">kcal</h5>
                 </div>
               </div>
-              <!-- <div class="gallery-info">
+              <div class="gallery-info">
                 <h4>칼로리</h4>
                 <p>소모량</p>
-              </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 gallery-item filter-home">
+            <div class="gallery-wrap">
+              <div class="innerText">
+                <img src="./assets/img/move.png" class="img-fluid" alt="">
+                <h3 class="Myinfo-text-move Myinfo-text">총 이동 거리</h3><br></h3>
+                <div class="text-box3">
+                  <h3 class="info-user-move info-user"> 1234</h3>
+                  <h5 class="info-unit unit-move">km</h5>
+                </div>
+              </div>
+              <div class="gallery-info">
+                <h4>칼로리</h4>
+                <p>소모량</p>
+              </div>
             </div>
           </div>
 
@@ -151,41 +167,49 @@
               <div class="innerText">
                 <img src="./assets/img/tree.png" class="img-fluid" alt="">
                 <h3 class="Myinfo-text-tree Myinfo-text">내가 심은 나무<br></h3>
-                <div class="text-box3">
+                <div class="text-box4">
                   <h3 class="info-user-tree info-user">5</h3>
                   <h5 class="info-unit unit-tree">그루</h5>
                 </div>
               </div>
-              <!-- <div class="gallery-info">
-                <h4>칼로리</h4>
-                <p>소모량</p>
-              </div> -->
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 gallery-item filter-beach">
-            <div class="gallery-wrap">
-              <img src="assets/img/gallery/beach-2.jpg" class="img-fluid" alt="">
               <div class="gallery-info">
-                <h4>Beach 2</h4>
-                <p>Beach</p>
-                <div class="gallery-links">
-                  <a href="assets/img/gallery/beach-2.jpg" class="glightbox" title="Beach 2"><i
-                      class="bx bx-plus"></i></a>
-                </div>
+                <h4>내가 심은</h4>
+                <p>나무</p>
               </div>
             </div>
           </div>
 
+          <div class="col-lg-4 col-md-6 gallery-item filter-beach">
+            <form action="changePw" class="was-validated">
+              <div class="mb-3 mt-3">
+                <div style="display: flex; white-space: nowrap; ">
+                <input type="password" class="form-control" id="cPw" name="cpw"placeholder="기존 비밀번호" name="uname" required>
+                <button type="button" class="btn btn-success btn-sm checkPw" onclick="checkPw()">인증</button>
+              </div>
+                <div class="valid-feedback">인증 완료</div>
+                <div class="invalid-feedback">현재 비밀번호를 입력해주세요</div>
+              </div>
+              <div class="mb-3">
+                <input disabled type="password" class="form-control" id="fPW1" name="fPW"placeholder="변경할 비밀번호" name="pswd" required>
+                <div class="invalid-feedback">8글자 이상 작성해주세요</div>
+              </div>
+              <div class="mb-3">
+                <input disabled type="password" class="form-control" id="fPw2" name="fPw2" placeholder="변경할 비밀번호 확인" name="pswd" required>
+                <div class="valid-feedback">일치</div>
+                <div class="invalid-feedback">비밀번호를 다시 확인해주세요</div>
+              </div>
+              <button type="submit" class="btn btn-success" onclick="changePw()">비밀번호 변경</button>
+            </form>
+          </div>
+
           <div class="col-lg-4 col-md-6 gallery-item filter-vacation">
             <div class="gallery-wrap">
-              <img src="assets/img/gallery/vacation-1.jpg" class="img-fluid" alt="">
+              <img src="" class="img-fluid" alt="">
               <div class="gallery-info">
                 <h4>Vacation 1</h4>
                 <p>Vacation</p>
                 <div class="gallery-links">
-                  <a href="assets/img/gallery/vacation-1.jpg" class="glightbox" title="Vacation 1"><i
-                      class="bx bx-plus"></i></a>
+                  <a href="" class="glightbox" title="Vacation 1"><i class="bx bx-plus"></i></a>
                 </div>
               </div>
             </div>
@@ -193,18 +217,17 @@
 
           <div class="col-lg-4 col-md-6 gallery-item filter-home">
             <div class="gallery-wrap">
-              <img src="assets/img/gallery/home-3.jpg" class="img-fluid" alt="">
+              <img src="" class="img-fluid" alt="">
               <div class="gallery-info">
                 <h4>Home 3</h4>
                 <p>Home</p>
                 <div class="gallery-links">
-                  <a href="assets/img/gallery/home-3.jpg" class="glightbox" title="Home 3"><i
-                      class="bx bx-plus"></i></a>
+                  <a href="" class="glightbox" title="Home 3"><i class="bx bx-plus"></i></a>
                 </div>
               </div>
             </div>
           </div>
-          </div>
+        </div>
     </section><!-- End Gallery Section -->
 
   </main><!-- End #main -->
@@ -293,6 +316,19 @@
           $(".info-user-tree").text(targetUserCount3.toLocaleString());
         }
       });
+      var targetUserCount4 = parseInt($(".info-user-move").text());
+
+      $({ val: initialUserCount }).animate({ val: targetUserCount4 }, {
+        duration: 2000, // Animation duration in milliseconds
+        step: function () {
+          // Update the text with the current animated value
+          $(".info-user-move").text(Math.floor(this.val).toLocaleString());
+        },
+        complete: function () {
+          // Ensure the final value is set without decimals
+          $(".info-user-move").text(targetUserCount4.toLocaleString());
+        }
+      });
 
       function formatNumber(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -300,6 +336,62 @@
 
 
     });
+
+    function checkPw() {
+  // 현재 비밀번호와 새 비밀번호를 가져옵니다.
+  var currentPassword = document.getElementById("cPw").value;
+  var newPassword1 = document.getElementById("fPW1").value;
+  var newPassword2 = document.getElementById("fPw2").value;
+
+  // 현재 비밀번호가 맞는지 확인합니다. (실제 로직으로 대체해야 함)
+  var isCurrentPasswordCorrect = true; // 실제 로직으로 대체
+
+  if (isCurrentPasswordCorrect) {
+    // 현재 비밀번호가 맞으면 새 비밀번호 입력 필드를 활성화합니다.
+    document.getElementById("fPW1").disabled = false;
+    document.getElementById("fPw2").disabled = false;
+  } else {
+    // 현재 비밀번호가 틀리면 현재 비밀번호 입력란에 유효하지 않음 피드백을 표시합니다.
+    document.getElementById("cPw").classList.add("is-invalid");
+    document.getElementById("cPw").classList.remove("is-valid");
+    return;
+  }
+
+  // 새 비밀번호가 일치하는지 확인합니다.
+  if (newPassword1 === newPassword2 && newPassword2 !== "" && newPassword1 !== "") {
+    // 새 비밀번호가 일치하고 비어있지 않으면 입력란에 유효한 피드백을 표시합니다.
+    document.getElementById("fPW1").classList.add("is-valid");
+    document.getElementById("fPW1").classList.remove("is-invalid");
+    document.getElementById("fPw2").classList.add("is-valid");
+    document.getElementById("fPw2").classList.remove("is-invalid");
+
+    // 새 비밀번호가 최소 8자 이상인지 확인합니다.
+    if (newPassword1.length >= 8) {
+      // 8자 이상이면 길이에 대한 유효하지 않음 피드백을 숨깁니다.
+      document.getElementById("fPW1").classList.remove("invalid-feedback");
+    }
+  } else {
+    // 새 비밀번호가 일치하지 않거나 비어 있으면 입력란에 유효하지 않음 피드백을 표시합니다.
+    document.getElementById("fPW1").classList.add("is-invalid");
+    document.getElementById("fPW1").classList.remove("is-valid");
+    document.getElementById("fPw2").classList.add("is-invalid");
+    document.getElementById("fPw2").classList.remove("is-valid");
+  }
+}
+  function changePw() {
+    // 새 비밀번호를 가져옵니다.
+    var newPassword1 = document.getElementById("fPW1").value;
+    var newPassword2 = document.getElementById("fPw2").value;
+
+    // 새 비밀번호가 일치하는지 확인합니다.
+    if (newPassword1 === newPassword2 && newPassword1.length >= 8) {
+      // 여기에 비밀번호 변경 로직을 추가합니다.
+      alert("비밀번호가 성공적으로 변경되었습니다."); // 실제로는 서버로 요청을 보내거나 다른 적절한 로직을 수행해야 합니다.
+    } else {
+      // 새 비밀번호가 일치하지 않거나 길이가 충족되지 않으면 알림을 표시합니다.
+      alert("비밀번호가 일치하지 않거나 8글자 이상이어야 합니다.");
+    }
+  }
   </script>
 
 </body>
