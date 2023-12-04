@@ -31,4 +31,7 @@ public class MainController {
     @GetMapping("/home")
     public String index() { return "index"; }
 
+    @GetMapping("/myPage")
+    public String myPage() {return "myPage";}
+
 }
