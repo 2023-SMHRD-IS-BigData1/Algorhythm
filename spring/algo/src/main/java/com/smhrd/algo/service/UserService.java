@@ -10,7 +10,6 @@ import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class UserService {
 
     private final UserRepository userRepository;
@@ -31,8 +30,11 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
+    public boolean idDuplicateCheck(String userId) {
+        return userRepository.findByUserId(userId) == null;
+    }
+
     public User loginUser(String userId, String userPw) {
         return userRepository.findByUserIdAndUserPw(userId, userPw);
     }
-
 }
