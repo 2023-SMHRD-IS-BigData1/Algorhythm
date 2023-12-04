@@ -43,9 +43,13 @@ public class WeatherService {
 
         String nowTime = null;
         if (Integer.parseInt(minSdf.format(today))<41) {
-            nowTime = Integer.parseInt(hourSdf.format(today))-1 + "00";
+            if (Integer.parseInt(hourSdf.format(today))-1<11){
+                nowTime = "0" + (Integer.parseInt(hourSdf.format(today))-1) + "00";
+            } else {
+                nowTime = (Integer.parseInt(hourSdf.format(today))-1) + "00";
+            }
         } else {
-            nowTime = hourSdf.format(today) + "00";
+                nowTime = hourSdf.format(today) + "00";
         }
         log.debug("hour={}", nowTime);
 
