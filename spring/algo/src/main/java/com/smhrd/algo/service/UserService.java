@@ -4,6 +4,7 @@ import com.smhrd.algo.model.entity.User;
 import com.smhrd.algo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
@@ -29,8 +30,11 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
+    public boolean idDuplicateCheck(String userId) {
+        return userRepository.findByUserId(userId) == null;
+    }
+
     public User loginUser(String userId, String userPw) {
         return userRepository.findByUserIdAndUserPw(userId, userPw);
     }
-
 }
