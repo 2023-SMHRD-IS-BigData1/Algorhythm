@@ -1,5 +1,6 @@
 package com.smhrd.algo.controller;
 
+import com.smhrd.algo.model.dto.UserDTO;
 import com.smhrd.algo.model.dto.WeatherResponse;
 import com.smhrd.algo.model.entity.User;
 import com.smhrd.algo.repository.BikeStationRepository;
@@ -24,8 +25,8 @@ public class MainController {
 
     @GetMapping("/")
     public String login(Model model) {
-        model.addAttribute("user",new User());
-        return "contact";
+        model.addAttribute("userDTO",new UserDTO());
+        return "login";
     }
 
     @GetMapping("/home")
