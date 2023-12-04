@@ -10,7 +10,7 @@ function initTmap() {
     {
       center: new Tmapv2.LatLng(36.5040736, 127.2494855),
       width: "100%",
-      height: "100%",
+      height: "1500px",
       zoom: 17,
       zoomControl: true,
       scrollwheel: true,
@@ -587,3 +587,8 @@ function poiSearch(map, searchKeyword, markerArr, resultdrawArr) {
     },
   });
 }
+
+//sidebar toggle
+$(".side-button").click(function () {
+  $(".sidebar").toggleClass("close");
+});
