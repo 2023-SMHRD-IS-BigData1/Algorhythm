@@ -46,7 +46,7 @@ public class UserController {
 
         if (user != null) { // 로그인 성공 시 session에 저장
             session.setAttribute("User", user);
-            return "redirect:/home";
+            return "home";
 
         } else { // 로그인 실패 시 실패 메시지 반환
             redirectAttributes.addAttribute("message", "fail");
