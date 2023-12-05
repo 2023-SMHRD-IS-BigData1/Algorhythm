@@ -52,4 +52,10 @@ public class WeatherAPIController {
     public String sevenDayWeather() {
         return weatherService.getSevenDayWeatherData();
     }
+
+    @GetMapping("/today-weather")
+    @ResponseBody
+    public String todayWeather() {
+        return weatherService.getTodayWeatherData();
+    }
 }
