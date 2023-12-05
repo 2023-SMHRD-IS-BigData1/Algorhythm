@@ -1,4 +1,3 @@
-from datetime import datetime
 from typing import List
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -29,7 +28,7 @@ async def predict(item: Item):
             {"name": "station1", "usage": 12000},
             {"name": "station2", "usage": 15000},
             {"name": "station3", "usage": 18000}
-            // 여기에 더 많은 정거장 객체를 추가할 수 있습니다...
+            여기에 더 많은 정거장 객체를 추가할 수 있습니다...
         ]
     }
     """
