@@ -1,6 +1,6 @@
 package com.smhrd.algo.controller;
 
-import com.smhrd.algo.model.dto.UserDTO;
+import com.smhrd.algo.model.dto.user.UserDTO;
 import com.smhrd.algo.model.entity.User;
 import com.smhrd.algo.service.UserService;
 import jakarta.servlet.http.HttpSession;

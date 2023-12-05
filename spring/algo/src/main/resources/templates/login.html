@@ -28,7 +28,7 @@
     <link href="../assets/CSS/contact.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <script defer src="./JS/contact.js"></script>
+    <script defer src="../JS/contact.js"></script>
 
     <!-- =======================================================
     * Template Name: MeFamily
@@ -80,7 +80,7 @@
 
                     <div class="form-field">
                         <!-- <label for="userPw2">비밀번호를 확인해주세요</label> -->
-                        <input type="password" id="userPw2" name="userPw2" placeholder="비밀번호를 다시 한번 입력해주세요"/>
+                        <input type="password" id="userPw2" name="userPw2" placeholder="PW를 확인해주세요"/>
                     </div>
 
                     <div class="form-field">
@@ -90,7 +90,7 @@
 
                     <button class="btn-sign btn-up" id="joinBtn">회원가입</button>
                 </form>
-                <p>아이디가 있으신가요? <a href="#" class="link-in"> 로그인</a></p>
+                <p style="margin-top:10px;">아이디가 있으신가요? <a href="#" class="link-in"> 로그인</a></p>
                 <div class="phone">
                     <img class = "phone_img" src="../assets/img/mobile_2.png" alt="">
                 </div>
@@ -107,14 +107,14 @@
 
                     <div class="form-field">
                         <!-- <label for="userPw">Password</label> -->
-                        <input type="text" id="userPw" th:field="*{userPw}" placeholder="PW를 입력해주세요"/>
+                        <input type="password" id="userPw" th:field="*{userPw}" placeholder="PW를 입력해주세요"/>
                     </div>
 
                     <button class="btn-sign btn-in">로그인</button>
                     <div class="social-logo">
-                        <button class="w3-button w3-circle naver"> </button>
-                        <button class="w3-button w3-circle kakao" > </button>
-                        <button class="w3-button w3-circle google"> </button>
+                        <button class="w3-button w3-circle naver" > <img class="logo_png" src="../assets/img/naver_logo.png"/></button>
+                        <button class="w3-button w3-circle kakao" > <img class="logo_png" src="../assets/img/kakao_logo.png"></button>
+                        <button class="w3-button w3-circle google"> <img class="logo_png" src="../assets/img/google_logo.png"></button>
                     </div>
                 </form>
                 <p>아이디가 없으신가요?<a href="#" class="link-up"> 회원가입</a></p>

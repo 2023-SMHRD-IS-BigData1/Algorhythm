@@ -301,11 +301,11 @@ text-align: center;
 margin-top: 10%;
 }
 .kakao{
-  background-image: url(./assets/img/kakao_logo.png);
+  background-image: url(../img/naver_logo.png);
   background-size: 100% 100%;
 }
 .naver{
-  background-image: url(./assets/img/naver_logo.png);
+  background-image: url(../img/kakao_logo.png);
   background-size: 100% 100%;
 }
 .w3-button.w3-circle {
@@ -313,7 +313,7 @@ margin-top: 10%;
   height: 40px; /* Adjust the height as needed */
 }
 .google{
-  background-image: url(./assets/img/google_logo.png);
+  background-image: url(../img/google_logo.png);
   background-size: 100% 100%;
 }
 .form-area {

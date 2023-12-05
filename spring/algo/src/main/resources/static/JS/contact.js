@@ -27,9 +27,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Show the page Sign Up
-el.signUpHome.addEventListener('click', function(e) {
-    showSign(e, 'signup');
-});
+//el.signUpHome.addEventListener('click', function(e) {
+//    showSign(e, 'signup');
+//});
 el.linkUp.addEventListener('click', function(e) {
     showSign(e, 'signup');
 });
@@ -183,5 +183,6 @@ function checkPw(){
         $("#userPw").val(userPw);
     }
 }
+
 
 

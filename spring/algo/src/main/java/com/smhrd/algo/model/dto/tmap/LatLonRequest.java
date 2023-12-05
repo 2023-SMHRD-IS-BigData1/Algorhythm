@@ -1,7 +1,6 @@
-package com.smhrd.algo.model.dto;
+package com.smhrd.algo.model.dto.tmap;
 
-import com.smhrd.algo.model.dto.LatLonRequest.LatlonList.Latlon;
-import com.smhrd.algo.model.dto.LatLonRequest.LatlonList.LatlonStation;
+import com.smhrd.algo.model.dto.tmap.LatLonRequest.LatlonList.LatlonStation;
 import lombok.*;
 
 import java.util.List;
