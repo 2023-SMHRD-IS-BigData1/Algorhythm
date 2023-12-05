@@ -1,9 +1,9 @@
 package com.smhrd.algo.controller;
 
-import com.smhrd.algo.model.dto.LatLonRequest;
-import com.smhrd.algo.model.dto.NaviPersonResponse;
-import com.smhrd.algo.model.dto.NaviTransportResponse;
-import com.smhrd.algo.model.dto.PoiResponse;
+import com.smhrd.algo.model.dto.tmap.LatLonRequest;
+import com.smhrd.algo.model.dto.tmap.NaviPersonResponse;
+import com.smhrd.algo.model.dto.tmap.NaviTransportResponse;
+import com.smhrd.algo.model.dto.tmap.PoiResponse;
 import com.smhrd.algo.model.entity.BikeStation;
 import com.smhrd.algo.repository.BikeStationRepository;
 import com.smhrd.algo.service.TmapService;

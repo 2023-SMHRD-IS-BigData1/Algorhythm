@@ -1,27 +1,66 @@
 package com.smhrd.algo.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.smhrd.algo.model.dto.WeatherResponse;
+import com.smhrd.algo.model.dto.weather.WeatherResponse;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.*;
 
 @Log4j2
 @Service
 public class WeatherService {
 
-    private static final String URL = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst";
+
+    public String sendWeather(String temp, String weather) {
+        /*
+        Description : Pycharm으로 데이터를 전송하여 머신러닝을 실시한 뒤, 값을 돌려 받습니다..
+        Params      :
+        Returns     : JSON 형식의 String
+        */
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        // URL
+        String URL = "http://127.0.0.1:5000/predict";
+
+        // header 세팅
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // body 세팅
+        ObjectMapper mapper = new ObjectMapper();
+
+        List<String> data = new ArrayList<>();
+        data.add(temp);
+        data.add(weather);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("json", data);
+
+        String jsonBody = null;
+        try {
+            jsonBody = mapper.writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        // combine
+        HttpEntity<String> request = new HttpEntity<>(jsonBody, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(URL, HttpMethod.POST, request, String.class);
+
+        return response.getBody();
+    }
 
     public String getData() {
         /*
@@ -60,6 +99,9 @@ public class WeatherService {
         UriComponentsBuilder를 사용할 때, .build()를 실행할 때, 인코딩이 일어나며 이중 인코딩이 발생하게 된다.
         .build(true)를 사용하여 인코딩된 serviceKey를 그대로 통과 시켜야 오류를 막을 수 있다.
         */
+
+        String URL = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst";
+
         URI targetUrl = UriComponentsBuilder.fromUriString(URL)
                 .queryParam("serviceKey", appKey)
                 .queryParam("dataType", "JSON")
@@ -100,23 +142,20 @@ public class WeatherService {
         return object;
     }
 
-    public String getSevenDayData() {
+    public String getSevenDayTempData() {
         /*
-        Description : 기상청 중기예보 API를 활용하여 3일 뒤부터 7일간의 날씨, 기온 데이터를 가져옵니다.
+        Description : 기상청 중기예보 API를 활용하여 3일 뒤부터 7일간의 기온 데이터를 가져옵니다.
         Params      :
         Returns     : JSON 형식의 String
         */
 
         RestTemplate restTemplate = new RestTemplate();
 
-//        11C20404
-
         // 날짜 간략화
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         String predictDay = LocalDate.now().format(formatter) + "0600";
 
         // 시간 간략화
-
         String nowTime = null;
 
         // appKey
@@ -130,6 +169,50 @@ public class WeatherService {
                 .queryParam("serviceKey", appKey)
                 .queryParam("dataType", "JSON")
                 .queryParam("regId", "11C20404")
+                .queryParam("tmFc", predictDay)
+                .build(true)
+                .encode()
+                .toUri();
+
+        log.debug("url={}", targetUrl);
+
+        // String으로 반환 받기
+        ResponseEntity<String> response = restTemplate.getForEntity(targetUrl, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Failed : HTTP error code : " + response.getStatusCode());
+        }
+    }
+
+    public String getSevenDayWeatherData() {
+        /*
+        Description : 기상청 중기예보 API를 활용하여 3일 뒤부터 7일간의 날씨 데이터를 가져옵니다.
+        Params      :
+        Returns     : JSON 형식의 String
+        */
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        // 날짜 간략화
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        String predictDay = LocalDate.now().format(formatter) + "0600";
+
+        // 시간 간략화
+        String nowTime = null;
+
+        // appKey
+        String appKey = "LG88A4t0E5rRdYGvW4%2BwQXnaX2ksSQ6KeA8dzlOj%2FnV6KxB0rpfA5zPeyo0mdcf%2Fe%2BoSCd%2Bq7pFjtvAoPn2zNg%3D%3D";
+
+        /*
+        UriComponentsBuilder를 사용할 때, .build()를 실행할 때, 인코딩이 일어나며 이중 인코딩이 발생하게 된다.
+        .build(true)를 사용하여 인코딩된 serviceKey를 그대로 통과 시켜야 오류를 막을 수 있다.
+        */
+        URI targetUrl = UriComponentsBuilder.fromUriString("http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst")
+                .queryParam("serviceKey", appKey)
+                .queryParam("dataType", "JSON")
+                .queryParam("regId", "11C20000")
                 .queryParam("tmFc", predictDay)
                 .build(true)
                 .encode()

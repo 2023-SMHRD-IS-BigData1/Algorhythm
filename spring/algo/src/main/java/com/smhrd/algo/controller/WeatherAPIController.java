@@ -1,6 +1,6 @@
 package com.smhrd.algo.controller;
 
-import com.smhrd.algo.model.dto.WeatherResponse;
+import com.smhrd.algo.model.dto.weather.WeatherResponse;
 import com.smhrd.algo.service.WeatherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -32,9 +32,24 @@ public class WeatherAPIController {
         return response;
     }
 
-    @GetMapping("/whether")
+    @GetMapping("/weatherPredict")
     @ResponseBody
-    public String predictWhether() {
-        return weatherService.getSevenDayData();
+    public String weatherPredict() {
+        String temp = weatherService.getSevenDayTempData();
+        String weather = weatherService.getSevenDayWeatherData();
+        log.info(temp);
+        return weatherService.sendWeather(temp, weather);
+    }
+
+    @GetMapping("/seven-day-temp")
+    @ResponseBody
+    public String sevenDayTemp() {
+        return weatherService.getSevenDayTempData();
+    }
+
+    @GetMapping("/seven-day-weather")
+    @ResponseBody
+    public String sevenDayWeather() {
+        return weatherService.getSevenDayWeatherData();
     }
 }
