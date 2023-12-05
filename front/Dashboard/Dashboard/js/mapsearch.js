@@ -44,12 +44,13 @@ function initTmap() {
 
   // 검색 기능 함수 아래 존재
   $("#search1").click(function () {
-    var inputValue = $("#searchValue1").val();
+    console.log("search1 clicked");
+    var inputValue = $("#search_keyword").val();
     poiSearch(map, inputValue, markerArr, resultdrawArr);
   });
 
   $("#search2").click(function () {
-    var inputValue = $("#searchValue2").val();
+    var inputValue = $("#search_keyword1").val();
     poiSearch(map, inputValue, markerArr, resultdrawArr);
   });
 
@@ -590,5 +591,37 @@ function poiSearch(map, searchKeyword, markerArr, resultdrawArr) {
 
 //sidebar toggle
 $(".side-button").click(function () {
-  $(".sidebar").toggleClass("close");
+  $(".sidebar, .search-list-box").toggleClass("close");
 });
+
+// 클릭시 대중교통 리스트생성
+document.getElementById("bus-toggle").style.visibility = "hidden";
+
+function toggleDiv() {
+  const div = document.getElementById("bus-toggle");
+
+  if (div.style.visibility == "visible") {
+    div.style.visibility = "hidden";
+  } else {
+    div.style.visibility = "visible";
+  }
+}
+$(document).mouseup(function (e) {
+  var movewrap = $("#bus-toggle");
+  if (movewrap.has(e.target).length === 0) {
+    movewrap.hide();
+  }
+});
+출처: //eunyoe.tistory.com/223 [eunyo의 it이야기:티스토리]
+// 클릭시 출발 도착지 리스트생성
+https: document.getElementById("pagination").style.visibility = "hidden";
+
+function API_search() {
+  const div = document.getElementById("pagination");
+
+  if (div.style.visibility == "visible") {
+    div.style.visibility = "hidden";
+  } else {
+    div.style.visibility = "visible";
+  }
+}

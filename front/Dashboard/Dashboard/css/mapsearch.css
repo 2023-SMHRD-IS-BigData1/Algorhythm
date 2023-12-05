@@ -2,15 +2,15 @@ body {
   margin: 0;
   padding: 0;
 }
-.mapsearch {
-}
+
 .search-box1 {
   position: relative;
   width: 100%;
   height: 100%;
 }
+
 .sidebar {
-  position: fixed;
+  position: absolute;
   width: 800px;
   height: 1500px;
   background-color: rgba(255, 255, 255, 0.75);
@@ -26,8 +26,7 @@ body {
   transition: all 0.4s;
 }
 
-.sidebar.close .side-button {
-  overflow-y: auto;
+.sidebar.close {
   -webkit-transform: translate3d(-750px, 0, 0);
   -moz-transform: translate3d(-750px, 0, 0);
   transform: translate3d(-750px, 0, 0);
@@ -36,6 +35,10 @@ body {
   -ms-transition: all 0.4s;
   -o-transition: all 0.4s;
   transition: all 0.4s;
+}
+.search-list-title {
+  position: relative;
+  width: 100%;
 }
 .search-btn-icon {
   display: flex;
@@ -57,7 +60,7 @@ body {
 .search-btn-list .item-search-tab .search-btn-tab {
   padding: 13px 0px;
   box-sizing: border-box;
-  font-size: 20px;
+  font-size: 40px;
   color: rgb(51, 51, 51);
   line-height: 16px;
   letter-spacing: -0.4px;
@@ -69,7 +72,8 @@ body {
   border-radius: 10px;
 }
 .search-btn-tab {
-  width: 170px;
+  width: 250px;
+  height: 80px;
 }
 .search-start {
   display: flex;
@@ -82,8 +86,9 @@ body {
   align-items: center;
 }
 .search-icon {
-  width: 300px;
-  height: 30px;
+  width: 550px;
+  height: 50px;
+  margin-bottom: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,7 +105,8 @@ body {
   overflow: auto;
   z-index: -1;
   margin-left: 10px;
-  font-size: 15px;
+  font-size: 40px;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .search-icon input:focus {
   outline: none;
@@ -108,9 +114,12 @@ body {
   text-align: left;
 }
 #search1 {
+  font-size: 20px;
   border-radius: 5px;
   background-color: #ffffff;
   margin-left: 5px;
+  margin-bottom: 5px;
+  padding: 10px 10px;
 }
 #search1:hover {
   border-radius: 5px;
@@ -118,9 +127,12 @@ body {
   color: #ffffff;
 }
 #search2 {
+  font-size: 20px;
   border-radius: 5px;
   background-color: #ffffff;
   margin-left: 5px;
+  margin-bottom: 5px;
+  padding: 10px 10px;
 }
 #search2:hover {
   border-radius: 5px;
@@ -129,11 +141,11 @@ body {
 }
 #searchValue1 {
   background-color: rgb(255, 255, 255, 0.1);
-  font-size: 20px;
+  font-size: 40px;
 }
 #searchValue2 {
   background-color: rgb(255, 255, 255, 0.1);
-  font-size: 20px;
+  font-size: 40px;
 }
 button {
   cursor: pointer;
@@ -161,37 +173,43 @@ button {
   color: #ffffff;
 }
 .bike-text {
+  font-size: 40px;
   padding-left: 10px;
 }
 .bus-text {
+  font-size: 40px;
   padding-left: 10px;
 }
 .menu-list {
-  font-size: 20px;
+  font-size: 40px;
   text-align: center;
   margin-top: 20px;
 }
+.menu-list-box {
+  position: absolute;
+  top: 370px;
+  width: 100%;
+}
 .side-button {
-  position: fixed;
-  width: 25px;
-  height: 60px;
+  position: absolute;
+  width: 40px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
-  background-color: #25bc74;
-  position: absolute;
-  top: 50%;
+  font-size: 40px;
+  background-color: rgba(255, 255, 255, 0.75);
+  top: 30%;
   left: 100%;
+  border-radius: 0 10px 10px 0;
   cursor: pointer;
   z-index: 100;
 }
-
 em {
-  font-size: 25px;
+  font-size: 35px;
 }
 span {
-  font-size: 20px;
+  font-size: 33px;
 }
 .search-info {
   background-color: rgba(225, 240, 255, 0.7);
@@ -218,12 +236,21 @@ span {
 }
 
 .search-list-bus {
-  font-size: 20px;
-  margin-left: 44%;
+  font-size: 40px;
+  margin-left: 45.5%;
 }
 .search-list-end {
   margin-left: 20px;
 }
 .search-list-end :last-child {
   margin-left: 24%;
+}
+
+#placelist {
+  list-style: none;
+  font-size: 40px;
+  width: 80%;
+  padding: 0;
+  margin-left: 10%;
+  background-color: rgba(232, 242, 252, 0.7);
 }

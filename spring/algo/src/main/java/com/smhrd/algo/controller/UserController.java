@@ -40,8 +40,7 @@ public class UserController {
 
 
         User user = userService.loginUser(userDTO.getUserId(), userDTO.getUserPw());
-
-
+        
         if (user != null) { // 로그인 성공 시 session에 저장
             session.setAttribute("user", user);
             return "home";
