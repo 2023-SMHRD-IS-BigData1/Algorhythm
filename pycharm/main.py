@@ -5,9 +5,7 @@ from pydantic import BaseModel
 
 """
     port 5000
-    스프링 부트로부터 정거장 이름을 받아
-    모델로 한 시간 뒤의 이용률을 예측하여 반환
-    반환 값은 JSON이며, 정거장 별로 이용률을 List로
+    uvicorn main:app --reload --port 5000
 """
 
 # FastAPI 객체 생성

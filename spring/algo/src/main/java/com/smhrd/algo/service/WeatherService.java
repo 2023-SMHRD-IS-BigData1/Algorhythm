@@ -1,10 +1,10 @@
 package com.smhrd.algo.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smhrd.algo.model.dto.WeatherResponse;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -15,13 +15,48 @@ import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.*;
 
 @Log4j2
 @Service
 public class WeatherService {
 
-    private static final String URL = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst";
+
+    public String sendWeather() {
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        // URL
+        String URL = "http://127.0.0.1:5000/predict";
+
+        // header 세팅
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // body 세팅
+        ObjectMapper mapper = new ObjectMapper();
+
+        List<String> data = new ArrayList<>();
+        data.add("data1");
+        data.add("data2");
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("stations", data);
+
+        String jsonBody = null;
+        try {
+            jsonBody = mapper.writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        // combine
+        HttpEntity<String> requst = new HttpEntity<>(jsonBody, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(URL, HttpMethod.POST, requst, String.class);
+
+        return response.getBody();
+    }
 
     public String getData() {
         /*
@@ -60,6 +95,9 @@ public class WeatherService {
         UriComponentsBuilder를 사용할 때, .build()를 실행할 때, 인코딩이 일어나며 이중 인코딩이 발생하게 된다.
         .build(true)를 사용하여 인코딩된 serviceKey를 그대로 통과 시켜야 오류를 막을 수 있다.
         */
+
+        String URL = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst";
+
         URI targetUrl = UriComponentsBuilder.fromUriString(URL)
                 .queryParam("serviceKey", appKey)
                 .queryParam("dataType", "JSON")

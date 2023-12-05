@@ -32,7 +32,13 @@ public class WeatherAPIController {
         return response;
     }
 
-    @GetMapping("/whether")
+    @GetMapping("/weatherPredict")
+    @ResponseBody
+    public String weatherPredict() {
+        return weatherService.sendWeather();
+    }
+
+    @GetMapping("/weather")
     @ResponseBody
     public String predictWhether() {
         return weatherService.getSevenDayData();
