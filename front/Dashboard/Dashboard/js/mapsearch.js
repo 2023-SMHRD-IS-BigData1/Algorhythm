@@ -589,39 +589,56 @@ function poiSearch(map, searchKeyword, markerArr, resultdrawArr) {
   });
 }
 
-//sidebar toggle
-$(".side-button").click(function () {
-  $(".sidebar, .search-list-box").toggleClass("close");
+//사이드바 토글
+document.addEventListener("DOMContentLoaded", function () {
+  var toggleButton = document.getElementById("toggleButton");
+  var sidebar = document.querySelector(".sidebar");
+  var searchListBox = document.querySelector(".search-list-box");
+
+  toggleButton.addEventListener("click", function () {
+    // 사이드바 및 검색 목록 상자에 close 클래스 토글
+    sidebar.classList.toggle("close");
+    searchListBox.classList.toggle("close");
+
+    // 버튼 아이콘에 rotated 클래스 토글
+    toggleButton.classList.toggle("rotated");
+  });
 });
 
-// 클릭시 대중교통 리스트생성
-document.getElementById("bus-toggle").style.visibility = "hidden";
-
-function toggleDiv() {
-  const div = document.getElementById("bus-toggle");
-
-  if (div.style.visibility == "visible") {
-    div.style.visibility = "hidden";
-  } else {
-    div.style.visibility = "visible";
-  }
-}
-$(document).mouseup(function (e) {
-  var movewrap = $("#bus-toggle");
-  if (movewrap.has(e.target).length === 0) {
-    movewrap.hide();
-  }
+// 클릭 기능
+$(document).ready(function () {
+  // 대중교통 버튼
+  $(".bus-button").click(function () {
+    $("#destination-toggle").addClass("hidden");
+    $("#bike-toggle").addClass("hidden");
+    $("#bus-toggle").removeClass("hidden");
+    $(".bus-button").addClass("active-tab");
+    $(".bike-button").removeClass("active-tab");
+  });
+  // 자전거 버튼
+  $(".bike-button").click(function () {
+    $("#destination-toggle").addClass("hidden");
+    $("#bike-toggle").removeClass("hidden");
+    $("#bus-toggle").addClass("hidden");
+    $(".bike-button").addClass("active-tab");
+    $(".bus-button").removeClass("active-tab");
+  });
+  // 출발지 버튼
+  $("#search1").click(function () {
+    $("#destination-toggle").removeClass("hidden");
+    $("#bike-toggle").addClass("hidden");
+    $("#search-field1").removeClass("hidden");
+    $("#bus-toggle").addClass("hidden");
+    $(".bus-button").removeClass("active-tab");
+    $(".bike-button").removeClass("active-tab");
+  });
+  // 도착지 버튼
+  $("#search2").click(function () {
+    $("#destination-toggle").removeClass("hidden");
+    $("#bike-toggle").addClass("hidden");
+    $("#search-field").removeClass("hidden");
+    $("#bus-toggle").addClass("hidden");
+    $(".bus-button").removeClass("active-tab");
+    $(".bike-button").removeClass("active-tab");
+  });
 });
-출처: //eunyoe.tistory.com/223 [eunyo의 it이야기:티스토리]
-// 클릭시 출발 도착지 리스트생성
-https: document.getElementById("pagination").style.visibility = "hidden";
-
-function API_search() {
-  const div = document.getElementById("pagination");
-
-  if (div.style.visibility == "visible") {
-    div.style.visibility = "hidden";
-  } else {
-    div.style.visibility = "visible";
-  }
-}

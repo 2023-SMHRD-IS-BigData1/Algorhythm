@@ -205,6 +205,9 @@ button {
   cursor: pointer;
   z-index: 100;
 }
+.side-button.rotated {
+  transform: rotate(180deg);
+}
 em {
   font-size: 35px;
 }
@@ -253,4 +256,16 @@ span {
   padding: 0;
   margin-left: 10%;
   background-color: rgba(232, 242, 252, 0.7);
+}
+#placelist > a {
+  text-decoration: none;
+  color: black;
+}
+
+.hidden {
+  display: none;
+}
+
+.active-tab {
+  background-color: lightgray;
 }

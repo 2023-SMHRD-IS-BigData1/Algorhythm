@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>simpleMap</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="css/mapsearch.css">
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script
@@ -21,7 +21,7 @@
                             <ul class="search-btn-list" role="tablist">
                                 <li class="bus item-search-tab active" role="presentation">
                                     <button type="button" id="bus-navi" class="search-btn-tab bus-button" role="tab"
-                                        aria-selected="true" onclick="toggleDiv()">
+                                        aria-selected="true">
                                         <i class="fa-solid fa-bus bus-icon"></i><span class="bus-text">대중교통</span>
                                     </button>
                                 </li>
@@ -41,8 +41,7 @@
                                     placeholder="출발지를 입력해주세요">
                             </div>
                             <div>
-                                <button id="search1" class='search_submit' onclick="API_search()"
-                                    autocomplete="off">출발지검색</button>
+                                <button id="search1" class='search_submit' autocomplete="off">출발지검색</button>
                             </div>
 
                         </div>
@@ -53,7 +52,7 @@
                                     placeholder="도착지를 입력해주세요">
                             </div>
                             <div>
-                                <button id="search2" class='search_submit' onclick="API_search()">도착지검색</button>
+                                <button id="search2" class='search_submit'>도착지검색</button>
                             </div>
                         </div>
                         <div class="menu-list">리스트</div>
@@ -62,19 +61,23 @@
 
                     <div class="map_wrap">
                         <div id="menu_wrap" class="list-info-title">
-                            <div id="pagination">
+                            <div id="destination-toggle" class="hidden">
                                 <ul id="placelist">
-                                    <li>스마트인재개발원</li>
-                                    <li>광주광역시 동구</li>
-                                    <li>1234</li>
-                                    <li>062-123-4567</li>
+                                    <a href="#">
+                                        <li>스마트인재개발원</li>
+                                        <li>광주광역시 동구</li>
+                                        <li>1234</li>
+                                        <li>062-123-4567</li>
+                                    </a>
                                 </ul>
                                 <hr>
                             </div>
                         </div>
                     </div>
-
-                    <div class="menu-list-box" id="bus-toggle">
+                    <div id="bike-toggle" class="hidden">
+                        <!-- 자전거에 관한 내용이 들어갈 요소들 -->
+                    </div>
+                    <div class="menu-list-box hidden" id="bus-toggle">
                         <div class="search-info">
                             <em>최적</em><br>
                             <em>
@@ -106,8 +109,9 @@
                             </ol>
                         </div>
                     </div>
+
                 </div>
-                <div class="side-button"><i class="fa-solid fa-chevron-left"></i></div>
+                <div class="side-button" id="toggleButton"><i class="fa-solid fa-chevron-left"></i></div>
             </nav>
         </div>
     </div>
