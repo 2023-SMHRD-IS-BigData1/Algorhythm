@@ -38,8 +38,9 @@ public class UserController {
     public String userLoginCheck(@ModelAttribute UserDTO userDTO,
                                  RedirectAttributes redirectAttributes, HttpSession session) {
 
-        User user = userService.loginUser(userDTO.getUserId(), userDTO.getUserPw());
 
+        User user = userService.loginUser(userDTO.getUserId(), userDTO.getUserPw());
+        
         if (user != null) { // 로그인 성공 시 session에 저장
             session.setAttribute("user", user);
             return "home";

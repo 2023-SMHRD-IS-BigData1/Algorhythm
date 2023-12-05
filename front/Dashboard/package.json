@@ -1,7 +1,9 @@
 {
-  "dependencies": {
-    "cors": "^2.8.5",
-    "echarts": "^5.4.3",
-    "express": "^4.18.2"
-  }
+  "description": "Apache ECharts Demo",
+  "keywords": [
+    "echarts",
+    "apache"
+  ],
+  "main": "index.html",
+  "name": "Stacked Horizontal Bar"
 }
