@@ -182,6 +182,8 @@ public class TmapService {
         */
         RestTemplate restTemplate = new RestTemplate();
 
+        List<Latlon> data = latlon.getLatlonList().getLatlon();
+
         // appKey, URL
         String appKey = "nRUNxPRv9p2mYIfwpEZPC7qHQMtNN5ZB25T3ErVd";
         String URL = "https://apis.openapi.sk.com/transit/routes";
@@ -195,10 +197,10 @@ public class TmapService {
         // body 세팅
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map = new HashMap<>();
-        map.put("startX", 127.26377507);
-        map.put("startY", 36.49100010);
-        map.put("endX", 127.24724877);
-        map.put("endY", 36.49124978);
+        map.put("startX", data.get(0).getLon());
+        map.put("startY", data.get(0).getLat());
+        map.put("endX", data.get(1).getLon());
+        map.put("endY", data.get(1).getLat());
         map.put("format", "json");
 
         String jsonBody = null;
@@ -248,17 +250,22 @@ public class TmapService {
                             .lat(leg.getStart().getLat())
                             .lon(leg.getStart().getLon())
                             .build());
-                    for (Steps step : leg.getSteps()) {
-                        String[] road = step.getLinestring().split(" ");
 
-                        // 경로 latlon
-                        for (String idx : road) {
-                            Latlons latlons = new Latlons();
-                            String[] latlon = idx.split(",");
-                            latlons.setLon(Double.parseDouble(latlon[0]));
-                            latlons.setLat(Double.parseDouble(latlon[1]));
-                            setLatLon.add(latlons);
+                    try {
+                        for (Steps step : leg.getSteps()) {
+                            String[] road = step.getLinestring().split(" ");
+
+                            // 경로 latlon
+                            for (String idx : road) {
+                                Latlons latlons = new Latlons();
+                                String[] latlon = idx.split(",");
+                                latlons.setLon(Double.parseDouble(latlon[0]));
+                                latlons.setLat(Double.parseDouble(latlon[1]));
+                                setLatLon.add(latlons);
+                            }
                         }
+                    } catch (Exception e) {
+                        continue;
                     }
                     // 도착지 latlon
                     setLatLon.add(Latlons.builder()

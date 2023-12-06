@@ -22,15 +22,15 @@ public class UserController {
     public String userJoin(@ModelAttribute UserDTO userDTO,
                            RedirectAttributes redirectAttributes) {
 
-        // Id의 중복 여부 확인
+        // Id의 중복이 없다면
         if (userService.idDuplicateCheck(userDTO.getUserId())) {
             User newUser = userService.createUser(userDTO.getUserId(), userDTO.getUserPw(), userDTO.getUserNickname());
-            redirectAttributes.addAttribute("message", "success");
+            redirectAttributes.addAttribute("message", true);
             return "redirect:/";
 
         } else {
-            redirectAttributes.addAttribute("message", "fail");
-            return "redirect:/";
+            redirectAttributes.addAttribute("message", false);
+            return "login";
         }
     }
 
@@ -46,7 +46,7 @@ public class UserController {
             return "home";
 
         } else { // 로그인 실패 시 실패 메시지 반환
-            redirectAttributes.addAttribute("message", "fail");
+            redirectAttributes.addAttribute("message", false);
             return "login";
         }
     }
