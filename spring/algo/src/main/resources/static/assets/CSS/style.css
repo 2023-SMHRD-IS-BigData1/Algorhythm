@@ -47,11 +47,12 @@ h6 {
   right: 15px;
   bottom: 15px;
   z-index: 996;
-  background: #006fbe;
+  background: #55cb93;
   width: 40px;
   height: 40px;
   border-radius: 50px;
   transition: all 0.4s;
+
 }
 
 .back-to-top i {
@@ -61,7 +62,7 @@ h6 {
 }
 
 .back-to-top:hover {
-  background: #0087e7;
+  background: #55cb93;
   color: black;
 }
 
@@ -1808,3 +1809,29 @@ h5.info-unit.unit-km
   left: 50px;
 }
 
+/*.addr_in{
+  background-color: #e9ecef;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 310px;
+  height:38px;
+*//*  border-radius:*//*
+  }*/
+.form-control.is-valid,
+.was-validated .form-control:valid {
+
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+     margin-bottom: 10px;
+}
+button.btn.btn-success {
+    height: 38px;
+}
+
+.input-group.mb-3 .form-control.dong {
+    margin-bottom: 0; /* 입력란과 버튼 간의 간격을 없애줍니다 */
+}

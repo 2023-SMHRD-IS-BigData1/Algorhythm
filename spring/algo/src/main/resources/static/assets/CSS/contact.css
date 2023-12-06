@@ -378,10 +378,10 @@ input#userName{
 @media (max-width: 400px) {
     .phone_img {
         display: block;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        position: absolute;
+        bottom: -95px;
+        left: -35px;
+        right: 0px;
         z-index: -1;
         margin-bottom: -105px;
     }
@@ -406,4 +406,8 @@ input#userName{
     transform: translate(-50%, -50%);
     width: 100%; /* Adjust the size as needed */
     height: 100%; /* Adjust the size as needed */
+}
+.overBox{
+overflow:auto;
+height:180px;
 }
