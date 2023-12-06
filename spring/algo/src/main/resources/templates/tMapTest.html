@@ -530,7 +530,7 @@
                 success : function(response){
 
                     var data = response.searchPoiInfo.pois.poi;
-
+                    console.log(response)
 
                     // 메소드 호출시 맵 객체가 누수 되는 오류 발생, 맵 재할당 하여 해결
                     if (resultdrawArr.length > 0){

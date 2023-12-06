@@ -1,6 +1,6 @@
 package com.smhrd.algo.controller;
 
-import com.smhrd.algo.model.dto.UserDTO;
+import com.smhrd.algo.model.dto.user.UserDTO;
 import com.smhrd.algo.model.entity.User;
 import com.smhrd.algo.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -38,8 +38,9 @@ public class UserController {
     public String userLoginCheck(@ModelAttribute UserDTO userDTO,
                                  RedirectAttributes redirectAttributes, HttpSession session) {
 
-        User user = userService.loginUser(userDTO.getUserId(), userDTO.getUserPw());
 
+        User user = userService.loginUser(userDTO.getUserId(), userDTO.getUserPw());
+        
         if (user != null) { // 로그인 성공 시 session에 저장
             session.setAttribute("user", user);
             return "home";

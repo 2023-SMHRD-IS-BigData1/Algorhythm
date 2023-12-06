@@ -1,4 +1,4 @@
-package com.smhrd.algo.model.dto;
+package com.smhrd.algo.model.dto.tmap;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
