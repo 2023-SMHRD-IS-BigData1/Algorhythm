@@ -125,6 +125,46 @@ public class WeatherService {
         }
     }
 
+    public String getTodayWeatherData() {
+        /*
+        Description : openweathermap API를 활용하여 5일간의 날씨, 기온, 습도 등의 다양한 데이터를 가져옵니다.
+        Params      :
+        Returns     : JSON 형식의 String
+        */
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        // appKey
+        String appKey = "d5f9fcd2ba2b9e1b3594c167745c4849";
+
+        /*
+        UriComponentsBuilder를 사용할 때, .build()를 실행할 때, 인코딩이 일어나며 이중 인코딩이 발생하게 된다.
+        .build(true)를 사용하여 인코딩된 serviceKey를 그대로 통과 시켜야 오류를 막을 수 있다.
+        */
+
+        String URL = "http://api.openweathermap.org/data/2.5/forecast";
+
+        URI targetUrl = UriComponentsBuilder.fromUriString(URL)
+                .queryParam("appid", appKey)
+                .queryParam("lat", 36.5040736)
+                .queryParam("lon", 127.2494855)
+                .queryParam("units", "metric")
+                .build(true)
+                .encode()
+                .toUri();
+
+        log.debug("url={}", targetUrl);
+
+        // String으로 반환 받기
+        ResponseEntity<String> response = restTemplate.getForEntity(targetUrl, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            return response.getBody();
+        } else {
+            throw new RuntimeException("Failed : HTTP error code : " + response.getStatusCode());
+        }
+    }
+
     public WeatherResponse convertToObject(String json) {
         /*
          Description : 날씨 API로 받은 데이터를 자바 객체화 합니다.

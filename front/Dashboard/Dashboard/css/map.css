@@ -1,6 +1,6 @@
 #map {
     display: flex;
-    margin-top: 225px;
+    margin-top: 50px;
 }
 .search_content{
     width: 25%;
@@ -18,6 +18,5 @@
     height: 30px;
 }
 .search_btn {
-
     text-align: center;
 }
