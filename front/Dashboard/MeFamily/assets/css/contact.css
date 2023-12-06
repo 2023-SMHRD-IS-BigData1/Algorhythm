@@ -25,7 +25,7 @@ body {
   /* display: flex; */
   /* background: rgb(249, 63, 76); */
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  /* transition: all 0.1s ease-in 0.1s; */
+  transition: all 0.1s ease-in 0.1s;
 }
 /* PAGE HOME */
 .home {
@@ -73,6 +73,7 @@ a.link-copy {
   /* color: white; */
   font-weight: bold;
   cursor: pointer;
+  /*1204수정*/
   transition: all 0.1s ease-in-out 0.1s;
 }
 .btn:hover {
@@ -97,7 +98,8 @@ a.link-copy {
   font-size: 14px;
   background: #55cb93;
   border-radius: 10px 0 0 10px;
-  transition: all 0.5s ease-in 0.2s;
+  /*1204수정*/
+  /* transition: all 0.5s ease-in 0.2s;*/
 }
 .signup-left h1 {
   font-size: 21px;
@@ -138,7 +140,8 @@ a.link-copy {
   z-index: 2;
 
   opacity: 0;
-  transition: opacity 0.5s ease-in 0.2s;
+  /*1204수정*/
+  /* transition: opacity 0.5s ease-in 0.2s;*/
 }
 .organize-form {
   width: 100%;
@@ -168,11 +171,13 @@ a.link-copy {
 .form-area-signup {
   /* display: none; */
   opacity: 0;
+  /*1204수정*/
   transition: all 0.4s ease-in 0.2s;
 }
 .form-area-signin {
   /* display: none; */
   opacity: 0;
+  /*1204수정*/
   transition: all 0.4s ease-in 0.2s;
 }
 
@@ -189,7 +194,8 @@ a.link-copy {
   padding: 5px;
   border-bottom: 1px solid rgba(116, 116, 116, 0.44);
   height: 30px;
-  transition: border-bottom 0.1s ease-in-out 0.1s;
+  /*1204수정*/
+  /* transition: border-bottom 0.1s ease-in-out 0.1s;*/
 }
 .form-field input:focus {
   border-bottom: 1px solid #55cb93;
@@ -199,7 +205,8 @@ a.link-copy {
   top: 25px;
   left: 5px;
   cursor: text;
-  transition: all 0.2s ease-in-out 0.1s;
+  /*1204수정*/
+  /* transition: all 0.2s ease-in-out 0.1s;*/
   color: rgba(116, 116, 116, 0.44);
   user-select: none;
 }
@@ -213,7 +220,8 @@ a.link-copy {
   margin-top: 20px;
   border-radius: 50px;
   cursor: pointer;
-  transition: background 0.1s ease 0.1s;
+  /*1204수정*/
+  /*transition: background 0.1s ease 0.1s;*/
 }
 .btn-sign:hover {
   background: #55cb93;
@@ -233,7 +241,8 @@ a.link-copy {
   background-position: 235% 50%;
 
   opacity: 0;
-  transition: opacity 0.5s ease-in 0.2s, background-position-x 0.5s ease-in 0.2s;
+  /*1204수정*/
+  /* transition: opacity 0.5s ease-in 0.2s, background-position-x 0.5s ease-in 0.2s;*/
 }
 .bars-style {
   color: #55cb93;
@@ -246,7 +255,10 @@ a.link-copy {
     width: 100%;
     height: 100%;
   }
-  .home, .signup-left { border-radius: 0; }
+  .home,
+  .signup-left {
+    border-radius: 0;
+  }
   .form-area {
     left: 35%;
     width: 40%;
@@ -259,13 +271,14 @@ a.link-copy {
     width: 70%;
     background-color: rgb(255, 255, 255, 0.7);
   }
-  main{
+  main {
     background-image: url(../img/mobile2.png);
   }
   .wc_message {
-/*     display: none; */
+    /*     display: none; */
     opacity: 0;
-    transition: opacity .1s;
+    /*1204수정*/
+    /*    transition: opacity .1s;*/
   }
 }
 
@@ -276,44 +289,44 @@ a.link-copy {
     height: 60%;
     opacity: 0.7;
   }
- body{
-  background-image: url(../img/mobile2.png);
- }
- .signup-left{
-display: none;
- }
- .signup-right{
-display: none;
- }
- article.form-area{
-  text-align: center;
-  display: grid;
- }
- input#userId{
-  color: rgb(255, 255, 255, 0.7);
- }
-}
-.hide{
+  body {
+    background-image: url(../img/mobile2.png);
+  }
+  .signup-left {
     display: none;
+  }
+  .signup-right {
+    display: none;
+  }
+  article.form-area {
+    text-align: center;
+    display: grid;
+  }
+  input#userId {
+    color: rgb(255, 255, 255, 0.7);
+  }
 }
-.social-logo{
-text-align: center;
-margin-top: 10%;
+.hide {
+  display: none;
 }
-.kakao{
-  background-image: url(../img/naver_logo.png);
+.social-logo {
+  text-align: center;
+  margin-top: 10%;
+}
+.kakao {
+  background-image: url(../img/kakao.png);
   background-size: 100% 100%;
 }
-.naver{
-  background-image: url(../img/kakao_logo.png);
+.naver {
+  background-image: url();
   background-size: 100% 100%;
 }
 .w3-button.w3-circle {
   width: 40px; /* Adjust the width as needed */
   height: 40px; /* Adjust the height as needed */
 }
-.google{
-  background-image: url(../img/google_logo.png);
+.google {
+  background-image: url();
   background-size: 100% 100%;
 }
 .form-area {
@@ -324,35 +337,34 @@ margin-top: 10%;
 /* @media (max-width: 768px) {
   .home, .signup-left, .signup-right {
     background-image: url(./assets/img/login_mobile.png) !important;
-   
+
 }
   } */
-.form-field{
-  margin:3px 0;
+.form-field {
+  margin: 3px 0;
 }
-input#userId{
-  background: none;
-  color: black;
-  input#userId::focus {
-    border: 1px solid #55cb93;
-  }
- 
-}
-input#userPw{
+input#userId {
   background: none;
   color: black;
   input#userId::focus {
     border: 1px solid #55cb93;
   }
 }
-input#userPw2{
+input#userPw {
   background: none;
   color: black;
   input#userId::focus {
     border: 1px solid #55cb93;
   }
 }
-input#userName{
+input#userPw2 {
+  background: none;
+  color: black;
+  input#userId::focus {
+    border: 1px solid #55cb93;
+  }
+}
+input#userName {
   background: none;
   color: black;
   input#userId::focus {
@@ -382,4 +394,18 @@ input#userName{
   .phone_img {
     display: none;
   }
+}
+.social-logo .w3-button.w3-circle {
+  position: relative;
+  width: 40px; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+}
+
+.logo_png {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%; /* Adjust the size as needed */
+  height: 100%; /* Adjust the size as needed */
 }

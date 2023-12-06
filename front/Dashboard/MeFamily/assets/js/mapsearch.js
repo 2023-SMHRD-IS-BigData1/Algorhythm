@@ -10,7 +10,7 @@ function initTmap() {
     {
       center: new Tmapv2.LatLng(36.5040736, 127.2494855),
       width: "100%",
-      height: "800px",
+      height: "1500px",
       zoom: 17,
       zoomControl: true,
       scrollwheel: true,
@@ -597,8 +597,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   toggleButton.addEventListener("click", function () {
     // 사이드바 및 검색 목록 상자에 close 클래스 토글
-    sidebar.classList.toggle("open");
-    searchListBox.classList.toggle("open");
+    sidebar.classList.toggle("close");
+    searchListBox.classList.toggle("close");
 
     // 버튼 아이콘에 rotated 클래스 토글
     toggleButton.classList.toggle("rotated");
