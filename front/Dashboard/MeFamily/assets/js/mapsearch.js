@@ -1,26 +1,24 @@
-// 주요 필드
-  let map;
+function initTmap() {
+  // 주요 필드
+  var map;
   var markerArr = [];
   var resultdrawArr = [];
-  var dataInfo;
-  var startLatData;
-  var startLonData;
-  var endLatData;
-  var endLonData;
 
-function initTmap() {
   // 맵 객체 생성
   map = new Tmapv2.Map(
     "map", // "map" id 값과 맞추기
     {
       center: new Tmapv2.LatLng(36.5040736, 127.2494855),
       width: "100%",
-      height: "800px",
+      height: "1500px",
       zoom: 17,
       zoomControl: true,
       scrollwheel: true,
     }
   );
+
+  // test
+  naviTransport(map, resultdrawArr, markerArr);
 
   // 정류장 지도 위에 표기하기
   $.ajax({
@@ -44,97 +42,31 @@ function initTmap() {
     },
   });
 
-    $(".bus-button").click(function () {
-      $("#destination-toggle").addClass("hidden");
-      $("#bike-toggle").addClass("hidden");
-      $("#bus-toggle").removeClass("hidden");
-      $(".bus-button").addClass("active-tab");
-      $(".bike-button").removeClass("active-tab");
-    });
-    // 자전거 버튼
-    $(".bike-button").click(function () {
-      $("#destination-toggle").addClass("hidden");
-      $("#bike-toggle").removeClass("hidden");
-      $("#bus-toggle").addClass("hidden");
-      $(".bike-button").addClass("active-tab");
-      $(".bus-button").removeClass("active-tab");
-    });
-    // 출발지 버튼
-    $("#search1").click(function () {
-      $("#destination-toggle").removeClass("hidden");
-      $("#bike-toggle").addClass("hidden");
-      $("#search-field1").removeClass("hidden");
-      $("#bus-toggle").addClass("hidden");
-      $(".bus-button").removeClass("active-tab");
-      $(".bike-button").removeClass("active-tab");
-    });
-    // 도착지 버튼
-    $("#search2").click(function () {
-      $("#destination-toggle").removeClass("hidden");
-      $("#bike-toggle").addClass("hidden");
-      $("#search-field").removeClass("hidden");
-      $("#bus-toggle").addClass("hidden");
-      $(".bus-button").removeClass("active-tab");
-      $(".bike-button").removeClass("active-tab");
-    });
-}
   // 검색 기능 함수 아래 존재
-function poi1(){
-    dataInfo = "start";
-    console.log(dataInfo)
   $("#search1").click(function () {
+    console.log("search1 clicked");
     var inputValue = $("#search_keyword").val();
-    poiSearch(inputValue, 1);
+    poiSearch(map, inputValue, markerArr, resultdrawArr);
   });
-}
 
-function poi2(){
-    dataInfo = "end";
-    console.log(dataInfo)
   $("#search2").click(function () {
     var inputValue = $("#search_keyword1").val();
-    poiSearch(inputValue, 2);
+    poiSearch(map, inputValue, markerArr, resultdrawArr);
   });
-}
-function person(){
+
   // 길찾기 기능 함수 아래 존재
   $("#navi").click(function () {
-    naviPerson();
-  });
-}
-
-function transport(){
-  $("#bus-navi").click(function () {
-    naviTransport();
+    naviPerson(map, resultdrawArr, markerArr);
   });
 }
 
 // 대중교통 기반 길찾기 서비스
-function naviTransport() {
+function naviTransport(map, resultdrawArr, markerArr) {
   var transportList;
   var selectRoute;
 
-    // latLonRequest 제작하기
-    var latLonRequest = {};
-
-    latLonRequest.latlonList = { latlon: [] };
-
-    latLonRequest.latlonList.latlon.push({
-    type: "start",
-    lat: startLatData,
-    lon: startLonData,
-    });
-    latLonRequest.latlonList.latlon.push({
-    type: "end",
-    lat: endLatData,
-    lon: endLonData,
-    });
-
   $.ajax({
     url: "/navitransport",
-    type: "POST",
-        contentType: "application/json",
-    data: JSON.stringify(latLonRequest),
     success: function (response) {
       console.log(response);
 
@@ -143,7 +75,6 @@ function naviTransport() {
         for (var i in markerArr) {
           markerArr[i].setMap(null);
         }
-        markerArr = [];
       }
 
       // 기존 경로 제거
@@ -157,16 +88,21 @@ function naviTransport() {
       transportList = response.metaData.plan.itineraries;
       selectRoute = transportList[0];
 
-      drawRoute(selectRoute);
+      // 나중에 삭제하고 밑에 부분으로 옮겨야 합니다.
+      drawRoute(map, resultdrawArr, markerArr, selectRoute);
     },
     error: function () {
-      alert("JSON 출력 실패");
+      // alert("JSON 출력 실패");
     },
   });
+
+  // <!--            // 클릭 이벤트 추가하기-->
+  // <!--            drawRoute(map, resultdrawArr, markerArr, selectRoute)-->
 } // function[E]
 
 // 대중교통 지도에 실제로 그려주는 부분
-function drawRoute(selectRoute) {
+function drawRoute(map, resultdrawArr, markerArr, selectRoute) {
+  console.log(selectRoute);
   var latlonList = [];
   var route = selectRoute.legs;
 
@@ -208,6 +144,8 @@ function drawRoute(selectRoute) {
         lon: checkRoute.end.lon,
       });
 
+      console.log(JSON.stringify(latLonRequest));
+
       // latlonRequest 만들기
       $.ajax({
         url: "/naviperson",
@@ -231,6 +169,7 @@ function drawRoute(selectRoute) {
             var properties = resultData[i].properties;
             var polyline_;
 
+            console.log(properties.pointType);
             if (properties.pointType == "PP1" || properties.pointType == "EP") {
               lastMarker = "bike";
 
@@ -250,6 +189,8 @@ function drawRoute(selectRoute) {
                     geometry.coordinates[j][0]
                   );
 
+                  console.log("bike = " + convertChange);
+
                   // 배열에 담기
                   drawBikeInfoArr.push(convertChange);
                 } else {
@@ -257,6 +198,7 @@ function drawRoute(selectRoute) {
                     geometry.coordinates[j][1],
                     geometry.coordinates[j][0]
                   );
+                  console.log("walk = " + convertChange);
                   // 배열에 담기
                   drawWalkInfoArr.push(convertChange);
                 }
@@ -339,6 +281,7 @@ function drawRoute(selectRoute) {
       }
 
       var strokeColor = "#" + checkRoute.routeColor;
+      console.log(strokeColor);
 
       // 선 스타일 제어하는 부분
       polyline_ = new Tmapv2.Polyline({
@@ -357,7 +300,7 @@ function drawRoute(selectRoute) {
 } // function[E}
 
 // 보행자 길찾기 서비스
-function naviPerson() {
+function naviPerson(map, resultdrawArr, markerArr) {
   // 지도 크기 조절 및 이동을 위한 객체 생성
   var positionBounds = new Tmapv2.LatLngBounds();
 
@@ -377,13 +320,13 @@ function naviPerson() {
 
   latLonRequest.latlonList.latlon.push({
     type: "start",
-    lat: startLatData,
-    lon: startLonData,
+    lat: 36.4910001,
+    lon: 127.26377507,
   });
   latLonRequest.latlonList.latlon.push({
     type: "end",
-    lat: endLatData,
-    lon: endLonData,
+    lat: 36.49124978,
+    lon: 127.24724877,
   });
 
   $.ajax({
@@ -401,7 +344,6 @@ function naviPerson() {
         for (var i in markerArr) {
           markerArr[i].setMap(null);
         }
-        markerArr = [];
       }
 
       var resultData = response.features;
@@ -435,6 +377,7 @@ function naviPerson() {
         var properties = resultData[i].properties;
         var polyline_;
 
+        console.log(properties.pointType);
         if (properties.pointType == "PP1" || properties.pointType == "EP") {
           lastMarker = "bike";
 
@@ -454,6 +397,8 @@ function naviPerson() {
                 geometry.coordinates[j][0]
               );
 
+              console.log("bike = " + convertChange);
+
               // 배열에 담기
               drawBikeInfoArr.push(convertChange);
             } else {
@@ -461,6 +406,7 @@ function naviPerson() {
                 geometry.coordinates[j][1],
                 geometry.coordinates[j][0]
               );
+              console.log("walk = " + convertChange);
               // 배열에 담기
               drawWalkInfoArr.push(convertChange);
             }
@@ -541,7 +487,7 @@ function naviPerson() {
 }
 
 // 지도에 선 그리는 부분
-function drawLine(arrBikePoint, arrWalkPointList) {
+function drawLine(arrBikePoint, arrWalkPointList, map, resultdrawArr) {
   var polyline_;
 
   // 선 스타일 제어하는 부분
@@ -570,7 +516,8 @@ function drawLine(arrBikePoint, arrWalkPointList) {
 }
 
 // 검색 기능
-function poiSearch(searchKeyword, divNum) {
+function poiSearch(map, searchKeyword, markerArr, resultdrawArr) {
+  var map = map;
   var marker;
   var markerImg = "/img/tmap/testMarker.png";
   var positionBounds = new Tmapv2.LatLngBounds();
@@ -581,12 +528,11 @@ function poiSearch(searchKeyword, divNum) {
     success: function (response) {
       var data = response.searchPoiInfo.pois.poi;
 
-      console.log(response)
-
       // 메소드 호출시 맵 객체가 누수 되는 오류 발생, 맵 재할당 하여 해결
       if (resultdrawArr.length > 0) {
         if (resultdrawArr[0].getMap() == null) {
           for (var i in resultdrawArr) {
+            console.log(resultdrawArr[0]);
             resultdrawArr[i].setMap(map);
           }
         }
@@ -597,19 +543,21 @@ function poiSearch(searchKeyword, divNum) {
         for (var i in markerArr) {
           markerArr[i].setMap(null);
         }
-        markerArr = [];
       }
+
+      console.log(resultdrawArr.length);
 
       // 기존 경로 제거
       if (resultdrawArr.length > 0) {
         for (var i in resultdrawArr) {
+          console.log(resultdrawArr[i]);
           resultdrawArr[i].setMap(null);
         }
         resultdrawArr = [];
       }
 
-      var listCnt = 0;
-      var listHtml;
+      console.log(resultdrawArr.length);
+
       // 마커 생성
       for (var k = 0; k < data.length; k++) {
         // for[s]
@@ -627,31 +575,7 @@ function poiSearch(searchKeyword, divNum) {
         });
         markerArr.push(marker);
         positionBounds.extend(lonlat);
-
-        // 출력 필드
-        listCnt = listCnt + 1;
-        var field = data[k]
-        var name = field.name
-        var lowerAddrName = field.lowerAddrName
-        var fullAddressRoad = field.newAddressList.newAddress[0].fullAddressRoad
-        var zipCode = field.zipCode
-
-        // 출력 리스트 만들기
-        listHtml = listHtml + `<div id='listNum${listCnt}' onclick="getLatLon(${listCnt})">`
-        listHtml = listHtml + `<ul id='placeList${listCnt}'>`
-        listHtml = listHtml + `<li>${name}</li>`
-        listHtml = listHtml + `<li>${lowerAddrName}</li>`
-        listHtml = listHtml + `<li>${fullAddressRoad}</li>`
-        listHtml = listHtml + `<li>${zipCode}</li>`
-        listHtml = listHtml + `<div id='lat${listCnt}' style='display: none;'>${noorLat}</div>`
-        listHtml = listHtml + `<div id='lon${listCnt}' style='display: none;'>${noorLon}</div>`
-        listHtml = listHtml + `</ul>`
-        listHtml = listHtml + `<hr>`
-        listHtml = listHtml + `</div>`
-
       } // for[e]
-
-      $("#menu_wrap").html(listHtml);
 
       // 마커들이 보이도록 지도 조정
       map.panToBounds(positionBounds);
@@ -660,20 +584,9 @@ function poiSearch(searchKeyword, divNum) {
     error: function () {
       // 여기서 검색 결과 실패시 모달 창이라도 띄워주세요.
       alert("검색결과가 없습니다");
+      console.log("error");
     },
   });
-}
-
-function getLatLon(listCnt) {
-    if(dataInfo == "start") {
-        startLatData = parseFloat($(`#lat${listCnt}`).text());
-        startLonData = parseFloat($(`#lon${listCnt}`).text());
-        console.log("startData")
-    } else {
-        endLatData = parseFloat($(`#lat${listCnt}`).text());
-        endLonData = parseFloat($(`#lon${listCnt}`).text());
-        console.log("endData")
-    }
 }
 
 //사이드바 토글
@@ -684,48 +597,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
   toggleButton.addEventListener("click", function () {
     // 사이드바 및 검색 목록 상자에 close 클래스 토글
-    sidebar.classList.toggle("open");
-    searchListBox.classList.toggle("open");
+    sidebar.classList.toggle("close");
+    searchListBox.classList.toggle("close");
 
     // 버튼 아이콘에 rotated 클래스 토글
     toggleButton.classList.toggle("rotated");
   });
 });
 
-//// 클릭 기능
-//$(document).ready(function () {
-//  // 대중교통 버튼
-//  $(".bus-button").click(function () {
-//    $("#destination-toggle").addClass("hidden");
-//    $("#bike-toggle").addClass("hidden");
-//    $("#bus-toggle").removeClass("hidden");
-//    $(".bus-button").addClass("active-tab");
-//    $(".bike-button").removeClass("active-tab");
-//  });
-//  // 자전거 버튼
-//  $(".bike-button").click(function () {
-//    $("#destination-toggle").addClass("hidden");
-//    $("#bike-toggle").removeClass("hidden");
-//    $("#bus-toggle").addClass("hidden");
-//    $(".bike-button").addClass("active-tab");
-//    $(".bus-button").removeClass("active-tab");
-//  });
-//  // 출발지 버튼
-//  $("#search1").click(function () {
-//    $("#destination-toggle").removeClass("hidden");
-//    $("#bike-toggle").addClass("hidden");
-//    $("#search-field1").removeClass("hidden");
-//    $("#bus-toggle").addClass("hidden");
-//    $(".bus-button").removeClass("active-tab");
-//    $(".bike-button").removeClass("active-tab");
-//  });
-//  // 도착지 버튼
-//  $("#search2").click(function () {
-//    $("#destination-toggle").removeClass("hidden");
-//    $("#bike-toggle").addClass("hidden");
-//    $("#search-field").removeClass("hidden");
-//    $("#bus-toggle").addClass("hidden");
-//    $(".bus-button").removeClass("active-tab");
-//    $(".bike-button").removeClass("active-tab");
-//  });
-//});
+// 클릭 기능
+$(document).ready(function () {
+  // 대중교통 버튼
+  $(".bus-button").click(function () {
+    $("#destination-toggle").addClass("hidden");
+    $("#bike-toggle").addClass("hidden");
+    $("#bus-toggle").removeClass("hidden");
+    $(".bus-button").addClass("active-tab");
+    $(".bike-button").removeClass("active-tab");
+  });
+  // 자전거 버튼
+  $(".bike-button").click(function () {
+    $("#destination-toggle").addClass("hidden");
+    $("#bike-toggle").removeClass("hidden");
+    $("#bus-toggle").addClass("hidden");
+    $(".bike-button").addClass("active-tab");
+    $(".bus-button").removeClass("active-tab");
+  });
+  // 출발지 버튼
+  $("#search1").click(function () {
+    $("#destination-toggle").removeClass("hidden");
+    $("#bike-toggle").addClass("hidden");
+    $("#search-field1").removeClass("hidden");
+    $("#bus-toggle").addClass("hidden");
+    $(".bus-button").removeClass("active-tab");
+    $(".bike-button").removeClass("active-tab");
+  });
+  // 도착지 버튼
+  $("#search2").click(function () {
+    $("#destination-toggle").removeClass("hidden");
+    $("#bike-toggle").addClass("hidden");
+    $("#search-field").removeClass("hidden");
+    $("#bus-toggle").addClass("hidden");
+    $(".bus-button").removeClass("active-tab");
+    $(".bike-button").removeClass("active-tab");
+  });
+});
