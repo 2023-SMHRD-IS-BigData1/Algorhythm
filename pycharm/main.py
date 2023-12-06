@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import List
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-
+import json
 """
     port 5000
     uvicorn main:app --reload --host 0.0.0.0 --port 5000
@@ -34,6 +34,19 @@ async def predict(item: Item):
     }
     """
     print(item.json[0])
+    print(item.json[1])
+    treeTempData = json.loads(item.json[0])
+    treeWeatherData = json.loads(item.json[1])
+
+    # 3일의 최저기온
+    tempDataCall = treeTempData['response']['body']['items']['item'][0]
+
+    print(tempDataCall['taMin3'])
+    tempDataCall['taMax3']
+
+
+    weatherDataCall = treeWeatherData['response']['body']['items']['item'][0]
+
     try:
         # 머신러닝 모델을 넣는 공간입니다.
 
