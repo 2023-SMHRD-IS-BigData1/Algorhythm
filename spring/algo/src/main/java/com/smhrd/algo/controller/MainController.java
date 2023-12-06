@@ -22,7 +22,7 @@ public class MainController {
     }
 
     @GetMapping("/home")
-    public String index() { return "index"; }
+    public String index() { return "home"; }
 
     @GetMapping("/myPage")
     public String myPage() {return "myPage";}
