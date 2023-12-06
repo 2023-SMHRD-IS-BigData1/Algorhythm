@@ -20,14 +20,17 @@ public class UserService {
                 .userId(userId)
                 .userPw(userPw)
                 .userNickname(userNickname)
-                .userMileage(0)
-                .userReduce(0)
                 .userKm(0)
-                .userKcal(0)
-                .userTree(0)
                 .build();
 
         return userRepository.save(newUser);
+    }
+
+    public User updateUser(User user, double addKm) {
+        // 기존 User에서 데이터 꺼내서 새로 생성하기
+        // 기존 Km에서 add한 뒤에 그 km 곱하기 다른 값
+
+        return null;
     }
 
     public boolean idDuplicateCheck(String userId) {
