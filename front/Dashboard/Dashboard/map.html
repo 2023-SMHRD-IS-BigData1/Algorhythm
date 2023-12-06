@@ -21,8 +21,9 @@
 
         <!-- Sidebar Toggle-->
 
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 " id="sidebarToggle" href="#!"><i
-                class="fas fa-bars"></i></button>
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+            <i class="fas fa-bars"></i>
+        </button>
 
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -30,11 +31,7 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">마이페이지</a></li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li><a class="dropdown-item" href="#!">로그아웃</a></li>
+                    <li><a class="dropdown-item" href="#">로그아웃</a></li>
                 </ul>
             </li>
         </ul>
@@ -45,37 +42,45 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">메인</div>
-                        <a class="nav-link" href="index.html">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
-                            홈
-                        </a>
                         <a class="nav-link" href="dashboard.html">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
-                            대시보드
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-chalkboard-user"></i>
+                            </div>
+                            종합통계
                         </a>
                         <div class="sb-sidenav-menu-heading">통계</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                             aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-chart-area"></i>
+                            </div>
                             차트
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <div class="sb-sidenav-collapse-arrow">
+                                <i class="fas fa-angle-down"></i>
+                            </div>
                         </a>
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                 <a class="nav-link" href="Station_charts.html">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                    <div class="sb-nav-link-icon">
+                                        <i class="fas fa-chart-area"></i>
+                                    </div>
                                     대여/반납 현황
                                 </a>
                                 <a class="nav-link" href="day_charts.html">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                    <div class="sb-nav-link-icon">
+                                        <i class="fas fa-chart-area"></i>
+                                    </div>
                                     월/일/시간 이용현황
                                 </a>
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading">지도</div>
                         <a class="nav-link" href="map.html">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-map"></i></div>
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-map"></i>
+                            </div>
                             지도
                         </a>
                     </div>
