@@ -5,7 +5,13 @@
   #chart-container {
     position: relative;
     width: 100%;
-    height: 60vh;
+    height: 65vh;
+    overflow: hidden;
+  }
+  #chart-day {
+    position: relative;
+    width: 100%;
+    height: 65vh;
     overflow: hidden;
   }
   
