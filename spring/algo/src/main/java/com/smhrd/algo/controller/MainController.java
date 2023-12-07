@@ -27,4 +27,7 @@ public class MainController {
     @GetMapping("/myPage")
     public String myPage() {return "myPage";}
 
+    @GetMapping("/dashboard")
+    public String dashBoard() {return "dashboard";}
+
 }
