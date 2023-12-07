@@ -72,14 +72,15 @@ public class User {
     private String userCode;
 
     @Builder
-    public User(String userId, String userPw, String userNickname,
+    public User(Long userIdx, String userId, String userPw, String userNickname,
                 double userKm, Integer userAge, String userGender,
                 String userAddr) {
+        this.userIdx = userIdx;
         this.userId = userId;
         this.userPw = userPw;
         this.userNickname = userNickname;
         this.joinedAt = LocalDate.now();
-        this.userMileage = Integer.parseInt(String.valueOf(userKm * 100));
+        this.userMileage = (int) (userKm * 100);
         this.userReduce = userKm * 0.211;
         this.userKm = userKm;
         this.userKcal = userKm * 9;

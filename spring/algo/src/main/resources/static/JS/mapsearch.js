@@ -33,6 +33,8 @@ function initTmap() {
 
         var markerPosition = new Tmapv2.LatLng(lat, lon);
 
+        console.log("맵 생성")
+
         marker = new Tmapv2.Marker({
           position: markerPosition,
           icon: "/img/tmap/stationMarker.png",
@@ -82,31 +84,22 @@ function initTmap() {
 function poi1(){
     dataInfo = "start";
     console.log(dataInfo)
-  $("#search1").click(function () {
     var inputValue = $("#search_keyword").val();
-    poiSearch(inputValue, 1);
-  });
+    poiSearch(inputValue);
 }
 
 function poi2(){
     dataInfo = "end";
     console.log(dataInfo)
-  $("#search2").click(function () {
     var inputValue = $("#search_keyword1").val();
-    poiSearch(inputValue, 2);
-  });
+    poiSearch(inputValue);
 }
 function person(){
-  // 길찾기 기능 함수 아래 존재
-  $("#navi").click(function () {
     naviPerson();
-  });
 }
 
 function transport(){
-  $("#bus-navi").click(function () {
     naviTransport();
-  });
 }
 
 // 대중교통 기반 길찾기 서비스
@@ -319,17 +312,8 @@ function drawRoute(selectRoute) {
           drawLine(drawBikeInfoArr, walkInfoList, map, resultdrawArr);
         },
       });
-
-      // <!--                    // 선 스타일 제어하는 부분-->
-      // <!--                    polyline_ = new Tmapv2.Polyline({-->
-      // <!--                        path : latlonList,-->
-      // <!--                        strokeColor : "#000000",-->
-      // <!--                        strokeWeight : 5,-->
-      // <!--                        map : map-->
-      // <!--                    });-->
-
-      // <!--                    resultdrawArr.push(polyline_)-->
       latlonList = [];
+
     } else {
       for (let latlon of checkRoute.latlons) {
         var pass = new Tmapv2.LatLng(latlon.lat, latlon.lon);
@@ -570,7 +554,7 @@ function drawLine(arrBikePoint, arrWalkPointList) {
 }
 
 // 검색 기능
-function poiSearch(searchKeyword, divNum) {
+function poiSearch(searchKeyword) {
   var marker;
   var markerImg = "/img/tmap/testMarker.png";
   var positionBounds = new Tmapv2.LatLngBounds();
@@ -663,6 +647,9 @@ function poiSearch(searchKeyword, divNum) {
     },
   });
 }
+
+
+
 
 function getLatLon(listCnt) {
     if(dataInfo == "start") {

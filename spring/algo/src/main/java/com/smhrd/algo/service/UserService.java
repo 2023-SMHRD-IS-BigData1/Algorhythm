@@ -26,12 +26,35 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-    public User updateUser(User user, double addKm) {
-        // 기존 User에서 데이터 꺼내서 새로 생성하기
-        // 기존 Km에서 add한 뒤에 그 km 곱하기 다른 값
+    public User updateUser(String userId, double addKm) {
+        User user = userRepository.findByUserId(userId);
 
-        return null;
+        User updateUser = User.builder()
+                .userIdx(user.getUserIdx())
+                .userId(user.getUserId())
+                .userPw(user.getUserPw())
+                .userNickname(user.getUserNickname())
+                .userKm(user.getUserKm() + addKm)
+                .build();
+
+        userRepository.save(updateUser);
+
+        return updateUser;
     }
+
+//    public User updateUser(User user, double addKm) {
+//        User updateUser = User.builder()
+//                .userIdx(user.getUserIdx())
+//                .userId(user.getUserId())
+//                .userPw(user.getUserPw())
+//                .userNickname(user.getUserNickname())
+//                .userKm(user.getUserKm() + addKm)
+//                .build();
+//
+//        userRepository.save(updateUser);
+//
+//        return updateUser;
+//    }
 
     public boolean idDuplicateCheck(String userId) {
         return userRepository.findByUserId(userId) == null;
