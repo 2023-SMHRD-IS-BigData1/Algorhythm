@@ -1,36 +1,48 @@
-
 document.addEventListener("DOMContentLoaded", () => {
-    echarts.init(document.querySelector("#chart-day")).setOption({
+  echarts.init(document.querySelector("#chart-day")).setOption({
     tooltip: {
-        trigger: 'axis'
+      trigger: "axis",
     },
     legend: {
-        data: ['월별 이용현황']
+      data: ["월별 이용현황"],
     },
     grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
+      left: "3%",
+      right: "4%",
+      bottom: "3%",
+      containLabel: true,
     },
     xAxis: {
-        type: 'category',
-        data: ['월', '화', '수', '목', '금', '토', '일']
+      type: "category",
+      data: ["월", "화", "수", "목", "금", "토", "일"],
     },
     yAxis: {
-          type: 'value'
+      type: "value",
     },
-    series: [{
+    series: [
+      {
         data: [52, 47, 60, 24, 32, 55, 63],
-        color: '#fcc82a',
-        stack: 'Total',
+        color: "#fcc82a",
+        stack: "Total",
         label: {
-            fontSize: 20,
-            show: true,
-            position: 'top'
+          fontSize: 20,
+          show: true,
+          position: "top",
         },
-        type: 'line',
-        smooth: false
-      }]
-    });
+        type: "line",
+        smooth: false,
+      },
+      {
+        data: [4, 10, 11, 13, 7, 20, 33],
+        color: "#228cf7",
+        stack: "Total",
+        label: {
+          fontSize: 20,
+          show: true,
+        },
+        type: "line",
+        smooth: false,
+      },
+    ],
   });
+});
