@@ -8,7 +8,7 @@ public class mapController {
     @GetMapping("/tmap")
     public String tMapTest() {
 
-        return "tMapTest";
+        return "mapsearch";
     }
 
     @GetMapping("/kakaomap")
