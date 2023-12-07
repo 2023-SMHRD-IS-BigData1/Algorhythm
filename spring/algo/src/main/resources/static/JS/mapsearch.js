@@ -33,6 +33,8 @@ function initTmap() {
 
         var markerPosition = new Tmapv2.LatLng(lat, lon);
 
+        console.log("맵 생성");
+
         marker = new Tmapv2.Marker({
           position: markerPosition,
           icon: "/img/tmap/stationMarker.png",
@@ -78,35 +80,28 @@ function initTmap() {
     $(".bike-button").removeClass("active-tab");
   });
 }
+
 // 검색 기능 함수 아래 존재
 function poi1() {
   dataInfo = "start";
   console.log(dataInfo);
-  $("#search1").click(function () {
-    var inputValue = $("#search_keyword").val();
-    poiSearch(inputValue, 1);
-  });
+  var inputValue = $("#search_keyword").val();
+  poiSearch(inputValue);
 }
 
 function poi2() {
   dataInfo = "end";
   console.log(dataInfo);
-  $("#search2").click(function () {
-    var inputValue = $("#search_keyword1").val();
-    poiSearch(inputValue, 2);
-  });
+  var inputValue = $("#search_keyword1").val();
+  poiSearch(inputValue);
 }
+
 function person() {
-  // 길찾기 기능 함수 아래 존재
-  $("#navi").click(function () {
-    naviPerson();
-  });
+  naviPerson();
 }
 
 function transport() {
-  $("#bus-navi").click(function () {
-    naviTransport();
-  });
+  naviTransport();
 }
 
 // 대중교통 기반 길찾기 서비스
@@ -561,7 +556,7 @@ function drawLine(arrBikePoint, arrWalkPointList) {
 }
 
 // 검색 기능
-function poiSearch(searchKeyword, divNum) {
+function poiSearch(searchKeyword) {
   var marker;
   var markerImg = "/img/tmap/testMarker.png";
   var positionBounds = new Tmapv2.LatLngBounds();
@@ -690,7 +685,3 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //검색시 엔터기능
-$("#search1").click(search_handler)
-
-$("#search_keyword").keyup(function(event))
-var keyCode = event.keyCode ? event.keyCode : event.which

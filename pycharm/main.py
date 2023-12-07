@@ -1,7 +1,10 @@
+from builtins import range
 from typing import List
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-
+import json
+from datetime import datetime, timedelta
+import pandas as pd
 """
     port 5000
     uvicorn main:app --reload --host 0.0.0.0 --port 5000
@@ -33,6 +36,107 @@ async def predict(item: Item):
     }
     """
     print(item.json[0])
+    print(item.json[1])
+    treeTempData = json.loads(item.json[0])
+    treeWeatherData = json.loads(item.json[1])
+
+    # 3일부터10일까지 최저기온
+    tempDataCall = treeTempData['response']['body']['items']['item'][0]
+
+    print(tempDataCall['taMin3'])
+
+    # 3일부터10일까지 최저기온 데이터에서 "regId":"11C20404"인 데이터 추출
+    temp_data_list = [data for data in treeTempData['response']['body']['items']['item'] if
+                      data.get('regId') == '11C20404']
+    print(temp_data_list)
+
+    # 데이터프레임 생성
+    temp_df = pd.DataFrame(temp_data_list,index=None)
+
+    # 필요한 컬럼만 선택 (taMin3부터 taMin10까지)
+    selected_columns1 = ['taMin3', 'taMin4', 'taMin5', 'taMin6', 'taMin7', 'taMin8', 'taMin9', 'taMin10']
+    
+    # 인덱스 삭제
+    temp_df_selected1 = temp_df[selected_columns1].reset_index(drop=True)
+    print(temp_df_selected1)
+
+    # 필요한 컬럼만 선택 (taMax3부터 taMax10까지)
+    selected_columns2 = ['taMax3', 'taMax4', 'taMax5', 'taMax6', 'taMax7', 'taMax8', 'taMax9', 'taMax10']
+    temp_df_selected2 = temp_df[selected_columns2].reset_index(drop=True)
+    print(temp_df_selected2)
+
+    temp_df_selected1 = pd.DataFrame(temp_df_selected1)
+    temp_df_selected2 = pd.DataFrame(temp_df_selected2)
+
+    # 두 개의 데이터프레임을 튜플로 합치기
+    combined_tuples = list(zip(temp_df_selected1.values.flatten(), temp_df_selected2.values.flatten()))
+
+    # 새로운 데이터프레임 생성
+    combined_df = pd.DataFrame(combined_tuples, columns=['최저기온(°C)', '최고기온(°C)'])
+
+    
+    # 3일부터 10일까지의 날짜 계산
+    dates = [datetime.now() + timedelta(days=i) for i in range(3, 11)]
+    formatted_dates = [date.strftime("%m-%d %H:00:00") for date in dates]
+
+    # 날짜를 열로 추가
+    combined_df['날짜'] = formatted_dates
+    # 결과 출력
+    print(combined_df)
+
+
+    # 강수 확률 데이터 전처리
+    weatherDataCall = treeWeatherData['response']['body']['items']['item'][0]
+
+    print(weatherDataCall)
+    # 3일부터10일까지 강수확률 데이터에서 "regId":"11C20000"인 데이터 추출
+    weather_data_list = [data1 for data1 in treeWeatherData['response']['body']['items']['item'] if
+                         data1.get('regId') == '11C20000']
+
+    print(weather_data_list)
+
+    # 데이터프레임 생성
+    weather_df = pd.DataFrame(weather_data_list, index=None)
+
+    selected_columns3 = ['rnSt3Am', 'rnSt3Pm', 'rnSt4Am', 'rnSt4Pm', 'rnSt5Am', 'rnSt5Pm', 'rnSt6Am', 'rnSt6Pm',
+                         'rnSt7Am', 'rnSt7Pm', 'rnSt8', 'rnSt9', 'rnSt10']
+
+
+    # 인덱스 삭제
+    weather_df_selected3 = weather_df[selected_columns3].reset_index(drop=True)
+
+    weather_df_selected3 = pd.DataFrame(weather_df_selected3)
+
+    # '강수량' 컬럼 추가
+    weather_df_selected3['강수량'] = 0
+
+
+    # 결과 출력
+    print(weather_df_selected3)
+
+
+    # 결과 출력
+    print(weather_df_selected3)
+    # # '강수량' 컬럼 생성
+    # rnst_cols_am_pm = [f'rnSt{i}Am' for i in range(3, 11)] + [f'rnSt{i}' for i in range(8, 11)]
+    # weather_df_selected3['강수량'] = weather_df_selected3[rnst_cols_am_pm].apply(tuple, axis=1)
+    #
+    # # 결과 출력
+    # print(weather_df_selected3)
+    # # 두 개의 데이터프레임을 튜플로 합치기
+    # combined_tuples = list(zip(temp_df_selected1.values.flatten(), temp_df_selected2.values.flatten()))
+    #
+    # # 새로운 데이터프레임 생성
+    # combined_df = pd.DataFrame(combined_tuples, columns=['최저기온(°C)', '최고기온(°C)'])
+
+    # 3일부터 10일까지의 날짜 계산
+    dates = [datetime.now() + timedelta(days=i) for i in range(3, 11)]
+    formatted_dates = [date.strftime("%m-%d %H:00:00") for date in dates]
+
+
+
+
+
     try:
         # 머신러닝 모델을 넣는 공간입니다.
 

@@ -31,6 +31,18 @@ public class User {
     @Column(name = "user_nickname", nullable = false, length = 30)
     private String userNickname;
 
+    // 유저 이름
+    @Column(name = "user_gender")
+    private String userGender;
+
+    // 유저 이름
+    @Column(name = "user_addr")
+    private String userAddr;
+
+    // 유저 이름
+    @Column(name = "user_age")
+    private Integer userAge;
+
     // 유저 가입일
     @Column(name = "joined_at", nullable = false, updatable = false)
     private LocalDate joinedAt;
@@ -39,35 +51,43 @@ public class User {
     @Column(name = "user_mileage")
     private Integer userMileage;
 
-    // 유저 마일리지
+    // 탄소 절감량
     @Column(name = "user_reduce")
-    private Integer userReduce;
+    private double userReduce;
 
-    // 유저 마일리지
+    // 총 km
     @Column(name = "user_km")
-    private Integer userKm;
+    private double userKm;
 
-    // 유저 마일리지
+    // 감소 칼로리
     @Column(name = "user_kcal")
-    private Integer userKcal;
+    private double userKcal;
 
-    // 유저 마일리지
+    // 심은 나무 수
     @Column(name = "user_tree")
-    private Integer userTree;
+    private double userTree;
+
+    // 유저 코드
+    @Column(name = "user_code")
+    private String userCode;
 
     @Builder
-    public User(String userId, String userPw, String userNickname,
-                Integer userMileage, Integer userReduce,
-                Integer userKm, Integer userKcal,
-                Integer userTree) {
+    public User(Long userIdx, String userId, String userPw, String userNickname,
+                double userKm, Integer userAge, String userGender,
+                String userAddr) {
+        this.userIdx = userIdx;
         this.userId = userId;
         this.userPw = userPw;
         this.userNickname = userNickname;
         this.joinedAt = LocalDate.now();
-        this.userMileage = userMileage;
-        this.userReduce = userReduce;
+        this.userMileage = (int) (userKm * 100);
+        this.userReduce = userKm * 0.211;
         this.userKm = userKm;
-        this.userKcal = userKcal;
-        this.userTree = userTree;
+        this.userKcal = userKm * 9;
+        this.userTree = this.userReduce / 17.2;
+        this.userCode = "C";
+        this.userAddr = userAddr;
+        this.userAge = userAge;
+        this.userGender = userGender;
     }
 }
