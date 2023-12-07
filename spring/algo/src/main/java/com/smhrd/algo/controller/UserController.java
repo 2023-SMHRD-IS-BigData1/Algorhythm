@@ -6,6 +6,7 @@ import com.smhrd.algo.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.hibernate.annotations.Fetch;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -38,7 +39,6 @@ public class UserController {
     public String userLoginCheck(@ModelAttribute UserDTO userDTO,
                                  RedirectAttributes redirectAttributes, HttpSession session) {
 
-
         User user = userService.loginUser(userDTO.getUserId(), userDTO.getUserPw());
         
         if (user != null) { // 로그인 성공 시 session에 저장
@@ -49,5 +49,16 @@ public class UserController {
             redirectAttributes.addAttribute("message", false);
             return "login";
         }
+    }
+
+//    @PostMapping("/ride")
+//    public String updateUser(@ModelAttribute User user, double addKm) {
+//        userService.updateUser(user, addKm);
+//        return "redirect:/myPage";
+//    }
+    @GetMapping("/ride")
+    @ResponseBody
+    public User updateUser(@RequestParam String userId, double addKm) {
+        return  userService.updateUser(userId, addKm);
     }
 }
