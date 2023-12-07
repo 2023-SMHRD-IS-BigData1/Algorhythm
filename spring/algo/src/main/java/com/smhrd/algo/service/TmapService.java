@@ -168,8 +168,12 @@ public class TmapService {
             object = mapper.readValue(json, NaviPersonResponse.class);
 
         } catch (IOException e) {
-            log.debug("Failed to parse WeatherResponse from JSON", e);
+            log.debug("Failed to parse JSON", e);
         }
+
+        double totalDistace = object.getFeatures().get(0).getProperties().getTotalDistance();
+        log.info("inputDistance= {}, object={}",totalDistace, object);
+
         return object;
     }
 
@@ -234,6 +238,7 @@ public class TmapService {
         } catch (IOException e) {
             log.debug("Failed to parse WeatherResponse from JSON", e);
         }
+
         return object;
     }
 
@@ -241,6 +246,7 @@ public class TmapService {
 
         List<Itineraries> dataList = object.getMetaData().getPlan().getItineraries();
         for (Itineraries data : dataList) {
+
             for (Legs leg : data.getLegs()) {
                 List<Latlons> setLatLon = new ArrayList<>();
 
@@ -263,9 +269,10 @@ public class TmapService {
                                 latlons.setLat(Double.parseDouble(latlon[1]));
                                 setLatLon.add(latlons);
                             }
+
                         }
                     } catch (Exception e) {
-                        continue;
+                        log.debug("No, steps");
                     }
                     // 도착지 latlon
                     setLatLon.add(Latlons.builder()
@@ -298,6 +305,9 @@ public class TmapService {
                 }
             }
         }
+
+
+
         return object;
     }
 
