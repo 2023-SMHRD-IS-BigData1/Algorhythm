@@ -23,11 +23,11 @@ public class WeatherInfo {
     @Column(name = "weather_temp")
     private double weatherTemp;
 
-    // 날씨 온도
+    // 강수량
     @Column(name = "weather_rain")
     private double weatherRain;
 
     // 기록 시간
     @Column(name = "weather_time")
-    private LocalDateTime weatherTime;
+    private String weatherTime;
 }

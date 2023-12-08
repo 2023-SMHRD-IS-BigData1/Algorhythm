@@ -37,7 +37,7 @@ function initTmap() {
 
         marker = new Tmapv2.Marker({
           position: markerPosition,
-          icon: "/img/tmap/stationMarker.png",
+          icon: "/img/tmap/bike.png",
           iconSize: new Tmapv2.Size(15, 15),
           title: name,
           map: map,

@@ -283,17 +283,17 @@ hr {
   margin-left: 10%;
 }
 
-@media (max-width: 360px) and (max-height: 569px) {
+@media (max-width: 375px) and (max-height: 667px) {
   .sidebar {
     position: absolute;
-    width: 280px;
+    width: 325px;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.75);
     top: 0;
     z-index: 200;
-    -webkit-transform: translate3d(-270px, 0, 0);
-    -moz-transform: translate3d(-270px, 0, 0);
-    transform: translate3d(-270px, 0, 0);
+    -webkit-transform: translate3d(-305px, 0, 0);
+    -moz-transform: translate3d(-305px, 0, 0);
+    transform: translate3d(-305px, 0, 0);
     -webkit-transition: all 0.4s;
     -moz-transition: all 0.4s;
     -ms-transition: all 0.4s;
@@ -309,7 +309,7 @@ hr {
   width: 80%;
   margin-left: 10%;
   margin-bottom: 0;
-  padding: 20px 0 20px 40px;
+  padding: 20px 40px 20px 40px;
 }
 #menu_wrap ul:hover,
 #menu_wrap ul:active,
@@ -317,11 +317,6 @@ hr {
   background-color: rgba(37, 188, 116, 0.7);
   cursor: pointer;
   border-radius: 5px;
-  padding-right: 40px;
-  text-align: center;
-  translate: 0.4s;
 }
-.list-info-title {
-  height: 500px;
-  overflow: scroll;
-}
+
+
