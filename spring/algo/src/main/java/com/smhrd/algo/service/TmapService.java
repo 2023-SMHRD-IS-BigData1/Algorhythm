@@ -384,7 +384,8 @@ public class TmapService {
             }
         }
 
-        // LatLonRequest Build
+
+        // LatLonRequest Build 출발지 도착지 저장
         List<Latlon> latlons = new ArrayList<>();
         latlons.add(Latlon.builder()
                 .type("출발")
@@ -397,19 +398,28 @@ public class TmapService {
                 .lon(latlonList.get(latlonList.size()-1).get(0))
                 .build());
         
-        // 대여 정거장과 반납 정거장이 둘 다 존재하는지 확인 필요
+        // 최소한 자전거 타고 500m는 가는지 확인
         List<LatlonStation> latlonStations = new ArrayList<>();
-        latlonStations.add(LatlonStation.builder()
-                .type("대여")
-                .lat(nearestStationStart.getLat().doubleValue())
-                .lon(nearestStationStart.getLng().doubleValue())
-                .build());
-        latlonStations.add(LatlonStation.builder()
-                .type("반납")
-                .lat(nearestStationEnd.getLat().doubleValue())
-                .lon(nearestStationEnd.getLng().doubleValue())
-                .build());
 
+        if (nearestStationStart != null && nearestStationEnd != null) {
+            double distance = calculateDistance(nearestStationStart.getLat().doubleValue(), nearestStationStart.getLng().doubleValue(),
+                    nearestStationEnd.getLat().doubleValue(), nearestStationEnd.getLng().doubleValue());
+            if (distance > 300) {
+                // 대여 정거장과 반납 정거장이 둘 다 존재하는지 확인 필요
+                latlonStations.add(LatlonStation.builder()
+                        .type("대여")
+                        .lat(nearestStationStart.getLat().doubleValue())
+                        .lon(nearestStationStart.getLng().doubleValue())
+                        .build());
+                latlonStations.add(LatlonStation.builder()
+                        .type("반납")
+                        .lat(nearestStationEnd.getLat().doubleValue())
+                        .lon(nearestStationEnd.getLng().doubleValue())
+                        .build());
+            }
+        }
+        
+        // 최종 취합
         LatLonRequest response = LatLonRequest.builder()
                 .latlonList(LatlonList.builder()
                         .latlon(latlons)
