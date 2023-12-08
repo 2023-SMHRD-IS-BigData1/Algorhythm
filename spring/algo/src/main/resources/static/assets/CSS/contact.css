@@ -376,12 +376,12 @@ input#userName {
   display: none;
 }
 
-/* Show phone_img when the screen width is 400px or less */
+/* Show phone_img when the screengit  width is 400px or less */
 @media (max-width: 400px) {
     .phone_img {
         display: block;
         position: absolute;
-        bottom: -95px;
+        bottom: -125px;
         left: -35px;
         right: 0px;
         z-index: -1;

@@ -18,7 +18,7 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark header-t">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3 header-title" href="index.html">TABRO</a>
+        <a class="navbar-brand ps-3 header-title" href="dashboard.html">TABRO</a>
 
         <!-- Sidebar Toggle-->
 
@@ -67,18 +67,18 @@
                                     <div class="sb-nav-link-icon">
                                         <i class="fas fa-chart-area"></i>
                                     </div>
-                                    대여/반납 현황
+                                    대여/반납 예측 차트
                                 </a>
                                 <a class="nav-link" href="day_charts.html">
                                     <div class="sb-nav-link-icon">
                                         <i class="fas fa-chart-area"></i>
                                     </div>
-                                    월/일/시간 이용현황
+                                    월 이용 예측 차트
                                 </a>
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading">지도</div>
-                        <a class="nav-link" href="map.html">
+                        <a class="nav-link" href="dashboard_map.html">
                             <div class="sb-nav-link-icon">
                                 <i class="fa-solid fa-map"></i>
                             </div>
@@ -95,29 +95,102 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">대여/반납 현황</h1>
+                    <h1 class="mt-4">대여/반납 예측</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="dashboard.html">대시보드</a></li>
+                        <li class="breadcrumb-item"><a href="dashboard.html">종합 통계</a></li>
                         <li class="breadcrumb-item active">차트</li>
                     </ol>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fa-solid fa-chart-column"></i>
-                            정거장 대여 / 반납
+                            정거장 대여/반납 예측 차트
                         </div>
-                        <div id="chart-container"></div>
+                        <div>
+                            <div id="container1" style="height: 65vh;"></div>
+                            <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+                            <script type="text/javascript">
+                                var dom = document.getElementById('container1');
+                                var myChart = echarts.init(dom, null, {
+                                  renderer: 'canvas',
+                                  useDirtyRect: false
+                                });
+                                var app = {};
+
+                                var option;
+
+                                option = {
+                              tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {
+                                  // Use axis to trigger tooltip
+                                  type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+                                }
+                              },
+                              legend: {},
+                              grid: {
+                                left: '5%',
+                                right: '5%',
+                                bottom: '3%',
+                                width: '90%',
+                                containLabel: true
+                              },
+                              xAxis: {
+                                 type: 'category',
+                                data: ['정거장1', '정거장2', '정거장3', '정거장4', '정거장5', '정거장6', '정거장7']
+
+                              },
+                              yAxis: {
+                               type: 'value'
+                              },
+                              series: [
+                                {
+                                  name: '대여',
+                                  type: 'bar',
+                                  stack: 'total',
+                                  color: "#0048ff",
+                                  label: {
+                                    fontSize: 20,
+                                    show: true
+                                  },
+                                  emphasis: {
+                                    focus: 'series'
+                                  },
+                                  data: [420, 432, 501, 334, 690, 430, 220]
+                                },
+
+                                {
+                                  name: '반납',
+                                  type: 'bar',
+                                  stack: 'total',
+                                  color: "#ffbb00",
+                                  label: {
+                                    fontSize: 20,
+                                    show: true
+                                  },
+                                  emphasis: {
+                                    focus: 'series'
+                                  },
+                                  data: [320, 302, 301, 334, 390, 330, 320]
+                                }
+                              ]
+                            };
+
+                                if (option && typeof option === 'object') {
+                                  myChart.setOption(option);
+                                }
+
+                                window.addEventListener('resize', myChart.resize);
+                            </script>
+                        </div>
                     </div>
                 </div>
             </main>
-            <footer class="py-4 bg-light mt-auto">
+            <footer class="bg-light mt-auto">
                 <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
+                    <div class="footer-list">
+                        <h3>TABRO</h3>
+                        <p>푸른 하늘을 위한 오늘의 한 걸음</p>
+                        <div class="text-muted">Algorithm 2023</div>
                     </div>
                 </div>
             </footer>
