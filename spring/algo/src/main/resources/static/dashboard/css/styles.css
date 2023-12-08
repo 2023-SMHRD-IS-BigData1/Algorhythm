@@ -83,6 +83,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  font-family: "GmarketSansMedium", sans-serif;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -585,7 +586,19 @@ progress {
 .blockquote > :last-child {
   margin-bottom: 0;
 }
-
+.footer-list {
+    text-align: center;
+}
+.footer-list h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.footer-list p {
+    color:#ff8b00;
+    font-style: oblique;
+    margin: 0;
+}
 .blockquote-footer {
   margin-top: -1rem;
   margin-bottom: 1rem;
@@ -8104,7 +8117,7 @@ textarea.form-control-lg {
 
 .text-muted {
   --bs-text-opacity: 1;
-  color: #6c757d !important;
+  font-size: 14px;
 }
 
 .text-black-50 {
@@ -10949,6 +10962,8 @@ body {
 .sb-topnav .navbar-brand {
   width: 150px;
   margin: 0;
+  font-size: 30px;
+  font-weight: bold;
 }
 .sb-topnav.navbar-dark #sidebarToggle {
   color: rgba(255, 255, 255, 1);
@@ -11003,6 +11018,7 @@ body {
   background-color: #f2f2f2;
   padding: 0.65rem;
   flex-shrink: 0;
+  font-weight: bold;
 }
 
 .sb-sidenav-dark {
