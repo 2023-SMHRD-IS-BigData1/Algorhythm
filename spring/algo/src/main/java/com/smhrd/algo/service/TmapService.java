@@ -16,12 +16,16 @@ import com.smhrd.algo.model.dto.tmap.NaviTransportResponse.MetaData.Plan.Itinera
 import com.smhrd.algo.model.dto.tmap.NaviTransportResponse.MetaData.Plan.Itineraries.Legs.Steps;
 import com.smhrd.algo.model.dto.tmap.PoiResponse;
 import com.smhrd.algo.model.entity.BikeStation;
+import com.smhrd.algo.model.entity.User;
 import com.smhrd.algo.repository.BikeStationRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
@@ -37,6 +41,7 @@ import java.util.Map;
 public class TmapService {
 
     private final BikeStationRepository bikeStationRepository;
+    private final UserService userService;
 
     public String poiSearch(String searchKeyword) {
         /*
@@ -164,6 +169,14 @@ public class TmapService {
         ObjectMapper mapper = new ObjectMapper();
         NaviPersonResponse object = null;
 
+        // userId session에서 꺼내오기
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session = attr.getRequest().getSession(true);
+        User data = (User) session.getAttribute("user");
+        String userId = data.getUserId();
+
+        log.info("userId = {}", userId);
+
         try {
             object = mapper.readValue(json, NaviPersonResponse.class);
 
@@ -171,11 +184,19 @@ public class TmapService {
             log.debug("Failed to parse JSON", e);
         }
 
+        // 해당 길찾기가 타랑께를 이용하는 길찾기인지 체크
         try {
-            double totalDistace = object.getFeatures().get(0).getProperties().getTotalDistance();
-            log.info("inputDistance= {}, object={}", totalDistace, object);
+            if(object.getFeatures().stream()
+                    .filter(check -> check.getProperties().getPointType() != null)
+                    .anyMatch(point -> point.getProperties().getPointType().equals("PP1"))) {
+                double totalDistace = object.getFeatures().get(0).getProperties().getTotalDistance();
+                log.info("inputDistance= {}, object={}", totalDistace, object);
+
+                userService.updateUser(userId, totalDistace);
+            }
         } catch (Exception e) {
             log.debug("No, passList");
+            log.debug(e);
         }
         return object;
     }

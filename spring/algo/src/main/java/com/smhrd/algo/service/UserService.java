@@ -28,13 +28,15 @@ public class UserService {
 
     public User updateUser(String userId, double addKm) {
         User user = userRepository.findByUserId(userId);
+        System.out.println(addKm/1000);
+        System.out.println(userId);
 
         User updateUser = User.builder()
                 .userIdx(user.getUserIdx())
                 .userId(user.getUserId())
                 .userPw(user.getUserPw())
                 .userNickname(user.getUserNickname())
-                .userKm(user.getUserKm() + addKm)
+                .userKm(user.getUserKm() + (addKm/1000))
                 .build();
 
         userRepository.save(updateUser);

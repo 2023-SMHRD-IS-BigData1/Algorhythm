@@ -28,6 +28,7 @@ public class LatLonRequest {
     public static class LatlonList {
         private List<Latlon> latlon;
         private List<LatlonStation> latlonStations;
+        private String userId;
 
         @Getter @Setter
         @Builder @AllArgsConstructor
