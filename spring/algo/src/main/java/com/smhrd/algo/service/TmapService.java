@@ -171,9 +171,12 @@ public class TmapService {
             log.debug("Failed to parse JSON", e);
         }
 
-        double totalDistace = object.getFeatures().get(0).getProperties().getTotalDistance();
-        log.info("inputDistance= {}, object={}",totalDistace, object);
-
+        try {
+            double totalDistace = object.getFeatures().get(0).getProperties().getTotalDistance();
+            log.info("inputDistance= {}, object={}", totalDistace, object);
+        } catch (Exception e) {
+            log.debug("No, passList");
+        }
         return object;
     }
 
