@@ -263,17 +263,17 @@ function drawRoute(selectRoute) {
 
               if (properties.pointType == "S") {
                 //출발지 마커
-                markerImg = "/upload/tmap/marker/pin_r_m_s.png";
+                markerImg = "../img/tmap/start.png";
                 pType = "S";
                 size = new Tmapv2.Size(24, 38);
               } else if (properties.pointType == "E") {
                 //도착지 마커
-                markerImg = "/upload/tmap/marker/pin_r_m_e.png";
+                markerImg = "../img/tmap/end.png";
                 pType = "E";
                 size = new Tmapv2.Size(24, 38);
               } else {
                 //각 포인트 마커
-                markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
+                markerImg = "";
                 pType = "P";
                 size = new Tmapv2.Size(8, 8);
               }
@@ -456,23 +456,6 @@ function naviPerson() {
           var pType = "";
           var size;
 
-          if (properties.pointType == "S") {
-            //출발지 마커
-            markerImg = "/upload/tmap/marker/pin_r_m_s.png";
-            pType = "S";
-            size = new Tmapv2.Size(24, 38);
-          } else if (properties.pointType == "E") {
-            //도착지 마커
-            markerImg = "/upload/tmap/marker/pin_r_m_e.png";
-            pType = "E";
-            size = new Tmapv2.Size(24, 38);
-          } else {
-            //각 포인트 마커
-            markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
-            pType = "P";
-            size = new Tmapv2.Size(8, 8);
-          }
-
           // 경로들의 결과값들을 포인트 객체로 변환
           var latlon = new Tmapv2.Point(
             geometry.coordinates[0],
@@ -494,10 +477,11 @@ function naviPerson() {
             pointType: pType,
           };
 
-          // Marker 추가
+          // Marker 제어하는 곳
           marker_p = new Tmapv2.Marker({
             position: new Tmapv2.LatLng(routeInfoObj.lat, routeInfoObj.lng),
             icon: routeInfoObj.markerImage,
+            visible: false,
             iconSize: size,
             map: map,
           });
@@ -603,7 +587,7 @@ function poiSearch(searchKeyword) {
         var markerImg = "../img/tmap/"+(k+1)+".png"
         // 마커 생성
         var lonlat = new Tmapv2.LatLng(noorLat, noorLon);
-        var iconSize = new Tmapv2.Size(20, 40);
+        var iconSize = new Tmapv2.Size(20, 37);
         marker = new Tmapv2.Marker({
           position: lonlat,
           icon: markerImg,
