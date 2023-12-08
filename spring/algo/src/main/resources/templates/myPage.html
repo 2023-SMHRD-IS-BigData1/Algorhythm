@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -15,8 +15,8 @@
 
     <!-- Google Fonts -->
     <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -40,344 +40,343 @@
 
 <body>
 
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top">
-        <div class="container d-flex align-items-center justify-content-between">
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
 
-            <h1 class="logo"><a href="home.html">TABRO</a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="home.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        <h1 class="logo"><a href="home.html">TABRO</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="home.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a class="fontC" href="index.html">대시보드</a></li>
-                    <li><a class="fontC" href="our-story.html">타브러 맵</a></li>
-                    <li><a class="fontC" href="myPage.html">마이페이지</a></li>
-                    <li><a class="fontC" href="contact.html">로그아웃</a></li>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="fontC" href="index.html">대시보드</a></li>
+                <li><a class="fontC" href="our-story.html">타브러 맵</a></li>
+                <li><a class="fontC" href="myPage.html">마이페이지</a></li>
+                <li><a class="fontC" href="contact.html">로그아웃</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
 
-        </div>
-    </header><!-- End Header -->
-    <main id="main">
+    </div>
+</header><!-- End Header -->
+<main id="main">
 
-        <!-- ======= Breadcrumbs ======= -->
-        <section id="breadcrumbs" class="breadcrumbs">
-            <div class="container">
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
 
-                <div class="d-flex justify-content-between align-items-center">
-                    <h2>My Page</h2>
-                    <ol>
-                        <li><a href="home.html">Home</a></li>
-                        <li>My Page</li>
-                    </ol>
-                </div>
-                <hr>
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>My Page</h2>
+                <ol>
+                    <li><a href="home.html">Home</a></li>
+                    <li>My Page</li>
+                </ol>
             </div>
-        </section><!-- End Breadcrumbs -->
+            <hr>
+        </div>
+    </section><!-- End Breadcrumbs -->
 
-        <!-- ======= Gallery Section ======= -->
-        <section id="gallery" class="gallery">
-            <div class="container">
-                <div class="row page_box">
-                    <div class="col-lg-12 d-flex justify-content-center">
-                        <ul id="gallery-flters">
-                            <li data-filter=".filter-home" class="filter-active">모아보기</li>
-                            <li data-filter=".filter-beach">나의 기록</li>
-                            <li data-filter=".filter-vacation">나의 정보 변경</li>
-                        </ul>
-                    </div>
+    <!-- ======= Gallery Section ======= -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="row page_box">
+                <div class="col-lg-12 d-flex justify-content-center">
+                    <ul id="gallery-flters">
+                        <li data-filter=".filter-home" class="filter-active" >모아보기</li>
+                        <li data-filter=".filter-beach" >나의 기록</li>
+                        <li data-filter=".filter-vacation">나의 정보 변경</li>
+                    </ul>
                 </div>
-                <div class="me_box">
-                    <div class="row gallery-container">
+            </div>
+            <div class="me_box">
+                <div class="row gallery-container">
 
-                        <div class="col-lg-4 col-md-6 gallery-item filter-beach">
-                            <div class="gallery-wrap">
-                                <div class="innerText">
-                                    <img src="../assets/img/co2D.png" class="img-fluid" alt="">
-                                    <h3 class="Myinfo-text-co2 Myinfo-text">온실가스 감소량</h3>
-                                    <!-- 여기에는 온실가스 감소량 계산해서 넣은 값 저 숫자 넣어진 값에 넣어주심 됨당 ^^-->
-                                    <div class="text-box1">
-                                        <h3 class="info-user-co2 info-user"> 2222234234</h3>
-                                        <h5 class="info-unit unit-co2">kg</h5>
-                                    </div>
-                                </div>
-                                <div class="gallery-info">
-                                    <h4>온실가스</h4>
-                                    <p>감소량</p>
+                    <div class="col-lg-4 col-md-6 gallery-item filter-beach">
+                        <div class="gallery-wrap">
+                            <div class="innerText">
+                                <img src="../assets/img/co2D.png" class="img-fluid" alt="">
+                                <h3 class="Myinfo-text-co2 Myinfo-text">온실가스 감소량</h3>
+                                <!-- 여기에는 온실가스 감소량 계산해서 넣은 값 저 숫자 넣어진 값에 넣어주심 됨당 ^^-->
+                                <div class="text-box1">
+                                    <h3 class="info-user-co2 info-user" th:text="${session.user.getUserReduce()}"> 2222234234</h3>
+                                    <h5 class="info-unit unit-co2">kg</h5>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 gallery-item filter-beach">
-                            <div class="gallery-wrap">
-                                <div class="innerText">
-                                    <img src="../assets/img/kcal.png" class="img-fluid" alt="">
-                                    <h3 class="Myinfo-text-kcal Myinfo-text">칼로리 소모량</h3><br></h3>
-                                    <div class="text-box2">
-                                        <h3 class="info-user-kcal info-user"> 23423</h3>
-                                        <h5 class="info-unit unit-kcal">kcal</h5>
-                                    </div>
-                                </div>
-                                <div class="gallery-info">
-                                    <h4>칼로리</h4>
-                                    <p>소모량</p>
-                                </div>
+                            <div class="gallery-info">
+                                <h4>온실가스</h4>
+                                <p>감소량</p>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 gallery-item filter-beach">
-                            <div class="gallery-wrap">
-                                <div class="innerText">
-                                    <img src="../assets/img/move.png" class="img-fluid" alt="">
-                                    <h3 class="Myinfo-text-move Myinfo-text">총 이동 거리</h3><br></h3>
-                                    <div class="text-box3">
-                                        <h3 class="info-user-move info-user"> 1234</h3>
-                                        <h5 class="info-unit unit-move">km</h5>
-                                    </div>
-                                </div>
-                                <div class="gallery-info">
-                                    <h4>칼로리</h4>
-                                    <p>소모량</p>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 gallery-item filter-beach">
+                        <div class="gallery-wrap">
+                            <div class="innerText">
+                                <img src="../assets/img/kcal.png" class="img-fluid" alt="">
+                                <h3 class="Myinfo-text-kcal Myinfo-text">칼로리 소모량</h3><br></h3>
+                                <div class="text-box2">
+                                    <h3 class="info-user-kcal info-user" th:text="${session.user.getUserKcal()}"> 23423</h3>
+                                    <h5 class="info-unit unit-kcal">kcal</h5>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 gallery-item filter-beach">
-                            <div class="gallery-wrap">
-                                <div class="innerText">
-                                    <img src="../assets/img/tree.png" class="img-fluid" alt="">
-                                    <h3 class="Myinfo-text-tree Myinfo-text">내가 심은 나무<br></h3>
-                                    <div class="text-box4">
-                                        <h3 class="info-user-tree info-user">5</h3>
-                                        <h5 class="info-unit unit-tree">그루</h5>
-                                    </div>
-                                </div>
-                                <div class="gallery-info">
-                                    <h4>내가 심은</h4>
-                                    <p>나무</p>
-                                </div>
+                            <div class="gallery-info">
+                                <h4>칼로리</h4>
+                                <p>소모량</p>
                             </div>
                         </div>
-
-                        <div class="col-lg-4 col-md-6 gallery-item filter-vacation">
-                            <form action="changePw" class="was-validated">
-                                <div class="mb-3 mt-3">
-                                    <h3>주소 추가</h3>
-                                    <form action="" method="post">
-                                        <div class="input-group mb-3">
-                                            <input class="form-control dong" type="text" id="sample4_postcode"
-                                                placeholder="우편번호">
-                                            <button class="btn btn-success" type="button"
-                                                onclick="sample4_execDaumPostcode()">우편 번호 찾기</button>
-                                        </div>
-                                        <input class="form-control dong" type="text" id="sample4_roadAddress"
-                                            placeholder="도로명주소">
-                                        <input class="form-control dong" type="text" id="sample4_jibunAddress"
-                                            name="dong" placeholder="지번주소">
-                                        <span id="guide" style="color:#999;display:none"></span>
-                                        <input class="form-control dong" type="text" id="sample4_detailAddress"
-                                            placeholder="상세주소">
-                                        <input class="form-control dong" type="text" id="sample4_extraAddress"
-                                            placeholder="참고항목">
-                                        <button type="submit" class="btn btn-success">추가</button>
-                                    </form>
+                    </div>
+                    <div class="col-lg-4 col-md-6 gallery-item filter-beach">
+                        <div class="gallery-wrap">
+                            <div class="innerText">
+                                <img src="../assets/img/move.png" class="img-fluid" alt="">
+                                <h3 class="Myinfo-text-move Myinfo-text">총 이동 거리</h3><br></h3>
+                                <div class="text-box3">
+                                    <h3 class="info-user-move info-user" th:text="${session.user.getUserKm()}"> 1234</h3>
+                                    <h5 class="info-unit unit-move">km</h5>
                                 </div>
-                            </form>
+                            </div>
+                            <div class="gallery-info">
+                                <h4>칼로리</h4>
+                                <p>소모량</p>
+                            </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 gallery-item filter-vacation">
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 gallery-item filter-beach">
+                        <div class="gallery-wrap">
+                            <div class="innerText">
+                                <img src="../assets/img/tree.png" class="img-fluid" alt="">
+                                <h3 class="Myinfo-text-tree Myinfo-text">내가 심은 나무<br></h3>
+                                <div class="text-box4">
+                                    <h3 class="info-user-tree info-user" th:text="${session.user.getUserTree()}">5</h3>
+                                    <h5 class="info-unit unit-tree">그루</h5>
+                                </div>
+                            </div>
+                            <div class="gallery-info">
+                                <h4>내가 심은</h4>
+                                <p>나무</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 gallery-item filter-vacation">
+                        <form action="changePw" class="was-validated">
                             <div class="mb-3 mt-3">
-                                <h3>생일 추가</h3>
+                                <h3>주소 추가</h3>
                                 <form action="" method="post">
-                                    <input class="form-control dong" type="date">
+                                    <div class="input-group mb-3">
+                                        <input class="form-control dong" type="text" id="sample4_postcode"
+                                               placeholder="우편번호">
+                                        <button class="btn btn-success" type="button"
+                                                onclick="sample4_execDaumPostcode()">우편 번호 찾기</button>
+                                    </div>
+                                    <input class="form-control dong" type="text" id="sample4_roadAddress"
+                                           placeholder="도로명주소">
+                                    <input class="form-control dong" type="text" id="sample4_jibunAddress" name="dong"
+                                           placeholder="지번주소">
+                                    <span id="guide" style="color:#999;display:none"></span>
+                                    <input class="form-control dong" type="text" id="sample4_detailAddress"
+                                           placeholder="상세주소">
+                                    <input class="form-control dong" type="text" id="sample4_extraAddress"
+                                           placeholder="참고항목">
                                     <button type="submit" class="btn btn-success">추가</button>
                                 </form>
                             </div>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="col-lg-4 col-md-6 gallery-item filter-vacation">
-                            <h3>비밀번호 변경</h3>
-                            <form action="changePw" class="was-validated">
-                                <div style="display: flex; white-space: nowrap;">
-                                    <input type="password" class="form-control" id="cPw" name="cpw"
-                                        placeholder="기존 비밀번호" required>
-                                    <button type="button" class="btn btn-success btn-sm checkPw"
-                                        onclick="checkPw()">인증</button>
-                                </div>
-
-                                <div class="mb-3">
-                                    <input disabled type="password" class="form-control" id="fPW1" name="fPW"
-                                        placeholder="변경할 비밀번호" required>
-                                    <div class="invalid-feedback">8글자 이상 작성해주세요</div>
-                                </div>
-                                <div class="mb-3">
-                                    <input disabled type="password" class="form-control" id="fPw2" name="fPw2"
-                                        placeholder="변경할 비밀번호 확인" required>
-                                    <div class="valid-feedback">일치</div>
-                                    <div class="invalid-feedback">비밀번호를 다시 확인해주세요</div>
-                                </div>
-                                <button type="submit" class="btn btn-success" onclick="changePw()">비밀번호 변경</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-4 col-md-6 gallery-item filter-vacation">
+                        <div class="mb-3 mt-3">
+                            <h3>생일 추가</h3>
+                            <form action="" method="post">
+                                <input class="form-control dong" type="date">
+                                <button type="submit" class="btn btn-success">추가</button>
                             </form>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 gallery-item filter-home">
-                        <div class="gallery-wrap">
-                            <img src="" class="img-fluid" alt="">
-                            <div class="gallery-info">
-                                <h4>Home 3</h4>
-                                <p>Home</p>
-                                <div class="gallery-links">
-                                    <a href="" class="glightbox" title="Home 3"><i class="bx bx-plus"></i></a>
-                                </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="col-lg-4 col-md-6 gallery-item filter-vacation">
+                        <h3>비밀번호 변경</h3>
+                        <form action="changePw" class="was-validated">
+                            <div style="display: flex; white-space: nowrap;">
+                                <input type="password" class="form-control" id="cPw" name="cpw" placeholder="기존 비밀번호"
+                                       required>
+                                <button type="button" class="btn btn-success btn-sm checkPw" onclick="checkPw()">인증</button>
+                            </div>
+
+                            <div class="mb-3">
+                                <input disabled type="password" class="form-control" id="fPW1" name="fPW"
+                                       placeholder="변경할 비밀번호" required>
+                                <div class="invalid-feedback">8글자 이상 작성해주세요</div>
+                            </div>
+                            <div class="mb-3">
+                                <input disabled type="password" class="form-control" id="fPw2" name="fPw2"
+                                       placeholder="변경할 비밀번호 확인" required>
+                                <div class="valid-feedback">일치</div>
+                                <div class="invalid-feedback">비밀번호를 다시 확인해주세요</div>
+                            </div>
+                            <button type="submit" class="btn btn-success" onclick="changePw()">비밀번호 변경</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 gallery-item filter-home">
+                    <div class="gallery-wrap">
+                        <img src="" class="img-fluid" alt="">
+                        <div class="gallery-info">
+                            <h4>Home 3</h4>
+                            <p>Home</p>
+                            <div class="gallery-links">
+                                <a href="" class="glightbox" title="Home 3"><i class="bx bx-plus"></i></a>
                             </div>
                         </div>
                     </div>
-        </section><!-- End Gallery Section -->
+                </div>
+    </section><!-- End Gallery Section -->
 
-    </main><!-- End #main -->
-    <footer id="footer">
-        <div class="container">
-            <h3>TABRO</h3>
-            <p>푸른 하늘을 위한 오늘의 한 걸음</p>
-            <div class="social-links">
-                <a href="#" class="team" data-bs-toggle="tooltip" data-bs-placement="right" title="윤석">최</a>
-                <a href="#" class="team" data-bs-toggle="tooltip" data-bs-placement="right" title="수완">박</a>
-                <a href="#" class="team" data-bs-toggle="tooltip" data-bs-placement="right" title="중호">이</a>
-                <a href="#" class="team" data-bs-toggle="tooltip" data-bs-placement="right" title="창용">주</a>
-                <a href="#" class="team" data-bs-toggle="tooltip" data-bs-placement="right" title="유민">임</a>
-            </div>
-            <div class="copyright">
-                &copy; Copyright <strong><span>TABRO</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/family-multipurpose-html-bootstrap-template-free/ -->
-                Designed by <a href="https://blog.naver.com/yumni_-">TABRO</a>
-            </div>
+</main><!-- End #main -->
+<footer id="footer">
+    <div class="container">
+        <h3>TABRO</h3>
+        <p>푸른 하늘을 위한 오늘의 한 걸음</p>
+        <div class="social-links">
+            <a href="#" class="team" data-bs-toggle="tooltip" data-bs-placement="right" title="윤석">최</a>
+            <a href="#" class="team" data-bs-toggle="tooltip" data-bs-placement="right" title="수완">박</a>
+            <a href="#" class="team" data-bs-toggle="tooltip" data-bs-placement="right" title="중호">이</a>
+            <a href="#" class="team" data-bs-toggle="tooltip" data-bs-placement="right" title="창용">주</a>
+            <a href="#" class="team" data-bs-toggle="tooltip" data-bs-placement="right" title="유민">임</a>
         </div>
-    </footer><!-- End Footer -->
+        <div class="copyright">
+            &copy; Copyright <strong><span>TABRO</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/family-multipurpose-html-bootstrap-template-free/ -->
+            Designed by <a href="https://blog.naver.com/yumni_-">TABRO</a>
+        </div>
+    </div>
+</footer><!-- End Footer -->
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
 
-    <!-- Vendor JS Files -->
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="../assets/vendor/php-email-form/validate.js"></script>
+<!-- Vendor JS Files -->
+<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="../assets/vendor/php-email-form/validate.js"></script>
 
-    <!-- jQuery를 사용하는 스크립트 로드 -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <!-- main.js 로드 -->
-    <script defer src="../JS/main.js"></script>
+<!-- jQuery를 사용하는 스크립트 로드 -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- main.js 로드 -->
+<script defer src="../JS/main.js"></script>
+<!-- 나머지 스크립트들 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script defer>
     <!-- 나머지 스크립트들 -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script defer>
-        <!-- 나머지 스크립트들 -->
-        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script defer>
-        $(document).ready(function () {
-            // 사용자 수 애니메이션
-            animateUserCount(".info-user-co2");
-        animateUserCount(".info-user-kcal");
-        animateUserCount(".info-user-tree");
-        animateUserCount(".info-user-move");
+<script defer>
+    $(document).ready(function () {
+      // 사용자 수 애니메이션
+      animateUserCount(".info-user-co2");
+      animateUserCount(".info-user-kcal");
+      animateUserCount(".info-user-tree");
+      animateUserCount(".info-user-move");
 
-        function animateUserCount(selector) {
+      function animateUserCount(selector) {
         var initialUserCount = 0;
         var targetUserCount = parseInt($(selector).text());
 
-        $({val: initialUserCount }).animate({val: targetUserCount }, {
-            duration: 2000,
-        step: function () {
+        $({ val: initialUserCount }).animate({ val: targetUserCount }, {
+          duration: 2000,
+          step: function () {
             $(selector).text(Math.floor(this.val).toLocaleString());
           },
-        complete: function () {
+          complete: function () {
             $(selector).text(targetUserCount.toLocaleString());
           }
         });
       }
     });
 
-        function checkPw() {
+    function checkPw() {
       // 실제로 현재 비밀번호가 맞는지 확인하는 로직으로 대체
       var isCurrentPasswordCorrect = true;
 
-        // 비밀번호 입력 필드를 토글
-        togglePasswordFields(isCurrentPasswordCorrect);
+      // 비밀번호 입력 필드를 토글
+      togglePasswordFields(isCurrentPasswordCorrect);
     }
 
-        function togglePasswordFields(isCorrect) {
+    function togglePasswordFields(isCorrect) {
       var passwordFields = ["fPW1", "fPw2"];
 
-        passwordFields.forEach(function (field) {
-            document.getElementById(field).disabled = !isCorrect;
+      passwordFields.forEach(function (field) {
+        document.getElementById(field).disabled = !isCorrect;
       });
 
-        var currentPasswordInput = document.getElementById("cPw");
+      var currentPasswordInput = document.getElementById("cPw");
 
-        if (isCorrect) {
-            currentPasswordInput.classList.remove("is-invalid");
+      if (isCorrect) {
+        currentPasswordInput.classList.remove("is-invalid");
         currentPasswordInput.classList.add("is-valid");
       } else {
-            currentPasswordInput.classList.remove("is-valid");
+        currentPasswordInput.classList.remove("is-valid");
         currentPasswordInput.classList.add("is-invalid");
       }
 
-        // 새 비밀번호 입력 필드를 검증
-        validateNewPasswordFields();
+      // 새 비밀번호 입력 필드를 검증
+      validateNewPasswordFields();
     }
 
-        function validateNewPasswordFields() {
+    function validateNewPasswordFields() {
       var newPassword1 = document.getElementById("fPW1").value;
-        var newPassword2 = document.getElementById("fPw2").value;
+      var newPassword2 = document.getElementById("fPw2").value;
 
       var isValidLength = newPassword1.length >= 8;
-        var passwordsMatch = newPassword1 === newPassword2 && newPassword2 !== "" && newPassword1 !== "";
+      var passwordsMatch = newPassword1 === newPassword2 && newPassword2 !== "" && newPassword1 !== "";
 
-        var fields = ["fPW1", "fPw2"];
+      var fields = ["fPW1", "fPw2"];
 
-        fields.forEach(function (field) {
+      fields.forEach(function (field) {
         var element = document.getElementById(field);
         element.classList.toggle("is-valid", isValidLength && passwordsMatch);
         element.classList.toggle("is-invalid", !isValidLength || !passwordsMatch);
       });
 
-        document.getElementById("fPW1").classList.remove("invalid-feedback");
+      document.getElementById("fPW1").classList.remove("invalid-feedback");
     }
 
-        function changePw() {
+    function changePw() {
       var newPassword1 = document.getElementById("fPW1").value;
-        var newPassword2 = document.getElementById("fPw2").value;
+      var newPassword2 = document.getElementById("fPw2").value;
 
       if (newPassword1 === newPassword2 && newPassword1.length >= 8) {
-            // 비밀번호 변경 로직을 여기에 추가
-            alert("비밀번호가 성공적으로 변경되었습니다.");
+        // 비밀번호 변경 로직을 여기에 추가
+        alert("비밀번호가 성공적으로 변경되었습니다.");
       } else {
-            alert("비밀번호가 일치하지 않거나 8자 이상이어야 합니다.");
+        alert("비밀번호가 일치하지 않거나 8자 이상이어야 합니다.");
       }
     }
 
-        /**
-        * Template Name: MeFamily
-        * Updated: Sep 18 2023 with Bootstrap v5.3.2
-        * Template URL: https://bootstrapmade.com/family-multipurpose-html-bootstrap-template-free/
-        * Author: BootstrapMade.com
-        * License: https://bootstrapmade.com/license/
-        */
-        (function() {
-            "use strict";
+/**
+* Template Name: MeFamily
+* Updated: Sep 18 2023 with Bootstrap v5.3.2
+* Template URL: https://bootstrapmade.com/family-multipurpose-html-bootstrap-template-free/
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
+(function() {
+"use strict";
 
 /**
 * Easy selector helper function
 */
 const select = (el, all = false) => {
-            el = el.trim()
+el = el.trim()
 if (all) {
   return [...document.querySelectorAll(el)]
 } else {
@@ -389,13 +388,13 @@ if (all) {
 * Easy event listener function
 */
 const on = (type, el, listener, all = false) => {
-            let selectEl = select(el, all)
-        if (selectEl) {
+let selectEl = select(el, all)
+if (selectEl) {
   if (all) {
-            selectEl.forEach(e => e.addEventListener(type, listener))
-        } else {
-            selectEl.addEventListener(type, listener)
-        }
+    selectEl.forEach(e => e.addEventListener(type, listener))
+  } else {
+    selectEl.addEventListener(type, listener)
+  }
 }
 }
 
@@ -403,50 +402,50 @@ const on = (type, el, listener, all = false) => {
 * Easy on scroll event listener
 */
 const onscroll = (el, listener) => {
-            el.addEventListener('scroll', listener)
-        }
+el.addEventListener('scroll', listener)
+}
 
 /**
-        * Scrolls to an element with header offset
-        */
+* Scrolls to an element with header offset
+*/
 const scrollto = (el) => {
-            let header = select('#header')
-        let offset = header.offsetHeight
+let header = select('#header')
+let offset = header.offsetHeight
 
-        if (!header.classList.contains('header-scrolled')) {
-            offset -= 16
-        }
+if (!header.classList.contains('header-scrolled')) {
+  offset -= 16
+}
 
-        let elementPos = select(el).offsetTop
-        window.scrollTo({
-            top: elementPos - offset,
-        behavior: 'smooth'
+let elementPos = select(el).offsetTop
+window.scrollTo({
+  top: elementPos - offset,
+  behavior: 'smooth'
 })
 }
 
-        /**
-        * Back to top button
-        */
-        let backtotop = select('.back-to-top')
-        if (backtotop) {
+/**
+* Back to top button
+*/
+let backtotop = select('.back-to-top')
+if (backtotop) {
 const toggleBacktotop = () => {
   if (window.scrollY > 100) {
-            backtotop.classList.add('active')
-        } else {
-            backtotop.classList.remove('active')
-        }
+    backtotop.classList.add('active')
+  } else {
+    backtotop.classList.remove('active')
+  }
 }
-        window.addEventListener('load', toggleBacktotop)
-        onscroll(document, toggleBacktotop)
+window.addEventListener('load', toggleBacktotop)
+onscroll(document, toggleBacktotop)
 }
 
-        /**
-        * Mobile nav toggle
-        */
-        on('click', '.mobile-nav-toggle', function(e) {
-            select('#navbar').classList.toggle('navbar-mobile')
+/**
+* Mobile nav toggle
+*/
+on('click', '.mobile-nav-toggle', function(e) {
+select('#navbar').classList.toggle('navbar-mobile')
 this.classList.toggle('bi-list')
-        this.classList.toggle('bi-x')
+this.classList.toggle('bi-x')
 })
 
 /**
@@ -454,73 +453,73 @@ this.classList.toggle('bi-list')
 */
 on('click', '.navbar .dropdown > a', function(e) {
 if (select('#navbar').classList.contains('navbar-mobile')) {
-            e.preventDefault()
+  e.preventDefault()
   this.nextElementSibling.classList.toggle('dropdown-active')
 }
 }, true)
 
-        /**
-        * Scrool with ofset on links with a class name .scrollto
-        */
-        on('click', '.scrollto', function(e) {
+/**
+* Scrool with ofset on links with a class name .scrollto
+*/
+on('click', '.scrollto', function(e) {
 if (select(this.hash)) {
-            e.preventDefault()
+  e.preventDefault()
 
   let navbar = select('#navbar')
-        if (navbar.classList.contains('navbar-mobile')) {
-            navbar.classList.remove('navbar-mobile')
+  if (navbar.classList.contains('navbar-mobile')) {
+    navbar.classList.remove('navbar-mobile')
     let navbarToggle = select('.mobile-nav-toggle')
-        navbarToggle.classList.toggle('bi-list')
-        navbarToggle.classList.toggle('bi-x')
+    navbarToggle.classList.toggle('bi-list')
+    navbarToggle.classList.toggle('bi-x')
   }
-        scrollto(this.hash)
+  scrollto(this.hash)
 }
 }, true)
 
-        /**
-        * Hero carousel indicators
-        */
-        let heroCarouselIndicators = select("#hero-carousel-indicators")
-        let heroCarouselItems = select('#heroCarousel .carousel-item', true)
+/**
+* Hero carousel indicators
+*/
+let heroCarouselIndicators = select("#hero-carousel-indicators")
+let heroCarouselItems = select('#heroCarousel .carousel-item', true)
 
 heroCarouselItems.forEach((item, index) => {
-            (index === 0) ?
-                heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "' class='active'></li>" :
-                heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "'></li>"
-        });
+(index === 0) ?
+heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "' class='active'></li>":
+  heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "'></li>"
+});
 
-        /**
-        * Clients Slider
-        */
-        new Swiper('.recent-photos-slider', {
-            speed: 400,
-        loop: true,
-        autoplay: {
-            delay: 5000,
-        disableOnInteraction: false
+/**
+* Clients Slider
+*/
+new Swiper('.recent-photos-slider', {
+speed: 400,
+loop: true,
+autoplay: {
+  delay: 5000,
+  disableOnInteraction: false
 },
-        slidesPerView: 'auto',
-        pagination: {
-            el: '.swiper-pagination',
-        type: 'bullets',
-        clickable: true
+slidesPerView: 'auto',
+pagination: {
+  el: '.swiper-pagination',
+  type: 'bullets',
+  clickable: true
 },
-        breakpoints: {
-            320: {
-            slidesPerView: 1,
-        spaceBetween: 20
+breakpoints: {
+  320: {
+    slidesPerView: 1,
+    spaceBetween: 20
   },
-        640: {
-            slidesPerView: 2,
-        spaceBetween: 20
+  640: {
+    slidesPerView: 2,
+    spaceBetween: 20
   },
-        992: {
-            slidesPerView: 3,
-        spaceBetween: 20
+  992: {
+    slidesPerView: 3,
+    spaceBetween: 20
   },
-        1200: {
-            slidesPerView: 5,
-        spaceBetween: 20
+  1200: {
+    slidesPerView: 5,
+    spaceBetween: 20
   }
 }
 });
@@ -529,23 +528,23 @@ heroCarouselItems.forEach((item, index) => {
 * Gallery isotope and filter
 */
 window.addEventListener('load', () => {
-            let galelryContainer = select('.gallery-container');
-        if (galelryContainer) {
-            let galleryIsotope = new Isotope(galelryContainer, {
-            itemSelector: '.gallery-item',
+let galelryContainer = select('.gallery-container');
+if (galelryContainer) {
+  let galleryIsotope = new Isotope(galelryContainer, {
+    itemSelector: '.gallery-item',
   });
 
-        let galleryFilters = select('#gallery-flters li', true);
+  let galleryFilters = select('#gallery-flters li', true);
 
-        on('click', '#gallery-flters li', function(e) {
-            e.preventDefault();
-        galleryFilters.forEach(function(el) {
-            el.classList.remove('filter-active');
+  on('click', '#gallery-flters li', function(e) {
+    e.preventDefault();
+    galleryFilters.forEach(function(el) {
+      el.classList.remove('filter-active');
     });
-        this.classList.add('filter-active');
+    this.classList.add('filter-active');
 
-        galleryIsotope.arrange({
-            filter: this.getAttribute('data-filter')
+    galleryIsotope.arrange({
+      filter: this.getAttribute('data-filter')
     });
 
   }, true);
@@ -553,76 +552,76 @@ window.addEventListener('load', () => {
 
 });
 
-        /**
-        * Initiate glightbox
-        */
-        const glightbox = GLightbox({
-            selector: '.glightbox'
+/**
+* Initiate glightbox
+*/
+const glightbox = GLightbox({
+selector: '.glightbox'
 });
 
 })()
-        function sample4_execDaumPostcode() {
-            new daum.Postcode({
-                oncomplete: function (data) {
-                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+function sample4_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-                    // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                    var roadAddr = data.roadAddress; // 도로명 주소 변수
-                    var extraRoadAddr = ''; // 참고 항목 변수
+            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var roadAddr = data.roadAddress; // 도로명 주소 변수
+            var extraRoadAddr = ''; // 참고 항목 변수
 
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-                        extraRoadAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if (data.buildingName !== '' && data.apartment === 'Y') {
-                        extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if (extraRoadAddr !== '') {
-                        extraRoadAddr = ' (' + extraRoadAddr + ')';
-                    }
+            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                extraRoadAddr += data.bname;
+            }
+            // 건물명이 있고, 공동주택일 경우 추가한다.
+            if(data.buildingName !== '' && data.apartment === 'Y'){
+               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+            if(extraRoadAddr !== ''){
+                extraRoadAddr = ' (' + extraRoadAddr + ')';
+            }
 
-                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                    document.getElementById('sample4_postcode').value = data.zonecode;
-                    document.getElementById("sample4_roadAddress").value = roadAddr;
-                    document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('sample4_postcode').value = data.zonecode;
+            document.getElementById("sample4_roadAddress").value = roadAddr;
+            document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
 
-                    // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-                    if (roadAddr !== '') {
-                        document.getElementById("sample4_extraAddress").value = extraRoadAddr;
-                    } else {
-                        document.getElementById("sample4_extraAddress").value = '';
-                    }
+            // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+            if(roadAddr !== ''){
+                document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+            } else {
+                document.getElementById("sample4_extraAddress").value = '';
+            }
 
-                    var guideTextBox = document.getElementById("guide");
-                    // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-                    if (data.autoRoadAddress) {
-                        var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                        guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-                        guideTextBox.style.display = 'block';
+            var guideTextBox = document.getElementById("guide");
+            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+            if(data.autoRoadAddress) {
+                var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                guideTextBox.style.display = 'block';
 
-                    } else if (data.autoJibunAddress) {
-                        var expJibunAddr = data.autoJibunAddress;
-                        guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                        guideTextBox.style.display = 'block';
-                    } else {
-                        guideTextBox.innerHTML = '';
-                        guideTextBox.style.display = 'none';
-                    }
-                }
-            }).open();
+            } else if(data.autoJibunAddress) {
+                var expJibunAddr = data.autoJibunAddress;
+                guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                guideTextBox.style.display = 'block';
+            } else {
+                guideTextBox.innerHTML = '';
+                guideTextBox.style.display = 'none';
+            }
+        }
+    }).open();
 }
 
-        $("li").click(function () {
-            $(this).addClass("active").siblings().removeClass("active");
+$("li").click(function () {
+$(this).addClass("active").siblings().removeClass("active");
 });
-        on('click', '.mobile-nav-toggle', function(e) {
-            select('#navbar').classList.toggle('navbar-mobile')
+    on('click', '.mobile-nav-toggle', function(e) {
+    select('#navbar').classList.toggle('navbar-mobile')
     this.classList.toggle('bi-list')
-        this.classList.toggle('bi-x')
+    this.classList.toggle('bi-x')
   })
 
   /**
@@ -630,29 +629,29 @@ window.addEventListener('load', () => {
    */
   on('click', '.navbar .dropdown > a', function(e) {
     if (select('#navbar').classList.contains('navbar-mobile')) {
-            e.preventDefault()
+      e.preventDefault()
       this.nextElementSibling.classList.toggle('dropdown-active')
     }
   }, true)
 
-        $(document).ready(function() {
-            // 초기에는 '나의 기록'이 선택되어 있는 상태로 설정
-            $(".filter-beach").show();
-        $(".filter-vaction").hide();
+$(document).ready(function() {
+    // 초기에는 '나의 기록'이 선택되어 있는 상태로 설정
+    $(".filter-beach").show();
+    $(".filter-vaction").hide();
 
-        // 갤러리 필터의 클릭 이벤트 리스너
-        $("#gallery-flters li").click(function() {
+    // 갤러리 필터의 클릭 이벤트 리스너
+    $("#gallery-flters li").click(function() {
         var selectedFilter = $(this).data("filter");
 
         // '나의 기록' 클릭 시
         if (selectedFilter === ".filter-beach") {
             $(".filter-beach").show();
-        $(".filter-vaction").hide();
+            $(".filter-vaction").hide();
         }
         // '내 정보 변경' 클릭 시
         else if (selectedFilter === ".filter-vaction") {
             $(".filter-beach").hide();
-        $(".filter-vaction").show();
+            $(".filter-vaction").show();
         }
 
         // 선택된 필터에 'active' 클래스 추가 및 형제 요소에서 'active' 클래스 제거
@@ -660,11 +659,11 @@ window.addEventListener('load', () => {
     });
 });
 
-        document.addEventListener("DOMContentLoaded", function () {
-            // "나의 기록"을 클릭한 상태로 설정
-            document.querySelector('li[data-filter=".filter-beach"]').click();
+    document.addEventListener("DOMContentLoaded", function () {
+    // "나의 기록"을 클릭한 상태로 설정
+    document.querySelector('li[data-filter=".filter-beach"]').click();
 });
-    </script>
+</script>
 
 </body>
 

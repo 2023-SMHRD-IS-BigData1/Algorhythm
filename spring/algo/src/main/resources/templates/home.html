@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -13,7 +13,7 @@
     <!-- 웹 로고 -->
     <!-- <link href="assets/img/favicon.png" rel="icon"> -->
 
-    <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link
@@ -59,8 +59,8 @@
                 <ul>
                     <li><a class="fontC" href="our-story.html">타브러 맵</a></li>
                     <li><a class="fontC" href="events.html">이용방법</a></li>
-                    <li><a class="fontC" href="myPage.html">마이페이지</a></li>
-                    <li><a class="fontC" href="contact.html">로그아웃</a></li>
+                    <li><a class="fontC" th:href="@{/myPage}">마이페이지</a></li>
+                    <li><a class="fontC" th:href="@{/home}">로그아웃</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
