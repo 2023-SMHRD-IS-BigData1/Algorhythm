@@ -172,10 +172,7 @@ public class TmapService {
         // userId session에서 꺼내오기
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attr.getRequest().getSession(true);
-        User data = (User) session.getAttribute("user");
-        String userId = data.getUserId();
-
-        log.info("userId = {}", userId);
+        User user = (User) session.getAttribute("user");
 
         try {
             object = mapper.readValue(json, NaviPersonResponse.class);
@@ -190,14 +187,19 @@ public class TmapService {
                     .filter(check -> check.getProperties().getPointType() != null)
                     .anyMatch(point -> point.getProperties().getPointType().equals("PP1"))) {
                 double totalDistace = object.getFeatures().get(0).getProperties().getTotalDistance();
+
+                log.info("userId = {}", user.getUserId());
                 log.info("inputDistance= {}, object={}", totalDistace, object);
 
-                userService.updateUser(userId, totalDistace);
+                User updateUser = userService.updateUser(user, totalDistace);
+                session.removeAttribute("user");
+                session.setAttribute("user", updateUser);
             }
         } catch (Exception e) {
             log.debug("No, passList");
             log.debug(e);
         }
+
         return object;
     }
 

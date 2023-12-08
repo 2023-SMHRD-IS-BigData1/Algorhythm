@@ -21,7 +21,7 @@ import java.util.*;
 public class WeatherService {
 
 
-    public String sendWeather(String temp, String weather) {
+    public String sendWeather(String temp, String weather, String towWeather) {
         /*
         Description : Pycharm으로 데이터를 전송하여 머신러닝을 실시한 뒤, 값을 돌려 받습니다..
         Params      :
@@ -43,6 +43,7 @@ public class WeatherService {
         List<String> data = new ArrayList<>();
         data.add(temp);
         data.add(weather);
+        data.add(towWeather);
 
         Map<String, Object> map = new HashMap<>();
         map.put("json", data);
