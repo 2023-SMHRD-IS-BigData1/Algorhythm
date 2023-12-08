@@ -87,30 +87,30 @@ async def predict(item: Item):
     print(combined_df)
 
 
-    # # 강수 확률 데이터 전처리
-    # weatherDataCall = treeWeatherData['response']['body']['items']['item'][0]
-    #
-    # print(weatherDataCall)
-    # # 3일부터10일까지 강수확률 데이터에서 "regId":"11C20000"인 데이터 추출
-    # weather_data_list = [data1 for data1 in treeWeatherData['response']['body']['items']['item'] if
-    #                      data1.get('regId') == '11C20000']
-    #
-    # print(weather_data_list)
-    #
-    # # 데이터프레임 생성
-    # weather_df = pd.DataFrame(weather_data_list, index=None)
-    #
-    # selected_columns3 = ['rnSt3Am', 'rnSt3Pm', 'rnSt4Am', 'rnSt4Pm', 'rnSt5Am', 'rnSt5Pm', 'rnSt6Am', 'rnSt6Pm',
-    #                      'rnSt7Am', 'rnSt7Pm', 'rnSt8', 'rnSt9', 'rnSt10']
-    #
-    #
-    # # 인덱스 삭제
-    # weather_df_selected3 = weather_df[selected_columns3].reset_index(drop=True)
-    #
-    # weather_df_selected4 = pd.DataFrame(weather_df_selected3)
-    #
-    # # 결과 출력
-    # print(weather_df_selected4)
+    # 강수 확률 데이터 전처리
+    weatherDataCall = treeWeatherData['response']['body']['items']['item'][0]
+
+    print(weatherDataCall)
+    # 3일부터10일까지 강수확률 데이터에서 "regId":"11C20000"인 데이터 추출
+    weather_data_list = [data1 for data1 in treeWeatherData['response']['body']['items']['item'] if
+                         data1.get('regId') == '11C20000']
+
+    print(weather_data_list)
+
+    # 데이터프레임 생성
+    weather_df = pd.DataFrame(weather_data_list, index=None)
+
+    selected_columns3 = ['rnSt3Am', 'rnSt3Pm', 'rnSt4Am', 'rnSt4Pm', 'rnSt5Am', 'rnSt5Pm', 'rnSt6Am', 'rnSt6Pm',
+                         'rnSt7Am', 'rnSt7Pm', 'rnSt8', 'rnSt9', 'rnSt10']
+
+
+    # 인덱스 삭제
+    weather_df_selected3 = weather_df[selected_columns3].reset_index(drop=True)
+
+    weather_df_selected4 = pd.DataFrame(weather_df_selected3)
+
+    # 결과 출력
+    print(weather_df_selected4)
     # print(weather_df_selected4.shape)
     # for i in range(3, 8):
     #     am_col = f'rnSt{i}Am'
