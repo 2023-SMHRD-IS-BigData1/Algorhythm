@@ -5,7 +5,6 @@ from pydantic import BaseModel
 import json
 from datetime import datetime, timedelta
 import pandas as pd
-import numpy as np
 
 """
     port 5000

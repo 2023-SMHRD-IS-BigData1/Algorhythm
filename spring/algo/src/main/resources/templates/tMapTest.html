@@ -105,8 +105,6 @@
                 }
             });
 
-<!--            // 클릭 이벤트 추가하기-->
-< !--drawRoute(map, resultdrawArr, markerArr, selectRoute)-->
 
         } // function[E]
 
@@ -271,44 +269,35 @@
                         }
                     });
 
-< !--                    // 선 스타일 제어하는 부분-->
-< !--polyline_ = new Tmapv2.Polyline({-- >
-< !--path : latlonList, -->
-< !--strokeColor : "#000000", -->
-< !--strokeWeight : 5, -->
-< !--map : map-- >
-< !--                    }); -->
+                    latlonList = [];
+                } else {
+                    for (let latlon of checkRoute.latlons) {
+                        var pass = new Tmapv2.LatLng(
+                            latlon.lat,
+                            latlon.lon);
 
-< !--resultdrawArr.push(polyline_)-->
-                    latlonList=[];
-            } else {
-                for (let latlon of checkRoute.latlons) {
-                    var pass = new Tmapv2.LatLng(
-                        latlon.lat,
-                        latlon.lon);
+                        latlonList.push(pass);
+                        positionBounds.extend(pass);
+                    }
 
-                    latlonList.push(pass);
-                    positionBounds.extend(pass);
+                    var strokeColor = "#" + checkRoute.routeColor
+                    console.log(strokeColor)
+
+                    // 선 스타일 제어하는 부분
+                    polyline_ = new Tmapv2.Polyline({
+                        path: latlonList,
+                        strokeColor: strokeColor,
+                        strokeWeight: 5,
+                        map: map
+                    });
+
+                    resultdrawArr.push(polyline_)
+                    latlonList = [];
                 }
 
-                var strokeColor = "#" + checkRoute.routeColor
-                console.log(strokeColor)
+                map.panToBounds(positionBounds);
 
-                // 선 스타일 제어하는 부분
-                polyline_ = new Tmapv2.Polyline({
-                    path: latlonList,
-                    strokeColor: strokeColor,
-                    strokeWeight: 5,
-                    map: map
-                });
-
-                resultdrawArr.push(polyline_)
-                latlonList = [];
             }
-
-            map.panToBounds(positionBounds);
-
-        }
         } // function[E}
 
         // 보행자 길찾기 서비스
