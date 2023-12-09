@@ -258,5 +258,21 @@ $.ajax({
                 // 제출 버튼을 비활성화합니다.
                 document.getElementById("join-form").submit.disabled = true;
             }
-        }, 1000); // 시간 지연 시뮬레이션, 실제 비동기 확인으로 대체하세요
+        }, 1000); // 시간 지연 시뮬레이션, 실제 비동기 확인
     }
+
+    function validateForm() {
+            var password1 = document.getElementById("userPw").value;
+            var password2 = document.getElementById("userPw2").value;
+            var matchMessage = document.getElementById("pw-match-message");
+
+            if (password1 !== password2) {
+                matchMessage.innerHTML = "비밀번호가 일치하지 않습니다.";
+                // 회원가입 버튼 비활성화
+                return false;
+            } else {
+                matchMessage.innerHTML = "";
+                // 회원가입 버튼 활성화
+                return true;
+            }
+        }

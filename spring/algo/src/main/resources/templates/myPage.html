@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -10,8 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../assets/img/logo.png" rel="shortcut icon" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link
@@ -25,7 +24,7 @@
     <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
+    <script crossorigin="anonymous" src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"></script>
     <!-- Template Main CSS File -->
     <link href="../assets/CSS/style.css" rel="stylesheet">
     <script defer src="../JS/main.js"></script>
@@ -41,18 +40,20 @@
 <body>
 
 <!-- ======= Header ======= -->
-<header id="header" class="fixed-top">
+<header class="fixed-top" id="header">
     <div class="container d-flex align-items-center justify-content-between">
 
         <h1 class="logo"><a href="home.html">TABRO</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="home.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-        <nav id="navbar" class="navbar">
+        <nav class="navbar" id="navbar">
             <ul>
-                <li><a class="fontC" th:href="@{/home}">타브러 맵</a></li>
+
+                <li><a class="fontC" th:href="@{/home}"><i class="fa-solid fa-map-location-dot" style="color: #ffffff;"></i>타브로 맵</a></li>
                 <li><a class="fontC" th:href="@{/myPage}">마이페이지</a></li>
                 <li><a class="fontC" th:href="@{/}">로그아웃</a></li>
+
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
@@ -62,7 +63,7 @@
 <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <section id="breadcrumbs" class="breadcrumbs">
+    <section class="breadcrumbs" id="breadcrumbs">
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
@@ -77,13 +78,13 @@
     </section><!-- End Breadcrumbs -->
 
     <!-- ======= Gallery Section ======= -->
-    <section id="gallery" class="gallery">
+    <section class="gallery" id="gallery">
         <div class="container">
             <div class="row page_box">
                 <div class="col-lg-12 d-flex justify-content-center">
                     <ul id="gallery-flters">
-                        <li data-filter=".filter-home" class="filter-active" >모아보기</li>
-                        <li data-filter=".filter-beach" >나의 기록</li>
+                        <li class="filter-active" data-filter=".filter-home">모아보기</li>
+                        <li data-filter=".filter-beach">나의 기록</li>
                         <li data-filter=".filter-vacation">나의 정보 변경</li>
                     </ul>
                 </div>
@@ -94,11 +95,12 @@
                     <div class="col-lg-4 col-md-6 gallery-item filter-beach">
                         <div class="gallery-wrap">
                             <div class="innerText">
-                                <img src="../assets/img/co2D.png" class="img-fluid" alt="">
+                                <img alt="" class="img-fluid" src="../assets/img/co2D.png">
                                 <h3 class="Myinfo-text-co2 Myinfo-text">온실가스 감소량</h3>
                                 <!-- 여기에는 온실가스 감소량 계산해서 넣은 값 저 숫자 넣어진 값에 넣어주심 됨당 ^^-->
                                 <div class="text-box1">
-                                    <h3 class="info-user-co2 info-user" th:text="${session.user.getUserReduce()}"> 2222234234</h3>
+                                    <h3 class="info-user-co2 info-user" th:text="${session.user.getUserReduce()}">
+                                        2222234234</h3>
                                     <h5 class="info-unit unit-co2">kg</h5>
                                 </div>
                             </div>
@@ -112,10 +114,11 @@
                     <div class="col-lg-4 col-md-6 gallery-item filter-beach">
                         <div class="gallery-wrap">
                             <div class="innerText">
-                                <img src="../assets/img/kcal.png" class="img-fluid" alt="">
+                                <img alt="" class="img-fluid" src="../assets/img/kcal.png">
                                 <h3 class="Myinfo-text-kcal Myinfo-text">칼로리 소모량</h3><br></h3>
                                 <div class="text-box2">
-                                    <h3 class="info-user-kcal info-user" th:text="${session.user.getUserKcal()}"> 23423</h3>
+                                    <h3 class="info-user-kcal info-user" th:text="${session.user.getUserKcal()}">
+                                        23423</h3>
                                     <h5 class="info-unit unit-kcal">kcal</h5>
                                 </div>
                             </div>
@@ -128,10 +131,11 @@
                     <div class="col-lg-4 col-md-6 gallery-item filter-beach">
                         <div class="gallery-wrap">
                             <div class="innerText">
-                                <img src="../assets/img/move.png" class="img-fluid" alt="">
+                                <img alt="" class="img-fluid" src="../assets/img/move.png">
                                 <h3 class="Myinfo-text-move Myinfo-text">총 이동 거리</h3><br></h3>
                                 <div class="text-box3">
-                                    <h3 class="info-user-move info-user" th:text="${session.user.getUserKm()}"> 1234</h3>
+                                    <h3 class="info-user-move info-user" th:text="${session.user.getUserKm()}">
+                                        1234</h3>
                                     <h5 class="info-unit unit-move">km</h5>
                                 </div>
                             </div>
@@ -145,7 +149,7 @@
                     <div class="col-lg-4 col-md-6 gallery-item filter-beach">
                         <div class="gallery-wrap">
                             <div class="innerText">
-                                <img src="../assets/img/tree.png" class="img-fluid" alt="">
+                                <img alt="" class="img-fluid" src="../assets/img/tree.png">
                                 <h3 class="Myinfo-text-tree Myinfo-text">내가 심은 나무<br></h3>
                                 <div class="text-box4">
                                     <h3 class="info-user-tree info-user" th:text="${session.user.getUserTree()}">5</h3>
@@ -165,21 +169,23 @@
                                 <h3>주소 추가</h3>
                                 <form action="" method="post">
                                     <div class="input-group mb-3">
-                                        <input class="form-control dong" type="text" id="sample4_postcode"
-                                               placeholder="우편번호">
-                                        <button class="btn btn-success" type="button"
-                                                onclick="sample4_execDaumPostcode()">우편 번호 찾기</button>
+                                        <input class="form-control dong" id="sample4_postcode" placeholder="우편번호"
+                                               type="text">
+                                        <button class="btn btn-success" onclick="sample4_execDaumPostcode()"
+                                                type="button">우편 번호 찾기
+                                        </button>
                                     </div>
-                                    <input class="form-control dong" type="text" id="sample4_roadAddress"
-                                           placeholder="도로명주소">
-                                    <input class="form-control dong" type="text" id="sample4_jibunAddress" name="dong"
-                                           placeholder="지번주소">
+                                    <input class="form-control dong" id="sample4_roadAddress" placeholder="도로명주소"
+                                           type="text">
+                                    <input class="form-control dong" id="sample4_jibunAddress" name="dong"
+                                           placeholder="지번주소"
+                                           type="text">
                                     <span id="guide" style="color:#999;display:none"></span>
-                                    <input class="form-control dong" type="text" id="sample4_detailAddress"
-                                           placeholder="상세주소">
-                                    <input class="form-control dong" type="text" id="sample4_extraAddress"
-                                           placeholder="참고항목">
-                                    <button type="submit" class="btn btn-success">추가</button>
+                                    <input class="form-control dong" id="sample4_detailAddress" placeholder="상세주소"
+                                           type="text">
+                                    <input class="form-control dong" id="sample4_extraAddress" placeholder="참고항목"
+                                           type="text">
+                                    <button class="btn btn-success" type="submit">추가</button>
                                 </form>
                             </div>
                         </form>
@@ -189,7 +195,7 @@
                             <h3>생일 추가</h3>
                             <form action="" method="post">
                                 <input class="form-control dong" type="date">
-                                <button type="submit" class="btn btn-success">추가</button>
+                                <button class="btn btn-success" type="submit">추가</button>
                             </form>
                         </div>
                     </div>
@@ -200,38 +206,40 @@
                         <h3>비밀번호 변경</h3>
                         <form action="changePw" class="was-validated">
                             <div style="display: flex; white-space: nowrap;">
-                                <input type="password" class="form-control" id="cPw" name="cpw" placeholder="기존 비밀번호"
-                                       required>
-                                <button type="button" class="btn btn-success btn-sm checkPw" onclick="checkPw()">인증</button>
+                                <input class="form-control" id="cPw" name="cpw" placeholder="기존 비밀번호" required
+                                       type="password">
+                                <button class="btn btn-success btn-sm checkPw" onclick="checkPw()" type="button">인증
+                                </button>
                             </div>
 
                             <div class="mb-3">
-                                <input disabled type="password" class="form-control" id="fPW1" name="fPW"
-                                       placeholder="변경할 비밀번호" required>
+                                <input class="form-control" disabled id="fPW1" name="fPW" placeholder="변경할 비밀번호"
+                                       required type="password">
                                 <div class="invalid-feedback">8글자 이상 작성해주세요</div>
                             </div>
                             <div class="mb-3">
-                                <input disabled type="password" class="form-control" id="fPw2" name="fPw2"
-                                       placeholder="변경할 비밀번호 확인" required>
+                                <input class="form-control" disabled id="fPw2" name="fPw2" placeholder="변경할 비밀번호 확인"
+                                       required type="password">
                                 <div class="valid-feedback">일치</div>
                                 <div class="invalid-feedback">비밀번호를 다시 확인해주세요</div>
                             </div>
-                            <button type="submit" class="btn btn-success" onclick="changePw()">비밀번호 변경</button>
+                            <button class="btn btn-success" onclick="changePw()" type="submit">비밀번호 변경</button>
                         </form>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 gallery-item filter-home">
                     <div class="gallery-wrap">
-                        <img src="" class="img-fluid" alt="">
+                        <img alt="" class="img-fluid" src="">
                         <div class="gallery-info">
                             <h4>Home 3</h4>
                             <p>Home</p>
                             <div class="gallery-links">
-                                <a href="" class="glightbox" title="Home 3"><i class="bx bx-plus"></i></a>
+                                <a class="glightbox" href="" title="Home 3"><i class="bx bx-plus"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
     </section><!-- End Gallery Section -->
 
 </main><!-- End #main -->
@@ -245,7 +253,7 @@
     </div>
 </footer><!-- End Footer -->
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+<a class="back-to-top d-flex align-items-center justify-content-center" href="#"><i
         class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
@@ -263,7 +271,8 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script defer>
     <!-- 나머지 스크립트들 -->
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js">
+</script>
 <script defer>
     $(document).ready(function () {
       // 사용자 수 애니메이션

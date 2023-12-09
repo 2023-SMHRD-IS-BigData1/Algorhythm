@@ -45,37 +45,18 @@ function initTmap() {
       }
     },
   });
-  // 대중교통 버튼
-  $(".bus-button").click(function () {
-    $("#destination-toggle").addClass("hidden");
-    $("#bike-toggle").addClass("hidden");
-    $("#bus-toggle").removeClass("hidden");
-    $(".bus-button").addClass("active-tab");
-    $(".bike-button").removeClass("active-tab");
-  });
-  // 자전거 버튼
-  $(".bike-button").click(function () {
-    $("#destination-toggle").addClass("hidden");
-    $("#bike-toggle").removeClass("hidden");
-    $("#bus-toggle").addClass("hidden");
-    $(".bike-button").addClass("active-tab");
-    $(".bus-button").removeClass("active-tab");
-  });
+
   // 출발지 버튼
   $("#search1").click(function () {
     $("#destination-toggle").removeClass("hidden");
-    $("#bike-toggle").addClass("hidden");
     $("#search-field1").removeClass("hidden");
-    $("#bus-toggle").addClass("hidden");
     $(".bus-button").removeClass("active-tab");
     $(".bike-button").removeClass("active-tab");
   });
   // 도착지 버튼
   $("#search2").click(function () {
     $("#destination-toggle").removeClass("hidden");
-    $("#bike-toggle").addClass("hidden");
     $("#search-field").removeClass("hidden");
-    $("#bus-toggle").addClass("hidden");
     $(".bus-button").removeClass("active-tab");
     $(".bike-button").removeClass("active-tab");
   });
@@ -626,6 +607,7 @@ function poiSearch(searchKeyword) {
         listHtml =
           listHtml +
           `<div id='listNum${listCnt}' onclick="getLatLon(${listCnt})">`;
+        listHtml = listHtml + `<hr>`;
         listHtml = listHtml + `<ul id='placeList${listCnt}'>`;
         listHtml = listHtml + `<li>${name}</li>`;
         listHtml = listHtml + `<li>${lowerAddrName}</li>`;
@@ -638,7 +620,6 @@ function poiSearch(searchKeyword) {
           listHtml +
           `<div id='lon${listCnt}' style='display: none;'>${noorLon}</div>`;
         listHtml = listHtml + `</ul>`;
-        listHtml = listHtml + `<hr>`;
         listHtml = listHtml + `</div>`;
       } // for[e]
 
@@ -684,3 +665,20 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //검색시 엔터기능
+var input1 = document.getElementById("search_keyword");
+var input2 = document.getElementById("search_keyword1");
+var button1 = document.getElementById("search1");
+var button2 = document.getElementById("search2");
+
+function handleEnterKeyPress(input, button, nextInput) {
+    return function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            button.click();
+            input.blur();
+            nextInput.focus();
+        }
+    };
+}
+input1.addEventListener("keyup", handleEnterKeyPress(input1, button1, input2));
+input2.addEventListener("keyup", handleEnterKeyPress(input2, button2));
