@@ -558,7 +558,6 @@ function drawLine(arrBikePoint, arrWalkPointList) {
 // 검색 기능
 function poiSearch(searchKeyword) {
   var marker;
-  var markerImg = "/img/tmap/testMarker.png";
   var positionBounds = new Tmapv2.LatLngBounds();
 
   $.ajax({
@@ -601,10 +600,10 @@ function poiSearch(searchKeyword) {
         // for[s]
         var noorLat = data[k].noorLat; // 위도
         var noorLon = data[k].noorLon; // 경도
-
+        var markerImg = "../img/tmap/"+(k+1)+".png"
         // 마커 생성
         var lonlat = new Tmapv2.LatLng(noorLat, noorLon);
-        var iconSize = new Tmapv2.Size(20, 20);
+        var iconSize = new Tmapv2.Size(20, 40);
         marker = new Tmapv2.Marker({
           position: lonlat,
           icon: markerImg,

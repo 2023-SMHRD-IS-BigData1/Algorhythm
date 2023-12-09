@@ -48,8 +48,9 @@ public class WeatherAPIController {
     public String weatherPredict() {
         String temp = weatherService.getSevenDayTempData();
         String weather = weatherService.getSevenDayWeatherData();
+        String twoWeather = weatherService.getTodayWeatherData();
         log.info(temp);
-        return weatherService.sendWeather(temp, weather);
+        return weatherService.sendWeather(temp, weather, twoWeather);
     }
 
     @GetMapping("/seven-day-temp")

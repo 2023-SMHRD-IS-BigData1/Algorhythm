@@ -51,14 +51,9 @@ public class UserController {
         }
     }
 
-//    @PostMapping("/ride")
-//    public String updateUser(@ModelAttribute User user, double addKm) {
-//        userService.updateUser(user, addKm);
-//        return "redirect:/myPage";
-//    }
-    @GetMapping("/ride")
-    @ResponseBody
-    public User updateUser(@RequestParam String userId, double addKm) {
-        return  userService.updateUser(userId, addKm);
+    @PostMapping("/ride")
+    public String updateUser(@ModelAttribute User user, double addKm) {
+        userService.updateUser(user, addKm);
+        return "redirect:/myPage";
     }
 }

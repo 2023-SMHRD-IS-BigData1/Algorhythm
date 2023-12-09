@@ -26,35 +26,20 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-    public User updateUser(String userId, double addKm) {
-        User user = userRepository.findByUserId(userId);
+    public User updateUser(User user, double addKm) {
 
         User updateUser = User.builder()
                 .userIdx(user.getUserIdx())
                 .userId(user.getUserId())
                 .userPw(user.getUserPw())
                 .userNickname(user.getUserNickname())
-                .userKm(user.getUserKm() + addKm)
+                .userKm(user.getUserKm() + (addKm/1000))
                 .build();
 
         userRepository.save(updateUser);
 
         return updateUser;
     }
-
-//    public User updateUser(User user, double addKm) {
-//        User updateUser = User.builder()
-//                .userIdx(user.getUserIdx())
-//                .userId(user.getUserId())
-//                .userPw(user.getUserPw())
-//                .userNickname(user.getUserNickname())
-//                .userKm(user.getUserKm() + addKm)
-//                .build();
-//
-//        userRepository.save(updateUser);
-//
-//        return updateUser;
-//    }
 
     public boolean idDuplicateCheck(String userId) {
         return userRepository.findByUserId(userId) == null;
