@@ -19,7 +19,6 @@ body {
 }
 
 a {
-  color: #006fbe;
   text-decoration: none;
 }
 
@@ -92,7 +91,7 @@ h6 {
 }
 
 #header .logo a {
-  color: #24325d;
+  color: #ffffff;
 }
 
 #header .logo img {
@@ -247,9 +246,11 @@ h6 {
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(22, 30, 56, 0.9);
+  background: rgba(22, 30, 56, 0);
   transition: 0.3s;
   z-index: 999;
+  height: 220px;
+  width: 375px;
 }
 
 .navbar-mobile .mobile-nav-toggle {
@@ -259,16 +260,16 @@ h6 {
 }
 
 .navbar-mobile ul {
-  display: block;
-  position: absolute;
-  top: 55px;
-  right: 15px;
-  bottom: 15px;
-  left: 15px;
-  padding: 10px 0;
-  background-color: #fff;
-  overflow-y: auto;
-  transition: 0.3s;
+    display: flex;
+    position: absolute;
+    top: 55px;
+    bottom: 15px;
+    padding: 10px 0;
+    background-color: #fff;
+    overflow-y: auto;
+    transition: 0.3s;
+    justify-content: center;
+    align-items: center;
 }
 
 .navbar-mobile a,
@@ -281,6 +282,7 @@ h6 {
 .navbar-mobile a:hover,
 .navbar-mobile .active,
 .navbar-mobile li:hover > a {
+  text-align: center;
   color: #006fbe;
 }
 
@@ -1344,13 +1346,18 @@ header#header {
   background-color: #25bc74;
 }
 nav#navbar {
-  background-color: #25bc74;
+  opacity: 1;
 }
 a.fontC {
-  color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    color: #ffffff;
 }
-
-/* 로그인 폼 css */
+a.fontC: hover {
+    color: #24325d;
+}
+/* 로그인 폼 css */s
 .login-page {
   width: 360px;
   padding: 8% 0 0;
@@ -1451,7 +1458,10 @@ a.fontC {
   margin-top: 70px;
 }
 .navbar-mobile ul {
- background-color: #25bc74;
+    font-size: 35px;
+    text-align: center;
+    width: 375px;
+    background-color: #25bc74;
 }
 select {
   /* Reset */
