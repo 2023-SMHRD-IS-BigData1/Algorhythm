@@ -2,280 +2,281 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
-    <meta content="" name="description" />
-    <meta content="" name="author" />
+    <meta charset="utf-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
     <title>TABRO</title>
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="../assets/img/logo.png" rel="shortcut icon" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet"/>
     <script crossorigin="anonymous" src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"></script>
     <link href="../dashboard/css/styles.css" rel="stylesheet">
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark header-t">
-        <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3 header-title" href="dashboard.html">TABRO</a>
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark header-t">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3 header-title" href="dashboard.html">TABRO</a>
 
 
-        <!-- Sidebar Toggle-->
+    <!-- Sidebar Toggle-->
 
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" href="#!" id="sidebarToggle">
-            <i class="fas fa-bars"></i>
-        </button>
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" href="#!" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </button>
 
-        <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-                <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                    id="navbarDropdown" role="button"><i class="fas fa-user fa-fw"></i></a>
-                <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">로그아웃</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-    <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                <div class="sb-sidenav-menu">
-                    <div class="nav">
-                        <div class="sb-sidenav-menu-heading">메인</div>
-                        <a class="nav-link" href="dashboard.html">
-                            <div class="sb-nav-link-icon">
-                                <i class="fa-solid fa-chalkboard-user"></i>
+    <!-- Navbar-->
+    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <li class="nav-item dropdown">
+            <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+               id="navbarDropdown" role="button"><i class="fas fa-user fa-fw"></i></a>
+            <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">로그아웃</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">메인</div>
+                    <a class="nav-link" href="dashboard.html">
+                        <div class="sb-nav-link-icon">
+                            <i class="fa-solid fa-chalkboard-user"></i>
 
-                            </div>
-                            종합 통계
-                        </a>
-                        <div class="sb-sidenav-menu-heading">통계</div>
-                        <a aria-controls="collapsePages" aria-expanded="false" class="nav-link collapsed"
-                            data-bs-target="#collapsePages" data-bs-toggle="collapse" href="#">
-                            <div class="sb-nav-link-icon">
-                                <i class="fas fa-chart-area"></i>
-                            </div>
-                            차트
-                            <div class="sb-sidenav-collapse-arrow">
-                                <i class="fas fa-angle-down"></i>
-                            </div>
-                        </a>
-                        <div aria-labelledby="headingTwo" class="collapse" data-bs-parent="#sidenavAccordion"
-                            id="collapsePages">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link" href="Station_charts.html">
-                                    <div class="sb-nav-link-icon">
-                                        <i class="fas fa-chart-area"></i>
-                                    </div>
-                                    대여/반납 예측 차트
-                                </a>
-                                <a class="nav-link" href="day_charts.html">
-                                    <div class="sb-nav-link-icon">
-                                        <i class="fas fa-chart-area"></i>
-                                    </div>
-                                    월 이용 예측 차트
-                                </a>
-                            </nav>
                         </div>
-                        <div class="sb-sidenav-menu-heading">지도</div>
-                        <a class="nav-link" href="dashboard_map.html">
-                            <div class="sb-nav-link-icon">
-                                <i class="fa-solid fa-map"></i>
-                            </div>
-                            지도
-                        </a>
-                    </div>
-                </div>
-                <div class="sb-sidenav-footer">
-                    <div>My Patner</div>
-                    TABRO
-                </div>
-            </nav>
-        </div>
-        <div id="layoutSidenav_content">
-            <main>
-                <div class="container-fluid px-4">
-                    <h1 class="mt-4">종합 통계</h1>
-
-                    <div class="row">
-                        <div class="col-xl-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fa-solid fa-chart-column"></i>
-                                    대여/반납 예측 차트
+                        종합 통계
+                    </a>
+                    <div class="sb-sidenav-menu-heading">통계</div>
+                    <a aria-controls="collapsePages" aria-expanded="false" class="nav-link collapsed"
+                       data-bs-target="#collapsePages" data-bs-toggle="collapse" href="#">
+                        <div class="sb-nav-link-icon">
+                            <i class="fas fa-chart-area"></i>
+                        </div>
+                        차트
+                        <div class="sb-sidenav-collapse-arrow">
+                            <i class="fas fa-angle-down"></i>
+                        </div>
+                    </a>
+                    <div aria-labelledby="headingTwo" class="collapse" data-bs-parent="#sidenavAccordion"
+                         id="collapsePages">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link" href="Station_charts.html">
+                                <div class="sb-nav-link-icon">
+                                    <i class="fas fa-chart-area"></i>
                                 </div>
-                                <div>
-                                    <div id="container1" style="height: 65vh;"></div>
-                                    <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-                                    <script type="text/javascript">
-                                        var dom = document.getElementById('container1');
-                                        var myChart = echarts.init(dom, null, {
-                                          renderer: 'canvas',
-                                          useDirtyRect: false
-                                        });
-                                        var app = {};
+                                대여/반납 예측 차트
+                            </a>
+                            <a class="nav-link" href="day_charts.html">
+                                <div class="sb-nav-link-icon">
+                                    <i class="fas fa-chart-area"></i>
+                                </div>
+                                월 이용 예측 차트
+                            </a>
+                        </nav>
+                    </div>
+                    <div class="sb-sidenav-menu-heading">지도</div>
+                    <a class="nav-link" href="dashboard_map.html">
+                        <div class="sb-nav-link-icon">
+                            <i class="fa-solid fa-map"></i>
+                        </div>
+                        지도
+                    </a>
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div>My Patner</div>
+                TABRO
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">종합 통계</h1>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fa-solid fa-chart-column"></i>
+                                대여/반납 예측 차트
+                            </div>
+                            <div class="main-container">
+                                <div id="container1" style="height: 65vh;"></div>
+                                <script src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"
+                                        type="text/javascript"></script>
+                                <script type="text/javascript">
+                                    var dom = document.getElementById('container1');
+                                    var myChart = echarts.init(dom, null, {
+                                      renderer: 'canvas',
+                                      useDirtyRect: false
+                                    });
+                                    var app = {};
 
-                                        var option;
+                                    var option;
 
-                                        option = {
-                                      tooltip: {
-                                        trigger: 'axis',
-                                        axisPointer: {
-                                          // Use axis to trigger tooltip
-                                          type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
-                                        }
-                                      },
-                                      legend: {},
-                                      grid: {
-                                        left: '5%',
-                                        right: '5%',
-                                        bottom: '3%',
-                                        width: '90%',
-                                        containLabel: true
-                                      },
-                                      xAxis: {
-                                         type: 'category',
-                                        data: ['정거장1', '정거장2', '정거장3', '정거장4', '정거장5', '정거장6', '정거장7']
+                                    option = {
+                                  tooltip: {
+                                    trigger: 'axis',
+                                    axisPointer: {
+                                      // Use axis to trigger tooltip
+                                      type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+                                    }
+                                  },
+                                  legend: {},
+                                  grid: {
+                                    left: '5%',
+                                    right: '5%',
+                                    bottom: '3%',
+                                    width: '90%',
+                                    containLabel: true
+                                  },
+                                  xAxis: {
+                                     type: 'category',
+                                    data: ['정거장1', '정거장2', '정거장3', '정거장4', '정거장5', '정거장6', '정거장7']
 
+                                  },
+                                  yAxis: {
+                                   type: 'value'
+                                  },
+                                  series: [
+                                    {
+                                      name: '대여',
+                                      type: 'bar',
+                                      stack: 'total',
+                                      color: "#0048ff",
+                                      label: {
+                                        fontSize: 20,
+                                        show: true
                                       },
-                                      yAxis: {
-                                       type: 'value'
+                                      emphasis: {
+                                        focus: 'series'
                                       },
-                                      series: [
-                                        {
-                                          name: '대여',
-                                          type: 'bar',
-                                          stack: 'total',
-                                          color: "#0048ff",
-                                          label: {
-                                            fontSize: 20,
-                                            show: true
-                                          },
-                                          emphasis: {
-                                            focus: 'series'
-                                          },
-                                          data: [420, 432, 501, 334, 690, 430, 220]
+                                      data: [420, 432, 501, 334, 690, 430, 220]
+                                    },
+
+                                    {
+                                      name: '반납',
+                                      type: 'bar',
+                                      stack: 'total',
+                                      color: "#ffbb00",
+                                      label: {
+                                        fontSize: 20,
+                                        show: true
+                                      },
+                                      emphasis: {
+                                        focus: 'series'
+                                      },
+                                      data: [320, 302, 301, 334, 390, 330, 320]
+                                    }
+                                  ]
+                                };
+
+                                    if (option && typeof option === 'object') {
+                                      myChart.setOption(option);
+                                    }
+
+                                    window.addEventListener('resize', myChart.resize);
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fa-solid fa-chart-line"></i>
+                                월별 이용 예측 차트
+                            </div>
+                            <div>
+                                <div id="container" style="height: 65vh;"></div>
+                                <script src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"
+                                        type="text/javascript"></script>
+                                <script type="text/javascript">
+                                    var dom = document.getElementById('container');
+                                    var myChart = echarts.init(dom, null, {
+                                        renderer: 'canvas',
+                                        useDirtyRect: false
+                                    });
+                                    var app = {};
+
+                                    var option;
+
+                                    option = {
+                                        title: {
                                         },
-
-                                        {
-                                          name: '반납',
-                                          type: 'bar',
-                                          stack: 'total',
-                                          color: "#ffbb00",
-                                          label: {
-                                            fontSize: 20,
-                                            show: true
-                                          },
-                                          emphasis: {
-                                            focus: 'series'
-                                          },
-                                          data: [320, 302, 301, 334, 390, 330, 320]
-                                        }
-                                      ]
+                                        tooltip: {
+                                            trigger: 'axis'
+                                        },
+                                        legend: {
+                                            data: ['월별 이용 예측']
+                                        },
+                                        grid: {
+                                            left: '3%',
+                                            right: '4%',
+                                            bottom: '3%',
+                                            containLabel: true
+                                        },
+                                        toolbox: {
+                                        },
+                                        xAxis: {
+                                            type: 'category',
+                                            boundaryGap: false,
+                                            data: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
+                                        },
+                                        yAxis: {
+                                            type: 'value'
+                                        },
+                                        series: [
+                                            {
+                                                name: '월별 이용 예측',
+                                                type: 'line',
+                                                stack: 'Total',
+                                                color: '#444eff',
+                                                label: {
+                                                    fontSize: 20,
+                                                    show: true,
+                                                    position: 'top'
+                                                },
+                                                data: [430, 325, 564, 185, 156, 550, 297, 374, 359, 589, 415, 216]
+                                            },
+                                        ]
                                     };
 
-                                        if (option && typeof option === 'object') {
-                                          myChart.setOption(option);
-                                        }
+                                    if (option && typeof option === 'object') {
+                                        myChart.setOption(option);
+                                    }
 
-                                        window.addEventListener('resize', myChart.resize);
-                                    </script>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fa-solid fa-chart-line"></i>
-                                    월별 이용 예측 차트
-                                </div>
-                                <div>
-                                    <div id="container" style="height: 65vh;"></div>
-                                    <script src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"
-                                        type="text/javascript"></script>
-                                    <script type="text/javascript">
-                                        var dom = document.getElementById('container');
-                                        var myChart = echarts.init(dom, null, {
-                                            renderer: 'canvas',
-                                            useDirtyRect: false
-                                        });
-                                        var app = {};
-
-                                        var option;
-
-                                        option = {
-                                            title: {
-                                            },
-                                            tooltip: {
-                                                trigger: 'axis'
-                                            },
-                                            legend: {
-                                                data: ['월별 이용 예측']
-                                            },
-                                            grid: {
-                                                left: '3%',
-                                                right: '4%',
-                                                bottom: '3%',
-                                                containLabel: true
-                                            },
-                                            toolbox: {
-                                            },
-                                            xAxis: {
-                                                type: 'category',
-                                                boundaryGap: false,
-                                                data: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
-                                            },
-                                            yAxis: {
-                                                type: 'value'
-                                            },
-                                            series: [
-                                                {
-                                                    name: '월별 이용 예측',
-                                                    type: 'line',
-                                                    stack: 'Total',
-                                                    color: '#444eff',
-                                                    label: {
-                                                        fontSize: 20,
-                                                        show: true,
-                                                        position: 'top'
-                                                    },
-                                                    data: [430, 325, 564, 185, 156, 550, 297, 374, 359, 589, 415, 216]
-                                                },
-                                            ]
-                                        };
-
-                                        if (option && typeof option === 'object') {
-                                            myChart.setOption(option);
-                                        }
-
-                                        window.addEventListener('resize', myChart.resize);
-                                    </script>
-                                </div>
+                                    window.addEventListener('resize', myChart.resize);
+                                </script>
                             </div>
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
+        </main>
 
-            <footer class="bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="footer-list">
-                        <h3>TABRO</h3>
-                        <p>푸른 하늘을 위한 오늘의 한 걸음</p>
-                        <div class="text-muted">Algorithm 2023</div>
-                    </div>
+        <footer class="bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="footer-list">
+                    <h3>TABRO</h3>
+                    <p>푸른 하늘을 위한 오늘의 한 걸음</p>
+                    <div class="text-muted">Algorithm 2023</div>
                 </div>
-            </footer>
-        </div>
+            </div>
+        </footer>
     </div>
+</div>
 
 
-    <script crossorigin="anonymous"
+<script crossorigin="anonymous"
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script crossorigin="anonymous"
+<script crossorigin="anonymous"
         src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
-    <!--  <script src="../dashboard/js/day_chart_month.js"></script>-->
-    <script src="../dashboard/js/scripts.js"></script>
+<!--  <script src="../dashboard/js/day_chart_month.js"></script>-->
+<script src="../dashboard/js/scripts.js"></script>
 </body>
 
 </html>
