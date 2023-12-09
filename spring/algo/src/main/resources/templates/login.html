@@ -70,7 +70,8 @@
                     <div class="form-field btn_ris">
                         <!-- <label for="userId">ID를 입력해주세요</label> -->
                         <input type="text" id="userId" th:field="*{userId}" class="regis" placeholder="ID를 입력해주세요"/>
-                        <button onclick="registerCheck()" type="button" class="w3-button w3-white w3-border w3-border-green w3-round-large">중복체크</button>
+                        <button onclick="checkUsernameAvailability()" type="button" class="w3-button w3-white w3-border w3-border-green w3-round-large">중복체크</button>
+                        <span id="availability-message"></span>
                     </div>
 
                     <div class="form-field">
