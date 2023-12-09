@@ -2,140 +2,141 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <title>TABRO</title>
+    <link href="../assets/img/logo.png" rel="shortcut icon" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script
-    src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=nRUNxPRv9p2mYIfwpEZPC7qHQMtNN5ZB25T3ErVd"></script>
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/dashboard_map.css">
-    <link rel="stylesheet" href="css/styles.css">
+            src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=nRUNxPRv9p2mYIfwpEZPC7qHQMtNN5ZB25T3ErVd"></script>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet"/>
+    <script crossorigin="anonymous" src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"></script>
+    <link href="css/dashboard_map.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
 </head>
 
 <body class="sb-nav-fixed" onload="initTmap();">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark header-t">
-        <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3 header-title" href="dashboard.html">TABRO</a>
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark header-t">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3 header-title" href="dashboard.html">TABRO</a>
 
-        <!-- Sidebar Toggle-->
+    <!-- Sidebar Toggle-->
 
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
-            <i class="fas fa-bars"></i>
-        </button>
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" href="#!" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </button>
 
-        <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">로그아웃</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-    <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                <div class="sb-sidenav-menu">
-                    <div class="nav">
-                        <div class="sb-sidenav-menu-heading">메인</div>
+    <!-- Navbar-->
+    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <li class="nav-item dropdown">
+            <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown"
+               role="button"><i class="fas fa-user fa-fw"></i></a>
+            <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">로그아웃</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">메인</div>
 
-                        <a class="nav-link" href="dashboard.html">
-                            <div class="sb-nav-link-icon">
-                                <i class="fa-solid fa-chalkboard-user"></i>
-                            </div>
-                            종합 통계
-                        </a>
-                        <div class="sb-sidenav-menu-heading">통계</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
-                            aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon">
-                                <i class="fas fa-chart-area"></i>
-                            </div>
-                            차트
-                            <div class="sb-sidenav-collapse-arrow">
-                                <i class="fas fa-angle-down"></i>
-                            </div>
-                        </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link" href="Station_charts.html">
-                                    <div class="sb-nav-link-icon">
-                                        <i class="fas fa-chart-area"></i>
-                                    </div>
-                                    대여/반납 예측 차트
-                                </a>
-                                <a class="nav-link" href="day_charts.html">
-                                    <div class="sb-nav-link-icon">
-                                        <i class="fas fa-chart-area"></i>
-                                    </div>
-                                    월 이용 예측 차트
-                                </a>
-                            </nav>
+                    <a class="nav-link" href="dashboard.html">
+                        <div class="sb-nav-link-icon">
+                            <i class="fa-solid fa-chalkboard-user"></i>
                         </div>
-                        <div class="sb-sidenav-menu-heading">지도</div>
-                        <a class="nav-link" href="dashboard_map.html">
-                            <div class="sb-nav-link-icon">
-                                <i class="fa-solid fa-map"></i>
-                            </div>
-                            지도
-                        </a>
+                        종합 통계
+                    </a>
+                    <div class="sb-sidenav-menu-heading">통계</div>
+                    <a aria-controls="collapsePages" aria-expanded="false" class="nav-link collapsed" data-bs-target="#collapsePages"
+                       data-bs-toggle="collapse" href="#">
+                        <div class="sb-nav-link-icon">
+                            <i class="fas fa-chart-area"></i>
+                        </div>
+                        차트
+                        <div class="sb-sidenav-collapse-arrow">
+                            <i class="fas fa-angle-down"></i>
+                        </div>
+                    </a>
+                    <div aria-labelledby="headingTwo" class="collapse" data-bs-parent="#sidenavAccordion"
+                         id="collapsePages">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link" href="Station_charts.html">
+                                <div class="sb-nav-link-icon">
+                                    <i class="fas fa-chart-area"></i>
+                                </div>
+                                대여/반납 예측 차트
+                            </a>
+                            <a class="nav-link" href="day_charts.html">
+                                <div class="sb-nav-link-icon">
+                                    <i class="fas fa-chart-area"></i>
+                                </div>
+                                월 이용 예측 차트
+                            </a>
+                        </nav>
                     </div>
+                    <div class="sb-sidenav-menu-heading">지도</div>
+                    <a class="nav-link" href="dashboard_map.html">
+                        <div class="sb-nav-link-icon">
+                            <i class="fa-solid fa-map"></i>
+                        </div>
+                        지도
+                    </a>
                 </div>
-                <div class="sb-sidenav-footer">
-                    <div>My Patner</div>
-                    TABRO
-                </div>
-            </nav>
-        </div>
-        <div id="layoutSidenav_content">
-            <main>
-                <div class="container-fluid px-4">
-                    <h1 class="mt-4">정거장 위치</h1>
-                    <div id="map">
-                        <div class="search_content">
-                            <div class="search_btn">
-                                <input type="text" id="searchValue" value="" placeholder="장소를 입력해주세요" />
-                                <button id="search">검색</button>
-                            </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div>My Patner</div>
+                TABRO
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">정거장 위치</h1>
+                <div id="map">
+                    <div class="search_content">
+                        <div class="search_btn">
+                            <input id="searchValue" placeholder="장소를 입력해주세요" type="text" value=""/>
+                            <button id="search">검색</button>
+                        </div>
+                        <div>
+                            <div class="title"><strong>검색결과</div>
                             <div>
-                                <div class="title"><strong>검색결과</div>
-                                <div>
-                                    <div class="rst_wrap">
-                                        <div class="rst mCustomScrollbar">
-                                            <ul id="searchResult" name="searchResult">
-                                                <li>검색결과</li>
-                                            </ul>
-                                        </div>
+                                <div class="rst_wrap">
+                                    <div class="rst mCustomScrollbar">
+                                        <ul id="searchResult" name="searchResult">
+                                            <li>검색결과</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="map_div" class="map_wrap" style="float:left"></div>
                     </div>
+                    <div class="map_wrap" id="map_div" style="float:left"></div>
                 </div>
-            </main>
-            <footer class="bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="footer-list">
-                        <h3>TABRO</h3>
-                        <p>푸른 하늘을 위한 오늘의 한 걸음</p>
-                        <div class="text-muted">Algorithm 2023</div>
-                    </div>
+            </div>
+        </main>
+        <footer class="bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="footer-list">
+                    <h3>TABRO</h3>
+                    <p>푸른 하늘을 위한 오늘의 한 걸음</p>
+                    <div class="text-muted">Algorithm 2023</div>
                 </div>
-            </footer>
-        </div>
+            </div>
+        </footer>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
-        crossorigin="anonymous"></script>
-    <script src="js/dashboard_map.js"></script>
-    <script src="js/scripts.js"></script>
+</div>
+<script crossorigin="anonymous"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<script crossorigin="anonymous"
+        src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
+<script src="js/dashboard_map.js"></script>
+<script src="js/scripts.js"></script>
 </body>
 
 </html>
