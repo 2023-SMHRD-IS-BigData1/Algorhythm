@@ -63,14 +63,12 @@ function poi2() {
 }
 
 function person() {
- // 자전거 버튼 클릭 시 실행할 로직
-  hideSidebar();
+  hideSidebar()
   naviPerson();
 }
 
 function transport() {
-// 대중교통 버튼 클릭 시 실행할 로직
-  hideSidebar();
+  hideSidebar()
   naviTransport();
 }
 
@@ -103,18 +101,18 @@ function hideSidebar() {
     });
   }
 }
-
-function showSidebar() {
-  var sidebar = document.querySelector('.sidebar');
-  if (sidebar) {
-    sidebar.style.width = '325px';
-    sidebar.style.top = '0';
-    var sidebarContents = document.querySelectorAll('.sidebar > *:not(.side-button)');
-    sidebarContents.forEach(function (element) {
-      element.style.display = '';
-    });
-  }
-}
+//
+//function showSidebar() {
+//  var sidebar = document.querySelector('.sidebar');
+//  if (sidebar) {
+//    sidebar.style.width = '325px';
+//    sidebar.style.top = '0';
+//    var sidebarContents = document.querySelectorAll('.sidebar > *:not(.side-button)');
+//    sidebarContents.forEach(function (element) {
+//      element.style.display = '';
+//    });
+//  }
+//}
 
 
 
@@ -521,9 +519,6 @@ function naviPerson() {
           error
       );
     },
-    error: function () {
-        alert("출발지와 도착지를 입력해주세요");
-    },
   });
 }
 
@@ -671,6 +666,20 @@ function getLatLon(listCnt) {
   }
 }
 
+// input창에 리스트 명칭 출력
+
+//function getLatLon(listCnt) {
+//  // 클릭한 리스트의 명칭을 가져와서 해당 입력창에 넣어줌
+//  var name = $(`#placeList${listCnt} li:first-child`).text();
+//
+//  // 시작지와 도착지를 구분하여 적절한 입력창에 명칭을 넣어줌
+//  if (dataInfo === "start") {
+//    $("#search_keyword").val(name);
+//  } else if (dataInfo === "end") {
+//    $("#search_keyword1").val(name);
+//  }
+//}
+
 ////사이드바 토글
 //document.addEventListener("DOMContentLoaded", function () {
 //  var toggleButton = document.getElementById("toggleButton");
@@ -705,3 +714,4 @@ function handleEnterKeyPress(input, button, nextInput) {
 }
 input1.addEventListener("keyup", handleEnterKeyPress(input1, button1, input2));
 input2.addEventListener("keyup", handleEnterKeyPress(input2, button2));
+
