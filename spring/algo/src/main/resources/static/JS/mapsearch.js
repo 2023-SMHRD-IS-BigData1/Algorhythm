@@ -45,21 +45,6 @@ function initTmap() {
       }
     },
   });
-
-  // 출발지 버튼
-  $("#search1").click(function () {
-    $("#destination-toggle").removeClass("hidden");
-    $("#search-field1").removeClass("hidden");
-    $(".bus-button").removeClass("active-tab");
-    $(".bike-button").removeClass("active-tab");
-  });
-  // 도착지 버튼
-  $("#search2").click(function () {
-    $("#destination-toggle").removeClass("hidden");
-    $("#search-field").removeClass("hidden");
-    $(".bus-button").removeClass("active-tab");
-    $(".bike-button").removeClass("active-tab");
-  });
 }
 
 // 검색 기능 함수 아래 존재
@@ -78,12 +63,60 @@ function poi2() {
 }
 
 function person() {
+ // 자전거 버튼 클릭 시 실행할 로직
+  hideSidebar();
   naviPerson();
 }
 
 function transport() {
+// 대중교통 버튼 클릭 시 실행할 로직
+  hideSidebar();
   naviTransport();
 }
+
+
+
+
+// 사이드바 토글 기능
+document.addEventListener("DOMContentLoaded", function () {
+  var toggleButton = document.getElementById("toggleButton");
+  var sidebar = document.querySelector(".sidebar");
+  var searchListBox = document.querySelector(".search-list-box");
+
+  toggleButton.addEventListener("click", function () {
+    // 사이드바 및 검색 목록 상자에 close 클래스 토글
+    sidebar.classList.toggle("open");
+    searchListBox.classList.toggle("open");
+
+    // 버튼 아이콘에 rotated 클래스 토글
+    toggleButton.classList.toggle("rotated");
+  });
+});
+
+function hideSidebar() {
+  var sidebar = document.querySelector('.sidebar');
+  if (sidebar) {
+    sidebar.style.width = 'calc(100% - 355px)';
+    var sidebarContents = document.querySelectorAll('.sidebar > *:not(.side-button)');
+    sidebarContents.forEach(function (element) {
+      element.style.display = 'none';
+    });
+  }
+}
+
+function showSidebar() {
+  var sidebar = document.querySelector('.sidebar');
+  if (sidebar) {
+    sidebar.style.width = '325px';
+    sidebar.style.top = '0';
+    var sidebarContents = document.querySelectorAll('.sidebar > *:not(.side-button)');
+    sidebarContents.forEach(function (element) {
+      element.style.display = '';
+    });
+  }
+}
+
+
 
 // 대중교통 기반 길찾기 서비스
 function naviTransport() {
@@ -136,7 +169,7 @@ function naviTransport() {
       drawRoute(selectRoute);
     },
     error: function () {
-      alert("가까운 경로를 찾을수 없습니다.");
+      alert("출발지와 도착지를 입력해주세요");
     },
   });
 } // function[E]
@@ -488,6 +521,9 @@ function naviPerson() {
           error
       );
     },
+    error: function () {
+        alert("출발지와 도착지를 입력해주세요");
+    },
   });
 }
 
@@ -592,6 +628,8 @@ function poiSearch(searchKeyword) {
           listHtml +
           `<div id='listNum${listCnt}' onclick="getLatLon(${listCnt})">`;
         listHtml = listHtml + `<hr>`;
+        listHtml = listHtml + `<div>`;
+        listHtml = listHtml + `<img src='../img/tmap/${k+1}.png'>`;
         listHtml = listHtml + `<ul id='placeList${listCnt}'>`;
         listHtml = listHtml + `<li>${name}</li>`;
         listHtml = listHtml + `<li>${lowerAddrName}</li>`;
@@ -604,6 +642,7 @@ function poiSearch(searchKeyword) {
           listHtml +
           `<div id='lon${listCnt}' style='display: none;'>${noorLon}</div>`;
         listHtml = listHtml + `</ul>`;
+        listHtml = listHtml + `</div>`;
         listHtml = listHtml + `</div>`;
       } // for[e]
 
@@ -632,21 +671,21 @@ function getLatLon(listCnt) {
   }
 }
 
-//사이드바 토글
-document.addEventListener("DOMContentLoaded", function () {
-  var toggleButton = document.getElementById("toggleButton");
-  var sidebar = document.querySelector(".sidebar");
-  var searchListBox = document.querySelector(".search-list-box");
-
-  toggleButton.addEventListener("click", function () {
-    // 사이드바 및 검색 목록 상자에 close 클래스 토글
-    sidebar.classList.toggle("open");
-    searchListBox.classList.toggle("open");
-
-    // 버튼 아이콘에 rotated 클래스 토글
-    toggleButton.classList.toggle("rotated");
-  });
-});
+////사이드바 토글
+//document.addEventListener("DOMContentLoaded", function () {
+//  var toggleButton = document.getElementById("toggleButton");
+//  var sidebar = document.querySelector(".sidebar");
+//  var searchListBox = document.querySelector(".search-list-box");
+//
+//  toggleButton.addEventListener("click", function () {
+//    // 사이드바 및 검색 목록 상자에 close 클래스 토글
+//    sidebar.classList.toggle("open");
+//    searchListBox.classList.toggle("open");
+//
+//    // 버튼 아이콘에 rotated 클래스 토글
+//    toggleButton.classList.toggle("rotated");
+//  });
+//});
 
 //검색시 엔터기능
 var input1 = document.getElementById("search_keyword");
