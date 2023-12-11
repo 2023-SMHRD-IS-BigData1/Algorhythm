@@ -45,21 +45,6 @@ function initTmap() {
       }
     },
   });
-
-  // 출발지 버튼
-  $("#search1").click(function () {
-    $("#destination-toggle").removeClass("hidden");
-    $("#search-field1").removeClass("hidden");
-    $(".bus-button").removeClass("active-tab");
-    $(".bike-button").removeClass("active-tab");
-  });
-  // 도착지 버튼
-  $("#search2").click(function () {
-    $("#destination-toggle").removeClass("hidden");
-    $("#search-field").removeClass("hidden");
-    $(".bus-button").removeClass("active-tab");
-    $(".bike-button").removeClass("active-tab");
-  });
 }
 
 // 검색 기능 함수 아래 존재
@@ -79,10 +64,12 @@ function poi2() {
 
 function person() {
   naviPerson();
+//  hideSidebar();
 }
 
 function transport() {
   naviTransport();
+//  hideSidebar();
 }
 
 // 대중교통 기반 길찾기 서비스
@@ -136,7 +123,7 @@ function naviTransport() {
       drawRoute(selectRoute);
     },
     error: function () {
-      alert("가까운 경로를 찾을수 없습니다.");
+      alert("출발지와 도착지를 입력해주세요");
     },
   });
 } // function[E]
@@ -488,6 +475,9 @@ function naviPerson() {
           error
       );
     },
+    error: function () {
+          alert("출발지와 도착지를 입력해주세요");
+        },
   });
 }
 
@@ -589,9 +579,11 @@ function poiSearch(searchKeyword) {
 
         // 출력 리스트 만들기
         listHtml =
-          listHtml +
+        listHtml +
           `<div id='listNum${listCnt}' onclick="getLatLon(${listCnt})">`;
         listHtml = listHtml + `<hr>`;
+        listHtml = listHtml + `<div>`;
+        listHtml = listHtml + `<img src='../img/tmap/${k + 1}.png'>`;
         listHtml = listHtml + `<ul id='placeList${listCnt}'>`;
         listHtml = listHtml + `<li>${name}</li>`;
         listHtml = listHtml + `<li>${lowerAddrName}</li>`;
@@ -604,6 +596,7 @@ function poiSearch(searchKeyword) {
           listHtml +
           `<div id='lon${listCnt}' style='display: none;'>${noorLon}</div>`;
         listHtml = listHtml + `</ul>`;
+        listHtml = listHtml + `</div>`;
         listHtml = listHtml + `</div>`;
       } // for[e]
 
@@ -620,7 +613,24 @@ function poiSearch(searchKeyword) {
   });
 }
 
-function getLatLonlist(listCnt) {
+function getLatLon(listCnt) {
+// 클릭한 리스트의 명칭을 가져와서 해당 입력창에 출력
+var name = $(`#placeList${listCnt} li:first-child`).text();
+// 시작지와 도착지를 구분하여 적절한 입력창에 명칭을 출력
+ if (dataInfo === "start") {
+    $("#search_keyword").val(name);
+     $("#search_keyword").css({
+     "background-color":"rgba(0, 255, 106, 0.75)",
+     "border-radius":"5px"
+     });
+  } else if (dataInfo === "end") {
+    $("#search_keyword1").val(name);
+    $("#search_keyword1").css({
+    "background-color":"rgba(0, 255, 106, 0.75)",
+    "border-radius":"5px"
+    });
+  }
+
   if (dataInfo == "start") {
     startLatData = parseFloat($(`#lat${listCnt}`).text());
     startLonData = parseFloat($(`#lon${listCnt}`).text());
@@ -632,7 +642,7 @@ function getLatLonlist(listCnt) {
   }
 }
 
-//사이드바 토글
+// 사이드바 토글 기능
 document.addEventListener("DOMContentLoaded", function () {
   var toggleButton = document.getElementById("toggleButton");
   var sidebar = document.querySelector(".sidebar");
@@ -647,6 +657,37 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleButton.classList.toggle("rotated");
   });
 });
+
+//function hideSidebar() {
+//  var sidebar = document.querySelector(".sidebar");
+//  if (sidebar) {
+//    sidebar.style.width = "calc(100% - 355px)";
+//    var sidebarContents = document.querySelectorAll(
+//      ".sidebar > *:not(.side-button)"
+//    );
+//    sidebarContents.forEach(function (element) {
+//      element.style.display = "none";
+//    });
+//  }
+//}
+//
+//function showSidebar() {
+//  var sidebar = document.querySelector('.sidebar');
+//  if (sidebar) {
+//    sidebar.style.width = '325px';
+//    sidebar.style.top = '0';
+//    var sidebarContents = document.querySelectorAll('.sidebar > *:not(.side-button)');
+//    sidebarContents.forEach(function (element) {
+//      element.style.display = '';
+//    });
+//  }
+//}
+
+// 대중교통, 자전거 버튼 클릭시 토글
+
+
+
+
 
 //검색시 엔터기능
 var input1 = document.getElementById("search_keyword");

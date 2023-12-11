@@ -218,7 +218,7 @@ h6 {
 */
 .mobile-nav-toggle {
   color: #24325d;
-  font-size: 28px;
+  font-size: 30px;
   cursor: pointer;
   display: none;
   line-height: 0;
@@ -249,7 +249,7 @@ h6 {
   background: rgba(22, 30, 56, 0);
   transition: 0.3s;
   z-index: 999;
-  height: 220px;
+  height: 180px;
   width: 375px;
 }
 
@@ -262,14 +262,15 @@ h6 {
 .navbar-mobile ul {
     display: flex;
     position: absolute;
-    top: 55px;
-    bottom: 15px;
+    top: 60px;
+    bottom: 40px;
     padding: 10px 0;
     background-color: #fff;
     overflow-y: auto;
     transition: 0.3s;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 .navbar-mobile a,
