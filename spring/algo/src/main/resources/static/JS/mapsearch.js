@@ -63,13 +63,13 @@ function poi2() {
 }
 
 function person() {
-  hideSidebar()
   naviPerson();
+//  hideSidebar();
 }
 
 function transport() {
-  hideSidebar()
   naviTransport();
+//  hideSidebar();
 }
 
 
@@ -519,6 +519,9 @@ function naviPerson() {
           error
       );
     },
+    error: function () {
+          alert("출발지와 도착지를 입력해주세요");
+        },
   });
 }
 
@@ -620,11 +623,11 @@ function poiSearch(searchKeyword) {
 
         // 출력 리스트 만들기
         listHtml =
-          listHtml +
+        listHtml +
           `<div id='listNum${listCnt}' onclick="getLatLon(${listCnt})">`;
         listHtml = listHtml + `<hr>`;
         listHtml = listHtml + `<div>`;
-        listHtml = listHtml + `<img src='../img/tmap/${k+1}.png'>`;
+        listHtml = listHtml + `<img src='../img/tmap/${k + 1}.png'>`;
         listHtml = listHtml + `<ul id='placeList${listCnt}'>`;
         listHtml = listHtml + `<li>${name}</li>`;
         listHtml = listHtml + `<li>${lowerAddrName}</li>`;
@@ -655,6 +658,23 @@ function poiSearch(searchKeyword) {
 }
 
 function getLatLon(listCnt) {
+// 클릭한 리스트의 명칭을 가져와서 해당 입력창에 출력
+var name = $(`#placeList${listCnt} li:first-child`).text();
+// 시작지와 도착지를 구분하여 적절한 입력창에 명칭을 출력
+ if (dataInfo === "start") {
+    $("#search_keyword").val(name);
+     $("#search_keyword").css({
+     "background-color":"rgba(0, 255, 106, 0.75)",
+     "border-radius":"5px"
+     });
+  } else if (dataInfo === "end") {
+    $("#search_keyword1").val(name);
+    $("#search_keyword1").css({
+    "background-color":"rgba(0, 255, 106, 0.75)",
+    "border-radius":"5px"
+    });
+  }
+
   if (dataInfo == "start") {
     startLatData = parseFloat($(`#lat${listCnt}`).text());
     startLonData = parseFloat($(`#lon${listCnt}`).text());
@@ -666,35 +686,17 @@ function getLatLon(listCnt) {
   }
 }
 
-// input창에 리스트 명칭 출력
+// 사이드바 토글 기능
+document.addEventListener("DOMContentLoaded", function () {
+  var toggleButton = document.getElementById("toggleButton");
+  var sidebar = document.querySelector(".sidebar");
+  var searchListBox = document.querySelector(".search-list-box");
 
-//function getLatLon(listCnt) {
-//  // 클릭한 리스트의 명칭을 가져와서 해당 입력창에 넣어줌
-//  var name = $(`#placeList${listCnt} li:first-child`).text();
-//
-//  // 시작지와 도착지를 구분하여 적절한 입력창에 명칭을 넣어줌
-//  if (dataInfo === "start") {
-//    $("#search_keyword").val(name);
-//  } else if (dataInfo === "end") {
-//    $("#search_keyword1").val(name);
-//  }
-//}
+// 대중교통, 자전거 버튼 클릭시 토글
 
-////사이드바 토글
-//document.addEventListener("DOMContentLoaded", function () {
-//  var toggleButton = document.getElementById("toggleButton");
-//  var sidebar = document.querySelector(".sidebar");
-//  var searchListBox = document.querySelector(".search-list-box");
-//
-//  toggleButton.addEventListener("click", function () {
-//    // 사이드바 및 검색 목록 상자에 close 클래스 토글
-//    sidebar.classList.toggle("open");
-//    searchListBox.classList.toggle("open");
-//
-//    // 버튼 아이콘에 rotated 클래스 토글
-//    toggleButton.classList.toggle("rotated");
-//  });
-//});
+
+
+
 
 //검색시 엔터기능
 var input1 = document.getElementById("search_keyword");
@@ -714,4 +716,3 @@ function handleEnterKeyPress(input, button, nextInput) {
 }
 input1.addEventListener("keyup", handleEnterKeyPress(input1, button1, input2));
 input2.addEventListener("keyup", handleEnterKeyPress(input2, button2));
-
