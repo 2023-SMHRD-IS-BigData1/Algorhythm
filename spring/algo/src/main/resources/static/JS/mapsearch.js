@@ -64,57 +64,11 @@ function poi2() {
 
 function person() {
   naviPerson();
-//  hideSidebar();
 }
 
 function transport() {
   naviTransport();
-//  hideSidebar();
 }
-
-
-
-
-// 사이드바 토글 기능
-document.addEventListener("DOMContentLoaded", function () {
-  var toggleButton = document.getElementById("toggleButton");
-  var sidebar = document.querySelector(".sidebar");
-  var searchListBox = document.querySelector(".search-list-box");
-
-  toggleButton.addEventListener("click", function () {
-    // 사이드바 및 검색 목록 상자에 close 클래스 토글
-    sidebar.classList.toggle("open");
-    searchListBox.classList.toggle("open");
-
-    // 버튼 아이콘에 rotated 클래스 토글
-    toggleButton.classList.toggle("rotated");
-  });
-});
-
-function hideSidebar() {
-  var sidebar = document.querySelector('.sidebar');
-  if (sidebar) {
-    sidebar.style.width = 'calc(100% - 355px)';
-    var sidebarContents = document.querySelectorAll('.sidebar > *:not(.side-button)');
-    sidebarContents.forEach(function (element) {
-      element.style.display = 'none';
-    });
-  }
-}
-//
-//function showSidebar() {
-//  var sidebar = document.querySelector('.sidebar');
-//  if (sidebar) {
-//    sidebar.style.width = '325px';
-//    sidebar.style.top = '0';
-//    var sidebarContents = document.querySelectorAll('.sidebar > *:not(.side-button)');
-//    sidebarContents.forEach(function (element) {
-//      element.style.display = '';
-//    });
-//  }
-//}
-
-
 
 // 대중교통 기반 길찾기 서비스
 function naviTransport() {
@@ -686,17 +640,41 @@ var name = $(`#placeList${listCnt} li:first-child`).text();
   }
 }
 
-// 사이드바 토글 기능
-document.addEventListener("DOMContentLoaded", function () {
-  var toggleButton = document.getElementById("toggleButton");
-  var sidebar = document.querySelector(".sidebar");
-  var searchListBox = document.querySelector(".search-list-box");
-
 // 대중교통, 자전거 버튼 클릭시 토글
+ document.addEventListener("DOMContentLoaded", function () {
+   var toggleButton = document.getElementById("toggleButton");
+   var sidebar = document.querySelector(".sidebar");
+   var searchListBox = document.querySelector(".search-list-box");
 
+   toggleButton.addEventListener("click", function () {
+     // 사이드바 및 검색 목록 상자에 open/close 클래스 토글
+     sidebar.classList.toggle("open");
+     searchListBox.classList.toggle("open");
 
+     // 버튼 아이콘에 rotated 클래스 토글
+     toggleButton.classList.toggle("rotated");
+   });
 
+   var busButton = document.getElementById("bus-navi");
+   var bikeButton = document.getElementById("navi");
+   var busListInfo = document.querySelector(".bus-list-info");
 
+   busButton.addEventListener("click", function () {
+     // 다른 버튼 클릭 시 사이드바 닫기
+     sidebar.classList.remove("open");
+     searchListBox.classList.remove("open");
+     toggleButton.classList.remove("rotated");
+     busListInfo.style.display = "block";
+   });
+
+   bikeButton.addEventListener("click", function () {
+     // 다른 버튼 클릭 시 사이드바 닫기
+     sidebar.classList.remove("open");
+     searchListBox.classList.remove("open");
+     toggleButton.classList.remove("rotated");
+     busListInfo.style.display = "none";
+   });
+ });
 
 //검색시 엔터기능
 var input1 = document.getElementById("search_keyword");
