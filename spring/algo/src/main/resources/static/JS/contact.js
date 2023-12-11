@@ -230,36 +230,31 @@ function checkPw(){
 //            }
 //        }).open();
 //    }
-function checkId(){
-var id  = $('#userId').val();
-$.ajax({
-    url:'./idCheck'
-})
-}
-  function checkUsernameAvailability() {
-        var userId = document.getElementById("userId").value;
-        var availabilityMessage = document.getElementById("availability-message");
 
-        // 비동기 부타드립니다
-        // 백엔드 확인부탁드립니다 AJAX 사용
-
-        // 서버 확인 시뮬레이션
-        setTimeout(function() {
-            var isUsernameAvailable = /* 실제 확인 결과로 대체 */ true;
-
-            if (isUsernameAvailable) {
-                availabilityMessage.innerHTML = "사용 가능한 아이디입니다.";
-                availabilityMessage.style.color = "green";
-                // 제출 버튼을 활성화합니다.
-                document.getElementById("join-form").submit.disabled = false;
-            } else {
-                availabilityMessage.innerHTML = "이미 존재하는 아이디입니다.";
-                availabilityMessage.style.color = "red";
-                // 제출 버튼을 비활성화합니다.
-                document.getElementById("join-form").submit.disabled = true;
-            }
-        }, 1000); // 시간 지연 시뮬레이션, 실제 비동기 확인
-    }
+//  function checkUsernameAvailability() {
+//        var userId = document.getElementById("userId").value;
+//        var availabilityMessage = document.getElementById("availability-message");
+//
+//        // 비동기 부타드립니다
+//        // 백엔드 확인부탁드립니다 AJAX 사용
+//
+//        // 서버 확인 시뮬레이션
+//        setTimeout(function() {
+//            var isUsernameAvailable = /* 실제 확인 결과로 대체 */ true;
+//
+//            if (isUsernameAvailable) {
+//                availabilityMessage.innerHTML = "사용 가능한 아이디입니다.";
+//                availabilityMessage.style.color = "green";
+//                // 제출 버튼을 활성화합니다.
+//                document.getElementById("join-form").submit.disabled = false;
+//            } else {
+//                availabilityMessage.innerHTML = "이미 존재하는 아이디입니다.";
+//                availabilityMessage.style.color = "red";
+//                // 제출 버튼을 비활성화합니다.
+//                document.getElementById("join-form").submit.disabled = true;
+//            }
+//        }, 1000); // 시간 지연 시뮬레이션, 실제 비동기 확인
+//    }
 
     function validateForm() {
             var password1 = document.getElementById("userPw").value;
@@ -276,3 +271,4 @@ $.ajax({
                 return true;
             }
         }
+
