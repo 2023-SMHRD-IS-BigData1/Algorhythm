@@ -620,7 +620,7 @@ function poiSearch(searchKeyword) {
   });
 }
 
-function getLatLon(listCnt) {
+function getLatLonlist(listCnt) {
   if (dataInfo == "start") {
     startLatData = parseFloat($(`#lat${listCnt}`).text());
     startLonData = parseFloat($(`#lon${listCnt}`).text());
