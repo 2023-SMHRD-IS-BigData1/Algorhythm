@@ -7,6 +7,7 @@ var startLatData;
 var startLonData;
 var endLatData;
 var endLonData;
+var stationMarker = [];
 
 function initTmap() {
   // 맵 객체 생성
@@ -35,16 +36,34 @@ function initTmap() {
 
         console.log("맵 생성");
 
-        marker = new Tmapv2.Marker({
+        var marker = new Tmapv2.Marker({
           position: markerPosition,
           icon: "/img/tmap/bike.png",
           iconSize: new Tmapv2.Size(15, 15),
           title: name,
           map: map,
         });
+
+        stationMarker.push(marker)
+
       }
     },
   });
+}
+
+function stationShow(show) {
+    console.log(stationMarker.length)
+    if (show == "off") {
+        for (let marker of stationMarker) {
+            marker.setVisible(false);
+        }
+        console.log("off")
+    } else if (show == "on"){
+        for (let marker of stationMarker) {
+            marker.setVisible(true);
+        }
+        console.log("on")
+    }
 }
 
 // 검색 기능 함수 아래 존재
@@ -52,6 +71,7 @@ function poi1() {
   dataInfo = "start";
   console.log(dataInfo);
   var inputValue = $("#search_keyword").val();
+  stationShow("on")
   poiSearch(inputValue);
 }
 
@@ -59,6 +79,7 @@ function poi2() {
   dataInfo = "end";
   console.log(dataInfo);
   var inputValue = $("#search_keyword1").val();
+  stationShow("on")
   poiSearch(inputValue);
 }
 
@@ -77,7 +98,6 @@ function naviTransport() {
 
   // latLonRequest 제작하기
   var latLonRequest = {};
-
   latLonRequest.latlonList = { latlon: [] };
 
   latLonRequest.latlonList.latlon.push({
@@ -98,6 +118,8 @@ function naviTransport() {
     data: JSON.stringify(latLonRequest),
     success: function (response) {
       console.log(response);
+
+      stationShow("off")
 
       // 기존 마커 제거
       if (markerArr.length > 0) {
@@ -231,16 +253,31 @@ function drawRoute(selectRoute) {
                 //출발지 마커
                 markerImg = "../img/tmap/start.png";
                 pType = "S";
+                visible = true;
                 size = new Tmapv2.Size(24, 38);
               } else if (properties.pointType == "E") {
                 //도착지 마커
                 markerImg = "../img/tmap/end.png";
+                visible = true;
                 pType = "E";
                 size = new Tmapv2.Size(24, 38);
+              } else if (properties.pointType == "PP1") {
+                  //도착지 마커
+                  markerImg = "../img/tmap/bike.png";
+                  visible = true;
+                  pType = "E";
+                  size = new Tmapv2.Size(15, 15);
+              } else if (properties.pointType == "PP2") {
+                  //도착지 마커
+                  markerImg = "../img/tmap/bike.png";
+                  visible = true;
+                  pType = "E";
+                  size = new Tmapv2.Size(15, 15);
               } else {
                 //각 포인트 마커
                 markerImg = "";
                 pType = "P";
+                visible = false;
                 size = new Tmapv2.Size(8, 8);
               }
 
@@ -270,7 +307,8 @@ function drawRoute(selectRoute) {
                 position: new Tmapv2.LatLng(routeInfoObj.lat, routeInfoObj.lng),
                 icon: routeInfoObj.markerImage,
                 iconSize: size,
-                map: map,
+                visible : visible,
+                map: map
               });
 
               markerArr.push(marker_p);
@@ -289,14 +327,17 @@ function drawRoute(selectRoute) {
         latlonList.push(pass);
         positionBounds.extend(pass);
       }
+      var busName = checkRoute.route;
+      $("#busName").text(busName)
 
       var strokeColor = "#" + checkRoute.routeColor;
+      $("#busColor").css("background-color", strokeColor)
 
       // 선 스타일 제어하는 부분
       polyline_ = new Tmapv2.Polyline({
         path: latlonList,
         strokeColor: strokeColor,
-        strokeWeight: 5,
+        strokeWeight: 8,
         map: map,
       });
 
@@ -345,7 +386,7 @@ function naviPerson() {
     method: "POST",
     success: function (response) {
       var lastMarker = "walk";
-
+      stationShow("off")
       console.log(response);
 
       // 기존 마커 제거
@@ -436,6 +477,8 @@ function naviPerson() {
 
           positionBounds.extend(lonlat);
 
+          // 여기서 자전거 마커 제어하기
+
           var routeInfoObj = {
             markerImage: markerImg,
             lng: geometry.coordinates[0],
@@ -487,7 +530,7 @@ function drawLine(arrBikePoint, arrWalkPointList) {
   polyline_ = new Tmapv2.Polyline({
     path: arrBikePoint,
     strokeColor: "#000000",
-    strokeWeight: 5,
+    strokeWeight: 8,
     map: map,
   });
 
@@ -500,7 +543,7 @@ function drawLine(arrBikePoint, arrWalkPointList) {
       path: arrWalkPoint,
       strokeColor: "#FF0000",
       strokeStyle: "dot",
-      strokeWeight: 5,
+      strokeWeight: 8,
       map: map,
     });
     resultdrawArr.push(polyline_);
