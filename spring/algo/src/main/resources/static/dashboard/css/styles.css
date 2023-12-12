@@ -10909,16 +10909,16 @@ body {
 }
 
 @media (min-width: 992px) {
-  #layoutSidenav #layoutSidenav_nav {
+  /*#layoutSidenav #layoutSidenav_nav {
     transform: translateX(0);
-  }
+  }*/
   #layoutSidenav #layoutSidenav_content {
-    margin-left: 0;
+    /*margin-left: 0;*/
     transition: margin 0.15s ease-in-out;
   }
-  .sb-sidenav-toggled #layoutSidenav #layoutSidenav_nav {
+  /*.sb-sidenav-toggled #layoutSidenav #layoutSidenav_nav {
     transform: translateX(-225px);
-  }
+  }*/
   .sb-sidenav-toggled #layoutSidenav #layoutSidenav_content {
     margin-left: -225px;
   }

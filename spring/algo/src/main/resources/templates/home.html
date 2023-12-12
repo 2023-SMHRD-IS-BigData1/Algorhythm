@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -11,14 +11,13 @@
 
     <!-- Favicons -->
     <!-- 웹 로고 -->
-    <!-- <link href="assets/img/favicon.png" rel="icon"> -->
 
-    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../assets/img/logo.png" rel="shortcut icon" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,14 +27,14 @@
     <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="../assets/CSS/mapsearch.css">
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="../assets/CSS/mapsearch.css" rel="stylesheet">
+    <script crossorigin="anonymous" src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"></script>
     <script
-        src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=nRUNxPRv9p2mYIfwpEZPC7qHQMtNN5ZB25T3ErVd"></script>
-
+            src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=nRUNxPRv9p2mYIfwpEZPC7qHQMtNN5ZB25T3ErVd"></script>
+    <script crossorigin="anonymous" src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"></script>
     <!-- Template Main CSS File -->
     <link href="../assets/CSS/mapsearch.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/CSS/style.css">
+    <link href="../assets/CSS/style.css" rel="stylesheet">
 
 
     <!-- =======================================================
@@ -49,119 +48,152 @@
 
 <body onload="initTmap();">
 
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top">
-        <div class="container d-flex align-items-center justify-content-between">
+<!-- ======= Header ======= -->
+<header class="fixed-top" id="header">
+    <div class="container d-flex align-items-center justify-content-between">
 
-            <h1 class="logo"><a href="home.html">TABRO</a></h1>
+        <h1 class="logo"><a href="home.html">TABRO</a></h1>
 
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a class="fontC" th:href="@{/home}">타브러 맵</a></li>
-                    <li><a class="fontC" th:href="@{/myPage}">마이페이지</a></li>
-                    <li><a class="fontC" th:href="@{/}">로그아웃</a></li>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
+        <nav class="navbar" id="navbar">
+            <ul>
+                <li><a class="fontC" th:href="@{/home}">
+                    <i class="fa-solid fa-map-location-dot" style="color: #ffffff; font-size: 40px; padding-bottom: 10px;"></i>
+                    타브러 맵
+                    </a>
+                </li>
+                <li><a class="fontC" th:href="@{/myPage}">
+                    <i class="fa-solid fa-user" style="color: #ffffff; font-size: 40px; padding-bottom: 10px;"></i>
+                    마이페이지
+                    </a>
+                </li>
+                <li><a class="fontC" th:href="@{/}">
+                    <i class="fa-solid fa-right-from-bracket" style="color: #ffffff; font-size: 40px; padding-bottom: 10px;"></i>
+                    로그아웃
+                    </a>
+                </li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
 
-        </div>
-    </header><!-- End Header -->
+    </div>
+</header><!-- End Header -->
 
 
-    <!-- ======= Hero Section ======= -->
-    <section id="hero" class="">
-        <div class="mapsearch">
-            <div class="search-box1">
-                <div id="map"></div>
-                <nav class="sidebar">
-                    <div class="search-list-box">
-                        <div class="search-list-title">
-                            <div id="search-field" class="search-start">
-                                <div class="search-icon">
-                                    <i class="fas fa-search" style="font-size: 15px; margin-left: 5px;"></i>
-                                    <input type="text" id='search_keyword' class='text_opt' value=""
-                                        placeholder="출발지를 입력해주세요">
-                                </div>
-                                <div>
-                                    <button onclick="poi1()" id="search1" class='search_submit'
-                                        autocomplete="off">출발지검색</button>
-                                </div>
-
+<!-- ======= Hero Section ======= -->
+<section class="" id="hero">
+    <div class="mapsearch">
+        <div class="search-box1">
+            <div id="map"></div>
+            <nav class="sidebar">
+                <div class="search-list-box">
+                    <div class="search-list-title">
+                        <div class="search-start" id="search-field">
+                            <div class="search-icon">
+                                <i class="fas fa-search" style="font-size: 15px; margin-left: 5px;"></i>
+                                <input class='text_opt' id='search_keyword' placeholder="출발지 입력" type="text"
+                                       value="">
                             </div>
-                            <div id="search-field1" class="search-end">
-                                <div class="search-icon">
-                                    <i class="fas fa-search" style="font-size: 15px; margin-left: 5px;"></i>
-                                    <input type="text" id='search_keyword1' class='text_opt' value=""
-                                        placeholder="도착지를 입력해주세요">
-                                </div>
-                                <div>
-                                    <button onclick="poi2()" id="search2" class='search_submit'>도착지검색</button>
-                                </div>
+                            <div>
+                                <button autocomplete="on" class='search_submit' id="search1"
+                                        onclick="poi1()">검색
+                                </button>
                             </div>
-                            <div class="search-btn-icon">
-                                <ol class="search-btn-list" role="tablist">
-                                    <li class="bus item-search-tab active" role="presentation">
-                                        <button onclick="transport()" type="button" id="bus-navi"
-                                            class="search-btn-tab bus-button" role="tab" aria-selected="true">
-                                            <i class="fa-solid fa-bus bus-icon"></i><span class="bus-text">대중교통</span>
-                                        </button>
-                                    </li>
-                                    <li class="bike item-search-tab" role="presentation">
-                                        <button onclick="person()" type="button" id="navi"
-                                            class="search-btn-tab bike-button" role="tab" aria-selected="false">
-                                            <i class="fa-solid fa-person-biking bike-icon"></i><span
-                                                class="bike-text">자전거</span>
-                                        </button>
-                                    </li>
-                                </ol>
-                            </div>
-                            <div class="menu-list">리스트</div>
-                            <hr>
+
                         </div>
-
-                        <div class="map_wrap">
-                            <div id="menu_wrap" class="list-info-title">
-
+                        <div class="search-end" id="search-field1">
+                            <div class="search-icon">
+                                <i class="fas fa-search" style="font-size: 15px; margin-left: 5px;"></i>
+                                <input class='text_opt' id='search_keyword1' placeholder="도착지 입력" type="text"
+                                       value="">
+                            </div>
+                            <div>
+                                <button autocomplete="on" class='search_submit' id="search2" onclick="poi2()">검색
+                                </button>
                             </div>
                         </div>
+                        <div class="search-btn-icon">
+                            <ol class="search-btn-list" role="tablist">
+                                <li class="bus item-search-tab active" role="presentation">
+                                    <button aria-selected="true" class="search-btn-tab bus-button" id="bus-navi"
+                                            onclick="transport()" role="tab" type="button">
+                                        <i class="fa-solid fa-bus bus-icon"></i><span class="bus-text">대중교통</span>
+                                    </button>
+                                </li>
+                                <li class="bike item-search-tab" role="presentation">
+                                    <button aria-selected="false" class="search-btn-tab bike-button" id="navi"
+                                            onclick="person()" role="tab" type="button">
+                                        <i class="fa-solid fa-person-biking bike-icon"></i><span
+                                            class="bike-text">자전거</span>
+                                    </button>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="menu-list">검색 목록</div>
                     </div>
-                    <div class="side-button" id="toggleButton"><i class="fa-solid fa-chevron-right"></i></div>
-                </nav>
-            </div>
+                    <div class="map_wrap">
+                        <div class="list-info-title" id="menu_wrap"></div>
+                    </div>
+                </div>
+                <div class="side-button" id="toggleButton"><i class="fa-solid fa-chevron-right"></i></div>
+            </nav>
         </div>
-        <div class="kcal-move" style="background-color: black;">
+    </div>
+    <div class="bus-list-info">
+        <ul class="bus-info-color">
+            <li>
+                <span>순환01</span>
+            </li>
+        </ul>
+    </div>
 
+
+    <div class="kcal-move">
+        <ul class="kcal-move-list">
+            <li>
+                <span>이동 거리</span><br>
+                <span>100Km</span>
+            </li>
+            <li>
+                <span>이동 시간</span><br>
+                <span>2시간20분</span>
+            </li>
+            <li>
+                <span>칼로리 소모량</span><br>
+                <span>10000Kcal</span>
+            </li>
+        </ul>
+
+    </div>
+
+</section><!-- End Hero -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+    <div class="container">
+        <h3>TABRO</h3>
+        <p>푸른 하늘을 위한 오늘의 한 걸음</p>
+        <div class="copyright">
+            Algorithm 2023
         </div>
+    </div>
+</footer><!-- End Footer -->
 
-    </section><!-- End Hero -->
+<a class="back-to-top d-flex align-items-center justify-content-center" href="#"><i
+        class="bi bi-arrow-up-short"></i></a>
 
-    <!-- ======= Footer ======= -->
-    <footer id="footer">
-        <div class="container">
-            <h3>TABRO</h3>
-            <p>푸른 하늘을 위한 오늘의 한 걸음</p>
-            <div class="copyright">
-                Algorithm 2023
-            </div>
-        </div>
-    </footer><!-- End Footer -->
+<!-- Vendor JS Files -->
+<!--<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+<script crossorigin="anonymous"
+        src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
+<script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="../assets/vendor/php-email-form/validate.js"></script>
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
-
-    <!-- Vendor JS Files -->
-    <!--<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
-        crossorigin="anonymous"></script>
-    <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="../assets/vendor/php-email-form/validate.js"></script>
-
-    <!-- Template Main JS File -->
-    <script src="../JS/contact.js"></script>
-    <script src="../JS/main.js"></script>
-    <script defer src="../JS/mapsearch.js"></script>
+<!-- Template Main JS File -->
+<script src="../JS/contact.js"></script>
+<script src="../JS/main.js"></script>
+<script defer src="../JS/mapsearch.js"></script>
 </body>
 
 </html>

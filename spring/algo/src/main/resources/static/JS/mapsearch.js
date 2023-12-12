@@ -45,40 +45,6 @@ function initTmap() {
       }
     },
   });
-  // 대중교통 버튼
-  $(".bus-button").click(function () {
-    $("#destination-toggle").addClass("hidden");
-    $("#bike-toggle").addClass("hidden");
-    $("#bus-toggle").removeClass("hidden");
-    $(".bus-button").addClass("active-tab");
-    $(".bike-button").removeClass("active-tab");
-  });
-  // 자전거 버튼
-  $(".bike-button").click(function () {
-    $("#destination-toggle").addClass("hidden");
-    $("#bike-toggle").removeClass("hidden");
-    $("#bus-toggle").addClass("hidden");
-    $(".bike-button").addClass("active-tab");
-    $(".bus-button").removeClass("active-tab");
-  });
-  // 출발지 버튼
-  $("#search1").click(function () {
-    $("#destination-toggle").removeClass("hidden");
-    $("#bike-toggle").addClass("hidden");
-    $("#search-field1").removeClass("hidden");
-    $("#bus-toggle").addClass("hidden");
-    $(".bus-button").removeClass("active-tab");
-    $(".bike-button").removeClass("active-tab");
-  });
-  // 도착지 버튼
-  $("#search2").click(function () {
-    $("#destination-toggle").removeClass("hidden");
-    $("#bike-toggle").addClass("hidden");
-    $("#search-field").removeClass("hidden");
-    $("#bus-toggle").addClass("hidden");
-    $(".bus-button").removeClass("active-tab");
-    $(".bike-button").removeClass("active-tab");
-  });
 }
 
 // 검색 기능 함수 아래 존재
@@ -155,7 +121,7 @@ function naviTransport() {
       drawRoute(selectRoute);
     },
     error: function () {
-      alert("가까운 경로를 찾을수 없습니다.");
+      alert("출발지와 도착지를 입력해주세요");
     },
   });
 } // function[E]
@@ -263,17 +229,17 @@ function drawRoute(selectRoute) {
 
               if (properties.pointType == "S") {
                 //출발지 마커
-                markerImg = "/upload/tmap/marker/pin_r_m_s.png";
+                markerImg = "../img/tmap/start.png";
                 pType = "S";
                 size = new Tmapv2.Size(24, 38);
               } else if (properties.pointType == "E") {
                 //도착지 마커
-                markerImg = "/upload/tmap/marker/pin_r_m_e.png";
+                markerImg = "../img/tmap/end.png";
                 pType = "E";
                 size = new Tmapv2.Size(24, 38);
               } else {
                 //각 포인트 마커
-                markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
+                markerImg = "";
                 pType = "P";
                 size = new Tmapv2.Size(8, 8);
               }
@@ -456,23 +422,6 @@ function naviPerson() {
           var pType = "";
           var size;
 
-          if (properties.pointType == "S") {
-            //출발지 마커
-            markerImg = "/upload/tmap/marker/pin_r_m_s.png";
-            pType = "S";
-            size = new Tmapv2.Size(24, 38);
-          } else if (properties.pointType == "E") {
-            //도착지 마커
-            markerImg = "/upload/tmap/marker/pin_r_m_e.png";
-            pType = "E";
-            size = new Tmapv2.Size(24, 38);
-          } else {
-            //각 포인트 마커
-            markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
-            pType = "P";
-            size = new Tmapv2.Size(8, 8);
-          }
-
           // 경로들의 결과값들을 포인트 객체로 변환
           var latlon = new Tmapv2.Point(
             geometry.coordinates[0],
@@ -494,10 +443,11 @@ function naviPerson() {
             pointType: pType,
           };
 
-          // Marker 추가
+          // Marker 제어하는 곳
           marker_p = new Tmapv2.Marker({
             position: new Tmapv2.LatLng(routeInfoObj.lat, routeInfoObj.lng),
             icon: routeInfoObj.markerImage,
+            visible: false,
             iconSize: size,
             map: map,
           });
@@ -523,6 +473,9 @@ function naviPerson() {
           error
       );
     },
+    error: function () {
+          alert("출발지와 도착지를 입력해주세요");
+        },
   });
 }
 
@@ -603,7 +556,7 @@ function poiSearch(searchKeyword) {
         var markerImg = "../img/tmap/"+(k+1)+".png"
         // 마커 생성
         var lonlat = new Tmapv2.LatLng(noorLat, noorLon);
-        var iconSize = new Tmapv2.Size(20, 40);
+        var iconSize = new Tmapv2.Size(20, 37);
         marker = new Tmapv2.Marker({
           position: lonlat,
           icon: markerImg,
@@ -624,8 +577,11 @@ function poiSearch(searchKeyword) {
 
         // 출력 리스트 만들기
         listHtml =
-          listHtml +
+        listHtml +
           `<div id='listNum${listCnt}' onclick="getLatLon(${listCnt})">`;
+        listHtml = listHtml + `<hr>`;
+        listHtml = listHtml + `<div>`;
+        listHtml = listHtml + `<img src='../img/tmap/${k + 1}.png'>`;
         listHtml = listHtml + `<ul id='placeList${listCnt}'>`;
         listHtml = listHtml + `<li>${name}</li>`;
         listHtml = listHtml + `<li>${lowerAddrName}</li>`;
@@ -638,7 +594,7 @@ function poiSearch(searchKeyword) {
           listHtml +
           `<div id='lon${listCnt}' style='display: none;'>${noorLon}</div>`;
         listHtml = listHtml + `</ul>`;
-        listHtml = listHtml + `<hr>`;
+        listHtml = listHtml + `</div>`;
         listHtml = listHtml + `</div>`;
       } // for[e]
 
@@ -656,6 +612,23 @@ function poiSearch(searchKeyword) {
 }
 
 function getLatLon(listCnt) {
+// 클릭한 리스트의 명칭을 가져와서 해당 입력창에 출력
+var name = $(`#placeList${listCnt} li:first-child`).text();
+// 시작지와 도착지를 구분하여 적절한 입력창에 명칭을 출력
+ if (dataInfo === "start") {
+    $("#search_keyword").val(name);
+     $("#search_keyword").css({
+     "background-color":"rgba(0, 255, 106, 0.75)",
+     "border-radius":"5px"
+     });
+  } else if (dataInfo === "end") {
+    $("#search_keyword1").val(name);
+    $("#search_keyword1").css({
+    "background-color":"rgba(0, 255, 106, 0.75)",
+    "border-radius":"5px"
+    });
+  }
+
   if (dataInfo == "start") {
     startLatData = parseFloat($(`#lat${listCnt}`).text());
     startLonData = parseFloat($(`#lon${listCnt}`).text());
@@ -667,20 +640,57 @@ function getLatLon(listCnt) {
   }
 }
 
-//사이드바 토글
-document.addEventListener("DOMContentLoaded", function () {
-  var toggleButton = document.getElementById("toggleButton");
-  var sidebar = document.querySelector(".sidebar");
-  var searchListBox = document.querySelector(".search-list-box");
+// 대중교통, 자전거 버튼 클릭시 토글
+ document.addEventListener("DOMContentLoaded", function () {
+   var toggleButton = document.getElementById("toggleButton");
+   var sidebar = document.querySelector(".sidebar");
+   var searchListBox = document.querySelector(".search-list-box");
 
-  toggleButton.addEventListener("click", function () {
-    // 사이드바 및 검색 목록 상자에 close 클래스 토글
-    sidebar.classList.toggle("open");
-    searchListBox.classList.toggle("open");
+   toggleButton.addEventListener("click", function () {
+     // 사이드바 및 검색 목록 상자에 open/close 클래스 토글
+     sidebar.classList.toggle("open");
+     searchListBox.classList.toggle("open");
 
-    // 버튼 아이콘에 rotated 클래스 토글
-    toggleButton.classList.toggle("rotated");
-  });
-});
+     // 버튼 아이콘에 rotated 클래스 토글
+     toggleButton.classList.toggle("rotated");
+   });
+
+   var busButton = document.getElementById("bus-navi");
+   var bikeButton = document.getElementById("navi");
+   var busListInfo = document.querySelector(".bus-list-info");
+
+   busButton.addEventListener("click", function () {
+     // 다른 버튼 클릭 시 사이드바 닫기
+     sidebar.classList.remove("open");
+     searchListBox.classList.remove("open");
+     toggleButton.classList.remove("rotated");
+     busListInfo.style.display = "block";
+   });
+
+   bikeButton.addEventListener("click", function () {
+     // 다른 버튼 클릭 시 사이드바 닫기
+     sidebar.classList.remove("open");
+     searchListBox.classList.remove("open");
+     toggleButton.classList.remove("rotated");
+     busListInfo.style.display = "none";
+   });
+ });
 
 //검색시 엔터기능
+var input1 = document.getElementById("search_keyword");
+var input2 = document.getElementById("search_keyword1");
+var button1 = document.getElementById("search1");
+var button2 = document.getElementById("search2");
+
+function handleEnterKeyPress(input, button, nextInput) {
+    return function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            button.click();
+            input.blur();
+            nextInput.focus();
+        }
+    };
+}
+input1.addEventListener("keyup", handleEnterKeyPress(input1, button1, input2));
+input2.addEventListener("keyup", handleEnterKeyPress(input2, button2));
