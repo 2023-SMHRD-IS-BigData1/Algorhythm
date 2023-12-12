@@ -295,7 +295,7 @@ async def predict(item: Item):
 
     final_station=[]
     # 일별 총 대여소 날씨 데이터 만들기
-    for i in range(3, 8):
+    for i in range(1, 8):
 
         WP = new_combined_df.iloc[:i]
         # 복제할 횟수
@@ -306,6 +306,8 @@ async def predict(item: Item):
         final_station = pd.concat([new_station, new_WP], axis=1)
 
         final_station = final_station[['날짜', 'use_start_lng', 'use_start_lat', '최저기온(°C)', '최고기온(°C)', '강수유무', '주간/주말']]
+        # 날짜를 오름차순으로 정렬
+        final_station = final_station.sort_values(by='날짜')
     # 결과 확인
     print('$$$$$$$$$일주일 데이터 test$$$$$$$$')
     print(final_station)
@@ -344,28 +346,60 @@ async def predict(item: Item):
 
 # ================ 대여,반납 차트 values ===================
     # 예측값 배열 (가정)
-    use_predictions = use_predict  # 총 3075개의 예측값
+    use_predictions = use_predict  # 총 4305개의 예측값
 
-    # 배열을 2D 배열로 변환 (615개씩 5개의 열로)
+    # 배열을 2D 배열로 변환 (615개씩 7개의 열로)
     use_predictions_2d = use_predictions.reshape(-1, 615)
-
+    use_Predictions=[]
     # 각 행은 하루의 데이터를 나타냄 / 대여자 총합
     for i, daily_predictions in enumerate(use_predictions_2d-2, start=1):
         print(f"{i}일차 대여자 총합 :", np.sum(daily_predictions))
+        use_Predictions.append(np.sum(daily_predictions))
+    print(use_Predictions)
 
     # 예측값 배열 (가정)
-    return_predictions = return_predict  # 총 3075개의 예측값
-
-    # 배열을 2D 배열로 변환 (615개씩 5개의 열로)
+    return_predictions = return_predict  # 총 4305개의 예측값
+    # 배열을 2D 배열로 변환 (615개씩 7개의 열로)
     return_predictions_2d = return_predictions.reshape(-1, 615)
+    return_Predictions=[]
     # 반납자 총합
-    for i, daily_predictions in enumerate(return_predictions_2d-2, start=1):
-        print(f"{i}일차 반납자 총합 :", np.sum(daily_predictions))
+    for i, end_predictions in enumerate(return_predictions_2d-2, start=1):
+        print(f"{i}일차 반납자 총합 :", np.sum(end_predictions))
+        return_Predictions.append(np.sum(end_predictions))
+    print(return_Predictions)
     print('===============================================================================')
 
+    # 스프링부트 서버 URL
+    url = "http://localhost:8087/dashboard"
+    # JSON 변환
 
+    # 소수점 2자리까지만 변환하는 함수
+    def format_float(value):
+        return round(value, 2)
+    # =================================================================
+    # 일주일 일별 총 대여/반납 이용량
+    # numpy.float32 값을 float로 변환
+    return_Predictions = [float(value) for value in return_Predictions]
+    # JSON 변환
+    return_predictions_json = json.dumps(return_Predictions)
+    # JSON 변환
+    # numpy.float32 값을 float로 변환
+    use_Predictions = [float(value) for value in use_Predictions]
+    # JSON 변환
+    use_predictions_json = json.dumps(use_Predictions)
 
-
+    # 출력
+    print(return_predictions_json)
+    data = {
+        "use_Predictions": use_predictions_json,
+        "return_Predictions": return_predictions_json
+    }
+    #
+    print("============================================================================================")
+    # 일간 대여소 이용률 Top5
+    use_predictions = use_predict # 총 4305개의 예측값
+    return_predictions = return_predict  # 총 4305개의 예측값
+    final_station
 
 
 
@@ -379,8 +413,26 @@ async def predict(item: Item):
     try:
         # 머신러닝 모델을 넣는 공간입니다.
 
-        response = {"": 5517.143}
-        return response
+        # 딕셔너리인지 확인
+        if isinstance(data, dict):
+            response_data = data
+        else:
+            # JSON 문자열을 파이썬 딕셔너리로 로드
+            response = data
+
+        # 응답 확인
+        use_predictions = response_data.get("use_Predictions", [])
+        return_predictions = response_data.get("return_Predictions", [])
+
+        if use_predictions and return_predictions:
+            print("데이터 전송 성공")
+            print("use_Predictions:", use_predictions)
+            print("return_Predictions:", return_predictions)
+        else:
+            print("데이터 전송 실패.")
+            print("에러 메시지:", response_data.get("error_message", "Unknown error"))
+
+        return response_data
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
