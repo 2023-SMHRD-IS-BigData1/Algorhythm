@@ -154,7 +154,6 @@ public class TmapService {
 
         // combine
         HttpEntity<String> request = new HttpEntity<>(jsonBody, headers);
-
         ResponseEntity<String> response = restTemplate.exchange(URL, HttpMethod.POST, request, String.class);
 
         return response.getBody();
@@ -210,13 +209,12 @@ public class TmapService {
          Params      : 출발지 위도경도, 도착지 위도경도
          Returns     : 대중교통 도로 기준 길 JSON 데이터
         */
-        RestTemplate restTemplate = new RestTemplate();
-
-        List<Latlon> data = latlon.getLatlonList().getLatlon();
-
         // appKey, URL
         String appKey = "nRUNxPRv9p2mYIfwpEZPC7qHQMtNN5ZB25T3ErVd";
         String URL = "https://apis.openapi.sk.com/transit/routes";
+
+        RestTemplate restTemplate = new RestTemplate();
+        List<Latlon> data = latlon.getLatlonList().getLatlon();
 
         // header 세팅
         HttpHeaders headers = new HttpHeaders();
@@ -243,8 +241,8 @@ public class TmapService {
 
         // combine
         HttpEntity<String> request = new HttpEntity<>(jsonBody, headers);
-
-        ResponseEntity<String> response = restTemplate.exchange(URL, HttpMethod.POST, request, String.class);
+        ResponseEntity<String> response =
+                restTemplate.exchange(URL, HttpMethod.POST, request, String.class);
 
         return response.getBody();
     }
@@ -262,14 +260,18 @@ public class TmapService {
             object = mapper.readValue(json, NaviTransportResponse.class);
 
         } catch (IOException e) {
-            log.debug("Failed to parse WeatherResponse from JSON", e);
+            log.debug("Failed to parse NaviTransportResponse from JSON", e);
         }
 
         return object;
     }
 
     public NaviTransportResponse setLatLon(NaviTransportResponse object) {
-
+        /*
+         Description : 대중교통 길찾기에서 걷는 부분 길을 좌표로 변환
+         Params      : NaviTransportResponse (변환 전)
+         Returns     : NaviTransportResponse (Tmap에 적용을 위해 길 점 객체로 변환)
+        */
         List<Itineraries> dataList = object.getMetaData().getPlan().getItineraries();
         for (Itineraries data : dataList) {
 
@@ -282,11 +284,9 @@ public class TmapService {
                             .lat(leg.getStart().getLat())
                             .lon(leg.getStart().getLon())
                             .build());
-
                     try {
                         for (Steps step : leg.getSteps()) {
                             String[] road = step.getLinestring().split(" ");
-
                             // 경로 latlon
                             for (String idx : road) {
                                 Latlons latlons = new Latlons();
@@ -295,7 +295,6 @@ public class TmapService {
                                 latlons.setLat(Double.parseDouble(latlon[1]));
                                 setLatLon.add(latlons);
                             }
-
                         }
                     } catch (Exception e) {
                         log.debug("No, steps");
@@ -331,9 +330,6 @@ public class TmapService {
                 }
             }
         }
-
-
-
         return object;
     }
 
@@ -462,7 +458,6 @@ public class TmapService {
          Params      : 비교 좌표의 위도, 경도 / 정거장의 위도, 경도
          Returns     : 비교 좌표와의 떨어진 거리 (m)
         */
-
         final int R = 6371; // 지구의 반경(km)
 
         double latDistance = Math.toRadians(lat2 - lat1);
