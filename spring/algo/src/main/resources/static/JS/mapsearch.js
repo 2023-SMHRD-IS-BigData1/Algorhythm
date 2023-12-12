@@ -660,15 +660,24 @@ var name = $(`#placeList${listCnt} li:first-child`).text();
    var busListInfo = document.querySelector(".bus-list-info");
 
    busButton.addEventListener("click", function () {
-     // 다른 버튼 클릭 시 사이드바 닫기
+     // 버스 버튼 클릭 시 사이드바 닫기
      sidebar.classList.remove("open");
      searchListBox.classList.remove("open");
      toggleButton.classList.remove("rotated");
-     busListInfo.style.display = "block";
-   });
+
+     // 출발지와 도착지가 입력되었는지 확인
+       if (startLatData && startLonData && endLatData && endLonData) {
+         // 출발지와 도착지가 입력되었을 때의 로직
+         busListInfo.style.display = "block";
+         naviTransport(); // 길찾기 서비스 호출
+       } else {
+         // 출발지 또는 도착지가 입력되지 않았을 때의 로직
+         busListInfo.style.display = "none"; // 입력이 안되어 있으면 숨기기
+       }
+    });
 
    bikeButton.addEventListener("click", function () {
-     // 다른 버튼 클릭 시 사이드바 닫기
+     // 자전거 버튼 클릭 시 사이드바 닫기
      sidebar.classList.remove("open");
      searchListBox.classList.remove("open");
      toggleButton.classList.remove("rotated");
