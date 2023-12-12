@@ -41,7 +41,7 @@ public class User {
 
     // 유저 이름
     @Column(name = "user_age")
-    private Integer userAge;
+    private String userAge;
 
     // 유저 가입일
     @Column(name = "joined_at", nullable = false, updatable = false)
@@ -73,7 +73,7 @@ public class User {
 
     @Builder
     public User(Long userIdx, String userId, String userPw, String userNickname,
-                double userKm, Integer userAge, String userGender,
+                double userKm, String userAge, String userGender,
                 String userAddr) {
         this.userIdx = userIdx;
         this.userId = userId;

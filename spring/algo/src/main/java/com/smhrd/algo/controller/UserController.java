@@ -26,13 +26,19 @@ public class UserController {
         // Id의 중복이 없다면
         if (userService.idDuplicateCheck(userDTO.getUserId())) {
             User newUser = userService.createUser(userDTO.getUserId(), userDTO.getUserPw(), userDTO.getUserNickname());
-            redirectAttributes.addAttribute("message", true);
+            redirectAttributes.addFlashAttribute("message", true);
             return "redirect:/";
 
         } else {
-            redirectAttributes.addAttribute("message", false);
-            return "login";
+            redirectAttributes.addFlashAttribute("message", false);
+            return "redirect:/";
         }
+    }
+
+    @GetMapping()
+    @ResponseBody
+    public Boolean userIDIsDuplicate(@RequestParam String userId) {
+        return userService.idDuplicateCheck(userId);
     }
 
     @PostMapping()
@@ -46,14 +52,8 @@ public class UserController {
             return "home";
 
         } else { // 로그인 실패 시 실패 메시지 반환
-            redirectAttributes.addAttribute("message", false);
-            return "login";
+            redirectAttributes.addFlashAttribute("message", false);
+            return "redirect:/";
         }
-    }
-
-    @PostMapping("/ride")
-    public String updateUser(@ModelAttribute User user, double addKm) {
-        userService.updateUser(user, addKm);
-        return "redirect:/myPage";
     }
 }
