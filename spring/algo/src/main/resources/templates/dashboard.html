@@ -115,10 +115,25 @@
                                       useDirtyRect: false
                                     });
                                     var app = {};
-
                                     var option;
 
-                                    option = {
+                                    // 대여/반납 주간 총합 데이터
+                                    var RentalData = null;
+
+                                    $.ajax({
+                                    type: "get",
+                                    url: " ",
+                                    data: "json",
+                                    success: function(reponse){
+
+                                        },
+                                        error: function(error){
+                                            console.log("error");
+                                    });
+
+
+
+                                  option = {
                                   tooltip: {
                                     trigger: 'axis',
                                     axisPointer: {
