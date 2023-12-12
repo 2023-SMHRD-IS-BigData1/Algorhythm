@@ -51,7 +51,7 @@ h6 {
   height: 40px;
   border-radius: 50px;
   transition: all 0.4s;
-
+  border: solid 1px white;
 }
 
 .back-to-top i {
