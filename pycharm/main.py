@@ -43,7 +43,7 @@ async def predict(item: Item):
     """
 
     # 이건 데이터가 너무 큼
-    # print(item.json[2]) #  1,2일 날씨데이터
+    print(item.json[0]) #  1,2일 날씨데이터
     threeTempData = json.loads(item.json[0])
     threeWeatherData = json.loads(item.json[1])
     oneTempData = json.loads(item.json[2])
@@ -323,8 +323,45 @@ async def predict(item: Item):
 
 # =================================================================================================================
 
-    # print(oneWeather_Df)
-    # print(return_station)
+    # 대여 예측모델 파일 불러오기
+    print("모델 불러오기")
+    use_model = pickle.load(open('XGB최종모델(12.11).pkl', 'rb'))
+    print(type(use_model))
+    print("예측하기")
+
+    use_predict = use_model.predict(final_station)
+    use_predict = np.round(use_predict, 2)
+    print(use_predict)
+
+    # # 반납 예측모델 파일 불러오기
+    print("모델 불러오기")
+    return_model = pickle.load(open("XGB최종모델_반납(12.11).pkl", "rb"))
+    print("예측하기")
+    return_predict = return_model.predict(return_station)
+    return_predict = np.round(return_predict, 2)
+    print(return_predict)
+
+
+# ================ 대여,반납 차트 values ===================
+    # 예측값 배열 (가정)
+    use_predictions = use_predict  # 총 3075개의 예측값
+
+    # 배열을 2D 배열로 변환 (615개씩 5개의 열로)
+    use_predictions_2d = use_predictions.reshape(-1, 615)
+
+    # 각 행은 하루의 데이터를 나타냄 / 대여자 총합
+    for i, daily_predictions in enumerate(use_predictions_2d-2, start=1):
+        print(f"{i}일차 대여자 총합 :", np.sum(daily_predictions))
+
+    # 예측값 배열 (가정)
+    return_predictions = return_predict  # 총 3075개의 예측값
+
+    # 배열을 2D 배열로 변환 (615개씩 5개의 열로)
+    return_predictions_2d = return_predictions.reshape(-1, 615)
+    # 반납자 총합
+    for i, daily_predictions in enumerate(return_predictions_2d-2, start=1):
+        print(f"{i}일차 반납자 총합 :", np.sum(daily_predictions))
+    print('===============================================================================')
 
 
 
@@ -332,58 +369,17 @@ async def predict(item: Item):
 
 
 
+    # 3일부터 10일까지의 날짜 계산
+    #dates = [datetime.now() + timedelta(days=i) for i in range(1, 8)]
+    #formatted_dates = [date.strftime("%m-%d %H:00:00") for date in dates]
+    #
+    #
 
-
-#     # 대여 예측모델 파일 불러오기
-#     print("모델 불러오기")
-#     use_model = pickle.load(open('xgb_대여모델2.pkl', 'rb'))
-#
-#     print(type(use_model))
-#
-#     print("예측하기")
-#
-#     use_predict = use_model.predict(final_station)
-#     print(use_predict)
-#
-#     # # 반납 예측모델 파일 불러오기
-#     return_model = pickle.load(open("xgb_반납모델2.pkl", "rb"))
-#     return_predict = return_model.predict(return_station)
-#     print(return_predict)
-#
-#     # 예측값 배열 (가정)
-#     use_predictions = use_predict  # 총 3075개의 예측값
-#
-#     # 배열을 2D 배열로 변환 (615개씩 5개의 열로)
-#     use_predictions_2d = use_predictions.reshape(-1, 615)
-#
-#     # 각 행은 하루의 데이터를 나타냄 / 대여자 총합
-#     for i, daily_predictions in enumerate(use_predictions_2d, start=1):
-#         print(f"{i+2}일차 대여자 총합 :", np.sum(daily_predictions))
-#
-#     # 예측값 배열 (가정)
-#     return_predictions = return_predict  # 총 3075개의 예측값
-#
-#     # 배열을 2D 배열로 변환 (615개씩 5개의 열로)
-#     return_predictions_2d = return_predictions.reshape(-1, 615)
-#     # 반납자 총합
-#     for i, daily_predictions in enumerate(return_predictions_2d, start=1):
-#         print(f"{i+2}일차 반납자 총합 :", np.sum(daily_predictions))
-#
-#     # # 3일부터 10일까지의 날짜 계산
-#     # dates = [datetime.now() + timedelta(days=i) for i in range(3, 11)]
-#     # formatted_dates = [date.strftime("%m-%d %H:00:00") for date in dates]
-#     #
-#     #
-
-
-
-
-
-
+    # df.to_json('test.json', orient='')
     try:
         # 머신러닝 모델을 넣는 공간입니다.
 
-        response = {"3일차 대여자 총합": 5517.143}
+        response = {"": 5517.143}
         return response
 
     except Exception as e:
