@@ -154,7 +154,7 @@
                                       emphasis: {
                                         focus: 'series'
                                       },
-                                      data: [3823, 4156, 3210, 4002, 3201, 5023, 4732]
+                                      data: [4823, 4156, 5210, 5002, 3201, 3023, 2732]
                                     },
 
                                     {
@@ -170,7 +170,7 @@
                                       emphasis: {
                                         focus: 'series'
                                       },
-                                      data: [3542, 4103, 2947, 4123, 2845, 5193, 5123]
+                                      data: [4542, 4103, 4947, 5123, 3145, 3193, 2623]
                                     }
                                   ]
                                 };
@@ -187,14 +187,14 @@
                     <div class="col-xl-6">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fa-solid fa-chart-bar"></i>
-                                일별 정거장 대여 / 반납 TOP7 이용 예측 차트
+                                <i class="fa-solid fa-chart-column"></i>
+                                월별 이용자 예측 차트
                             </div>
                             <div>
-                                <div id="container2" style="height: 65vh"></div>
+                                <div id="container3" style="height: 65vh;"></div>
                                 <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
                                 <script type="text/javascript">
-                                    var dom = document.getElementById('container2');
+                                    var dom = document.getElementById('container3');
                                     var myChart = echarts.init(dom, null, {
                                       renderer: 'canvas',
                                       useDirtyRect: false
@@ -204,17 +204,11 @@
                                     var option;
 
                                     option = {
-                                  title: {
-                                    text: '2023년 12월 13일'
-                                  },
                                   tooltip: {
                                     trigger: 'axis',
                                     axisPointer: {
                                       type: 'shadow'
                                     }
-                                  },
-                                  legend: {
-                                    data: ['대여', '반납']
                                   },
                                   grid: {
                                     left: '3%',
@@ -222,47 +216,35 @@
                                     bottom: '3%',
                                     containLabel: true
                                   },
-                                  xAxis:
-                                      {
-                                      type: 'value',
-                                    },
-
-                                  yAxis:
-                                      {
+                                  xAxis: [
+                                    {
                                       type: 'category',
-                                      inverse: true,
-                                      data: [
-                                        '어진동_푸르지오시티2차',
-                                        '어진동_푸르지로시티앞',
-                                        '어진동_세종파이낸스 2차 서편',
-                                        '어진동_행정안전부 별관',
-                                        '어진동_고용노동부BRT',
-                                        '나성동_행복의아침 빌딩',
-                                        '어진동_산자부앞BRT'
-                                        ]
-                                      },
+                                      data: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                                      axisTick: {
+                                        alignWithLabel: true
+                                      }
+                                    }
+                                  ],
+                                  yAxis: [
+                                    {
+                                      type: 'value'
+                                    }
+                                  ],
                                   series: [
                                     {
-                                      name: '대여',
+                                      name: '월별 이용자수',
                                       type: 'bar',
-                                      color: '#3de5a5',
+                                      barWidth: '60%',
+                                      stack: 'Total',
+                                      color: '#66c1c4',
                                       label: {
                                         fontSize: 20,
+                                        fontFamily: 'Ghanachocolate',
+                                        position: 'top',
                                         show: true
                                       },
-                                      data: [106, 84, 71, 69, 68, 64, 61]
-                                    },
-                                    {
-                                      name: '반납',
-                                      type: 'bar',
-                                      color: '#e487f2',
-                                      label: {
-                                        fontSize: 20,
-                                        show: true
-                                      },
-                                      data: [90, 70, 70, 70, 67, 66, 62]
-                                    },
-
+                                      data: [76356, 89994, 143576, 215464, 288748, 215464, 202935, 217851, 278985, 257637, 130189, 94217]
+                                    }
                                   ]
                                 };
 
