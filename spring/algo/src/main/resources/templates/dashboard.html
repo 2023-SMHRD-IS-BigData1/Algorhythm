@@ -117,22 +117,6 @@
                                     var app = {};
                                     var option;
 
-                                    // 대여/반납 주간 총합 데이터
-                                    var RentalData = null;
-
-                                    $.ajax({
-                                    type: "get",
-                                    url: " ",
-                                    data: "json",
-                                    success: function(reponse){
-
-                                        },
-                                        error: function(error){
-                                            console.log("error");
-                                    });
-
-
-
                                   option = {
                                   tooltip: {
                                     trigger: 'axis',
@@ -151,7 +135,7 @@
                                   },
                                   xAxis: {
                                      type: 'category',
-                                    data: ['정거장1', '정거장2', '정거장3', '정거장4', '정거장5', '정거장6', '정거장7']
+                                    data: ['월', '화', '수', '목', '금', '토', '일']
 
                                   },
                                   yAxis: {
@@ -170,7 +154,7 @@
                                       emphasis: {
                                         focus: 'series'
                                       },
-                                      data: [420, 432, 501, 334, 690, 430, 220]
+                                      data: [3823, 4156, 3210, 4002, 3201, 5023, 4732]
                                     },
 
                                     {
@@ -185,7 +169,7 @@
                                       emphasis: {
                                         focus: 'series'
                                       },
-                                      data: [320, 302, 301, 334, 390, 330, 320]
+                                      data: [3542, 4103, 2947, 4123, 2845, 5193, 5123]
                                     }
                                   ]
                                 };
@@ -202,66 +186,87 @@
                     <div class="col-xl-6">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fa-solid fa-chart-line"></i>
-                                월별 이용 예측 차트
+                                <i class="fa-solid fa-chart-bar"></i>
+                                일별 정거장 대여 / 반납 TOP7 이용 예측 차트
                             </div>
                             <div>
-                                <div id="container" style="height: 65vh;"></div>
-                                <script src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"
-                                        type="text/javascript"></script>
+                                <div id="container2" style="height: 65vh"></div>
+                                <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
                                 <script type="text/javascript">
-                                    var dom = document.getElementById('container');
+                                    var dom = document.getElementById('container2');
                                     var myChart = echarts.init(dom, null, {
-                                        renderer: 'canvas',
-                                        useDirtyRect: false
+                                      renderer: 'canvas',
+                                      useDirtyRect: false
                                     });
                                     var app = {};
 
                                     var option;
 
                                     option = {
-                                        title: {
-                                        },
-                                        tooltip: {
-                                            trigger: 'axis'
-                                        },
-                                        legend: {
-                                            data: ['월별 이용 예측']
-                                        },
-                                        grid: {
-                                            left: '3%',
-                                            right: '4%',
-                                            bottom: '3%',
-                                            containLabel: true
-                                        },
-                                        toolbox: {
-                                        },
-                                        xAxis: {
-                                            type: 'category',
-                                            boundaryGap: false,
-                                            data: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
-                                        },
-                                        yAxis: {
-                                            type: 'value'
-                                        },
-                                        series: [
-                                            {
-                                                name: '월별 이용 예측',
-                                                type: 'line',
-                                                stack: 'Total',
-                                                color: '#444eff',
-                                                label: {
-                                                    fontSize: 20,
-                                                    show: true,
-                                                    position: 'top'
-                                                },
-                                                data: [430, 325, 564, 185, 156, 550, 297, 374, 359, 589, 415, 216]
-                                            },
+                                  title: {
+                                    text: '2023년 12월 13일'
+                                  },
+                                  tooltip: {
+                                    trigger: 'axis',
+                                    axisPointer: {
+                                      type: 'shadow'
+                                    }
+                                  },
+                                  legend: {
+                                    data: ['대여', '반납']
+                                  },
+                                  grid: {
+                                    left: '3%',
+                                    right: '4%',
+                                    bottom: '3%',
+                                    containLabel: true
+                                  },
+                                  xAxis:
+                                      {
+                                      type: 'value',
+                                    },
+
+                                  yAxis:
+                                      {
+                                      type: 'category',
+                                      inverse: true,
+                                      data: [
+                                        '어진동_푸르지오시티2차',
+                                        '어진동_푸르지로시티앞',
+                                        '어진동_세종파이낸스 2차 서편',
+                                        '어진동_행정안전부 별관',
+                                        '어진동_고용노동부BRT',
+                                        '나성동_행복의아침 빌딩',
+                                        '어진동_산자부앞BRT'
                                         ]
-                                    };
+                                      },
+                                  series: [
+                                    {
+                                      name: '대여',
+                                      type: 'bar',
+                                      color: '#3de5a5',
+                                      label: {
+                                        fontSize: 20,
+                                        show: true
+                                      },
+                                      data: [106, 84, 71, 69, 68, 64, 61]
+                                    },
+                                    {
+                                      name: '반납',
+                                      type: 'bar',
+                                      color: '#e487f2',
+                                      label: {
+                                        fontSize: 20,
+                                        show: true
+                                      },
+                                      data: [90, 70, 70, 70, 67, 66, 62]
+                                    },
+
+                                  ]
+                                };
 
                                     if (option && typeof option === 'object') {
-                                        myChart.setOption(option);
+                                      myChart.setOption(option);
                                     }
 
                                     window.addEventListener('resize', myChart.resize);
