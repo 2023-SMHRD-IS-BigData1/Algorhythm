@@ -39,7 +39,6 @@ public class ApiController {
     @ResponseBody
     public NaviTransportResponse getTransportRoute(@RequestBody LatLonRequest latlon) {
         String json = ts.naviTransport(latlon);
-        log.debug(json);
         NaviTransportResponse object = ts.convertToTransportObject(json);
         return ts.setLatLon(object);
     }
