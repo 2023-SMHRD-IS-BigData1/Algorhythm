@@ -434,3 +434,6 @@ hr {
 .bus-info-color li span {
     font-size: 12px;
 }
+li.bus_txt {
+    font-size: smaller;
+}

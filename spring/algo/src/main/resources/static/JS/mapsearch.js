@@ -164,8 +164,9 @@ function drawRoute(selectRoute) {
 
   // 지도 크기 조절 및 이동을 위한 객체 생성
   var positionBounds = new Tmapv2.LatLngBounds();
-
+  var busRouteCnt = 0;
   for (let checkRoute of route) {
+
     if (checkRoute.mode == "WALK") {
       // 보행자 걷는 거리 받아와서 비교후 자전거로 안내하기
       for (let latlon of checkRoute.latlons) {
@@ -331,11 +332,28 @@ function drawRoute(selectRoute) {
         latlonList.push(pass);
         positionBounds.extend(pass);
       }
-      var busName = checkRoute.route;
-      $("#busName").text(busName)
 
+      var busName = checkRoute.route;
       var strokeColor = "#" + checkRoute.routeColor;
-      $("#busColor").css("background-color", strokeColor)
+      var busTxt = ""
+      if (busRouteCnt == 0) {
+        busTxt = busTxt + "<li class='bus_txt' style='background-color:"+strokeColor+"';"
+        busTxt = busTxt + "<span>" + busName + "</span>"
+        busTxt = busTxt + "</li>"
+        $(".bus-info-color").html(busTxt)
+        console.log("work?")
+      } else {
+        busTxt = busTxt + "<li class='bus_txt' style='background-color:"+strokeColor+"';"
+        busTxt = busTxt + "<span>" + busName + "</span>"
+        busTxt = busTxt + "</li>"
+        $(".bus-info-color").append(busTxt)
+        console.log("work!")
+      }
+      busRouteCnt = busRouteCnt + 1
+
+//      $("#busName").text(busName)
+//
+//      $("#busColor").css("background-color", strokeColor)
 
       // 선 스타일 제어하는 부분
       polyline_ = new Tmapv2.Polyline({
