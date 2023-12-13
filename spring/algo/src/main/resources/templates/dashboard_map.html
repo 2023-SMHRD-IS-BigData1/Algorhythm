@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -17,7 +17,7 @@
 <body class="sb-nav-fixed" onload="initTmap();">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark header-t">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3 header-title" href="dashboard.html">TABRO</a>
+    <a class="navbar-brand ps-3 header-title" th:href="@{/dashboard}">TABRO</a>
 
     <!-- Sidebar Toggle-->
 
@@ -31,7 +31,7 @@
             <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown"
                role="button"><i class="fas fa-user fa-fw"></i></a>
             <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                <li><a class="dropdown-item" th:href="@{/user/logout}">로그아웃</a></li>
             </ul>
         </li>
     </ul>
@@ -63,13 +63,13 @@
                     <div aria-labelledby="headingTwo" class="collapse" data-bs-parent="#sidenavAccordion"
                          id="collapsePages">
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                            <a class="nav-link" href="Station_charts.html">
+                            <a class="nav-link" th:href="@{/dashboard/station-chart}">
                                 <div class="sb-nav-link-icon">
                                     <i class="fas fa-chart-area"></i>
                                 </div>
                                 대여/반납 예측 차트
                             </a>
-                            <a class="nav-link" href="day_charts.html">
+                            <a class="nav-link" th:href="@{/dashboard/month-chart}">
                                 <div class="sb-nav-link-icon">
                                     <i class="fas fa-chart-area"></i>
                                 </div>
@@ -78,7 +78,7 @@
                         </nav>
                     </div>
                     <div class="sb-sidenav-menu-heading">지도</div>
-                    <a class="nav-link" href="dashboard_map.html">
+                    <a class="nav-link" th:href="@{/dashboard/map}">
                         <div class="sb-nav-link-icon">
                             <i class="fa-solid fa-map"></i>
                         </div>

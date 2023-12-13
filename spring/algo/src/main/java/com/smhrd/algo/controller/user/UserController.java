@@ -1,4 +1,4 @@
-package com.smhrd.algo.controller;
+package com.smhrd.algo.controller.user;
 
 import com.smhrd.algo.model.dto.user.UserDTO;
 import com.smhrd.algo.model.entity.User;
@@ -49,11 +49,22 @@ public class UserController {
         
         if (user != null) { // 로그인 성공 시 session에 저장
             session.setAttribute("user", user);
-            return "home";
+
+            if (user.getUserCode().equals("C")) {
+                return "redirect:/home";
+            } else {
+                return "redirect:/dashboard";
+            }
 
         } else { // 로그인 실패 시 실패 메시지 반환
             redirectAttributes.addFlashAttribute("message", false);
             return "redirect:/";
         }
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("user");
+        return "redirect:/";
     }
 }
