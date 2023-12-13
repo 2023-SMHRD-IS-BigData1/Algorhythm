@@ -4,12 +4,12 @@ from typing import List
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import json
-from datetime import datetime, timedelta
-import pandas as pd
 import pickle as pkl
 import numpy as np
 import requests
 from datetime import datetime, timedelta
+import pandas as pd
+
 """
     port 5000
     uvicorn main:app --reload --host 0.0.0.0 --port 5000
@@ -357,6 +357,7 @@ async def predict(item: Item):
         use_Predictions.append(np.sum(daily_predictions))
     print(use_Predictions)
 
+
     # 예측값 배열 (가정)
     return_predictions = return_predict  # 총 4305개의 예측값
     # 배열을 2D 배열로 변환 (615개씩 7개의 열로)
@@ -367,39 +368,57 @@ async def predict(item: Item):
         print(f"{i}일차 반납자 총합 :", np.sum(end_predictions))
         return_Predictions.append(np.sum(end_predictions))
     print(return_Predictions)
+    # csv 파일- 요일 예측 이용량
+
     print('===============================================================================')
 
+    final_station['대여자수'] = use_predict
+
+    return_station['대여자수'] = return_predict
+    print(return_station)
+
+
+    print(final_station)
+
+    import pandas as pd
+
+    # return_station을 CSV 파일로 저장하는 예제
+    return_station.to_csv('return_station.csv', index=False, encoding='utf-8')
+
+    # final_station을 CSV 파일로 저장하는 예제
+    final_station.to_csv('final_station.csv', index=False, encoding='utf-8')
+
+    # 일간 대여소 이용률 Top5
+    # use_day_top5 = final_station.iloc[:,1:3] + final_station.iloc[:,8:]
+    # return_day_top5 = return_station.iloc[:,1:3] + return_station.iloc[:,8:]
     # 스프링부트 서버 URL
-    url = "http://localhost:8087/dashboard"
+    # url = "http://localhost:8087/dashboard"
     # JSON 변환
 
     # 소수점 2자리까지만 변환하는 함수
-    def format_float(value):
-        return round(value, 2)
+    # def format_float(value):
+    #     return round(value, 2)
     # =================================================================
     # 일주일 일별 총 대여/반납 이용량
     # numpy.float32 값을 float로 변환
-    return_Predictions = [float(value) for value in return_Predictions]
-    # JSON 변환
-    return_predictions_json = json.dumps(return_Predictions)
-    # JSON 변환
-    # numpy.float32 값을 float로 변환
-    use_Predictions = [float(value) for value in use_Predictions]
-    # JSON 변환
-    use_predictions_json = json.dumps(use_Predictions)
-
-    # 출력
-    print(return_predictions_json)
-    data = {
-        "use_Predictions": use_predictions_json,
-        "return_Predictions": return_predictions_json
-    }
+    # return_Predictions = [float(value) for value in return_Predictions]
+    # # JSON 변환
+    # return_predictions_json = json.dumps(return_Predictions)
+    # # JSON 변환
+    # # numpy.float32 값을 float로 변환
+    # use_Predictions = [float(value) for value in use_Predictions]
+    # # JSON 변환
+    # use_predictions_json = json.dumps(use_Predictions)
     #
+    # # 출력
+    # print(return_predictions_json)
+    data = {
+        "use_Predictions": final_station,
+        "return_Predictions": return_station
+         }
+    # #
     print("============================================================================================")
-    # 일간 대여소 이용률 Top5
-    use_predictions = use_predict # 총 4305개의 예측값
-    return_predictions = return_predict  # 총 4305개의 예측값
-    final_station
+
 
 
 
