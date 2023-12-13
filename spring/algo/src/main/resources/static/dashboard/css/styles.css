@@ -85,7 +85,14 @@
   box-sizing: border-box;
   font-family: "GmarketSansMedium", sans-serif;
 }
-
+@font-face {
+    font-family: 'PartialSansKR-Regular';
+    src: url("../font/PartialSansKR-Regular.otf");
+    font-family: 'ObangNoPo_TTF';
+    src: url("../font/ObangNoPo_TTF");
+    font-family: 'esamanru Medium';
+    src: url("../font/esamanru Medium");
+}
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
