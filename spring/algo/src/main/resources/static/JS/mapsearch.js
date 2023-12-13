@@ -337,7 +337,7 @@ function drawRoute(selectRoute) {
       polyline_ = new Tmapv2.Polyline({
         path: latlonList,
         strokeColor: strokeColor,
-        strokeWeight: 8,
+        strokeWeight: 6,
         map: map,
       });
 
@@ -485,15 +485,23 @@ function naviPerson() {
             lat: geometry.coordinates[1],
             pointType: pType,
           };
-
-          // Marker 제어하는 곳
-          marker_p = new Tmapv2.Marker({
-            position: new Tmapv2.LatLng(routeInfoObj.lat, routeInfoObj.lng),
-            icon: routeInfoObj.markerImage,
-            visible: false,
-            iconSize: size,
-            map: map,
-          });
+          if (properties.pointType == "PP1" || properties.pointType == "PP2") {
+              marker_p = new Tmapv2.Marker({
+                  position: new Tmapv2.LatLng(routeInfoObj.lat, routeInfoObj.lng),
+                  icon: "../img/tmap/bike.png",
+                  iconSize: new Tmapv2.Size(15, 15),
+                  map: map
+              });
+          } else {
+              // Marker 제어하는 곳
+              marker_p = new Tmapv2.Marker({
+                position: new Tmapv2.LatLng(routeInfoObj.lat, routeInfoObj.lng),
+                icon: routeInfoObj.markerImage,
+                visible: false,
+                iconSize: size,
+                map: map,
+              });
+          }
 
           markerArr.push(marker_p);
         }
@@ -529,8 +537,8 @@ function drawLine(arrBikePoint, arrWalkPointList) {
   // 선 스타일 제어하는 부분
   polyline_ = new Tmapv2.Polyline({
     path: arrBikePoint,
-    strokeColor: "#000000",
-    strokeWeight: 8,
+    strokeColor: "#8e00ff",
+    strokeWeight: 6,
     map: map,
   });
 
@@ -543,7 +551,7 @@ function drawLine(arrBikePoint, arrWalkPointList) {
       path: arrWalkPoint,
       strokeColor: "#FF0000",
       strokeStyle: "dot",
-      strokeWeight: 8,
+      strokeWeight: 6,
       map: map,
     });
     resultdrawArr.push(polyline_);
