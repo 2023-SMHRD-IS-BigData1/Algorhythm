@@ -208,6 +208,7 @@ function drawRoute(selectRoute) {
           walkInfoList = [];
           drawWalkInfoArr = [];
 
+
           for (var i in resultData) {
             //for문 [S]
             var geometry = resultData[i].geometry;
@@ -248,14 +249,14 @@ function drawRoute(selectRoute) {
               var markerImg = "";
               var pType = "";
               var size;
-
-              if (properties.pointType == "S") {
+              console.log(properties.pointType)
+              if (properties.pointType == "SP") {
                 //출발지 마커
                 markerImg = "../img/tmap/start.png";
                 pType = "S";
                 visible = true;
                 size = new Tmapv2.Size(24, 38);
-              } else if (properties.pointType == "E") {
+              } else if (properties.pointType == "EP") {
                 //도착지 마커
                 markerImg = "../img/tmap/end.png";
                 visible = true;
@@ -265,13 +266,13 @@ function drawRoute(selectRoute) {
                   //도착지 마커
                   markerImg = "../img/tmap/bike.png";
                   visible = true;
-                  pType = "E";
+                  pType = "B";
                   size = new Tmapv2.Size(15, 15);
               } else if (properties.pointType == "PP2") {
                   //도착지 마커
                   markerImg = "../img/tmap/bike.png";
                   visible = true;
-                  pType = "E";
+                  pType = "B";
                   size = new Tmapv2.Size(15, 15);
               } else {
                 //각 포인트 마커
@@ -302,19 +303,22 @@ function drawRoute(selectRoute) {
                 pointType: pType,
               };
 
-              // Marker 추가
-              marker_p = new Tmapv2.Marker({
-                position: new Tmapv2.LatLng(routeInfoObj.lat, routeInfoObj.lng),
-                icon: routeInfoObj.markerImage,
-                iconSize: size,
-                visible : visible,
-                map: map
-              });
+              if (properties.pointType != "SP" && properties.pointType != "EP"){
+                  // Marker 추가
+                  marker_p = new Tmapv2.Marker({
+                    position: new Tmapv2.LatLng(routeInfoObj.lat, routeInfoObj.lng),
+                    icon: routeInfoObj.markerImage,
+                    iconSize: size,
+                    visible : visible,
+                    map: map
+                  });
 
-              markerArr.push(marker_p);
+                  markerArr.push(marker_p);
+              } else if (properties.pointType == "SP") {
+              } else if (properties.pointType == "EP") {
+              }
             }
           } //for문 [E]
-
           drawLine(drawBikeInfoArr, walkInfoList, map, resultdrawArr);
         },
       });
@@ -337,14 +341,13 @@ function drawRoute(selectRoute) {
       polyline_ = new Tmapv2.Polyline({
         path: latlonList,
         strokeColor: strokeColor,
-        strokeWeight: 8,
+        strokeWeight: 6,
         map: map,
       });
 
       resultdrawArr.push(polyline_);
       latlonList = [];
     }
-
     map.panToBounds(positionBounds);
   }
 } // function[E}
@@ -485,15 +488,23 @@ function naviPerson() {
             lat: geometry.coordinates[1],
             pointType: pType,
           };
-
-          // Marker 제어하는 곳
-          marker_p = new Tmapv2.Marker({
-            position: new Tmapv2.LatLng(routeInfoObj.lat, routeInfoObj.lng),
-            icon: routeInfoObj.markerImage,
-            visible: false,
-            iconSize: size,
-            map: map,
-          });
+          if (properties.pointType == "PP1" || properties.pointType == "PP2") {
+              marker_p = new Tmapv2.Marker({
+                  position: new Tmapv2.LatLng(routeInfoObj.lat, routeInfoObj.lng),
+                  icon: "../img/tmap/bike.png",
+                  iconSize: new Tmapv2.Size(15, 15),
+                  map: map
+              });
+          } else {
+              // Marker 제어하는 곳
+              marker_p = new Tmapv2.Marker({
+                position: new Tmapv2.LatLng(routeInfoObj.lat, routeInfoObj.lng),
+                icon: routeInfoObj.markerImage,
+                visible: false,
+                iconSize: size,
+                map: map,
+              });
+          }
 
           markerArr.push(marker_p);
         }
@@ -529,8 +540,8 @@ function drawLine(arrBikePoint, arrWalkPointList) {
   // 선 스타일 제어하는 부분
   polyline_ = new Tmapv2.Polyline({
     path: arrBikePoint,
-    strokeColor: "#000000",
-    strokeWeight: 8,
+    strokeColor: "#8e00ff",
+    strokeWeight: 6,
     map: map,
   });
 
@@ -543,7 +554,7 @@ function drawLine(arrBikePoint, arrWalkPointList) {
       path: arrWalkPoint,
       strokeColor: "#FF0000",
       strokeStyle: "dot",
-      strokeWeight: 8,
+      strokeWeight: 6,
       map: map,
     });
     resultdrawArr.push(polyline_);
@@ -624,7 +635,7 @@ function poiSearch(searchKeyword) {
           `<div id='listNum${listCnt}' onclick="getLatLon(${listCnt})">`;
         listHtml = listHtml + `<hr>`;
         listHtml = listHtml + `<div>`;
-        listHtml = listHtml + `<img src='../img/tmap/${k + 1}.png'>`;
+        listHtml = listHtml + `<img src='../img/tmap/m${k + 1}@2x.png'>`;
         listHtml = listHtml + `<ul id='placeList${listCnt}'>`;
         listHtml = listHtml + `<li>${name}</li>`;
         listHtml = listHtml + `<li>${lowerAddrName}</li>`;
